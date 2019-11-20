@@ -30,4 +30,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::resource('department', 'Admin\DepartmentController');
     Route::resource('schedule', 'Admin\ScheduleController');
     Route::resource('oneclass', 'Admin\OneClassController');
+
 });

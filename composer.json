@@ -11,6 +11,7 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+<<<<<<< HEAD
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^6.0",
         "maatwebsite/excel": "^3.1"
@@ -20,6 +21,13 @@
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "laravel/ui": "^1.1",
+=======
+        "laravel/tinker": "^1.0"
+    },
+    "require-dev": {
+        "facade/ignition": "^1.4",
+        "fzaninotto/faker": "^1.4",
+>>>>>>> cc6f1a27b87c4ba5e8f7ddfd1b8f62b34366fc92
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "phpunit/phpunit": "^8.0"
