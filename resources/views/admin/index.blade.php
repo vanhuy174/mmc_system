@@ -7,55 +7,48 @@
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">Thông tin</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="widget navy-bg no-padding">
-                                    <div class="p-m">
-                                        <h1 class="m-xs">Tổng số giảng viên</h1>
+            <div class="col-lg-6">
+                <div class="widget navy-bg no-padding">
+                    <div class="p-m">
+                        <h3 class="m-xs">Tổng số giảng viên</h3>
 
-                                        <h3 class="font-bold " style="margin-left: 10px;">
-                                            20
-                                        </h3>
+                        <h3 class="font-bold no-margins">
 
-                                    </div>
-                                    <div class="flot-chart">
-                                        <div class="flot-chart-content" id="flot-chart1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="widget lazur-bg no-padding">
-                                    <div class="p-m">
-                                        <h1 class="m-xs">Tổng số sinh viên</h1>
+                        </h3>
+                        <small></small>
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget lazur-bg no-padding">
+                    <div class="p-m">
+                        <h3 class="m-xs">Tổng số sinh viên</h3>
 
-                                        <h3 class="font-bold " style="margin-left: 10px;">
-                                            200
-                                        </h3>
+                        <h3 class="font-bold no-margins">
 
-                                    </div>
-                                    <div class="flot-chart">
-                                        <div class="flot-chart-content" id="flot-chart2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="widget yellw-bg no-padding">
-                                    <div class="p-m">
-                                        <h1 class="m-xs">Tổng số lớp học</h1>
-                                        <h3 class="font-bold " style="margin-left: 10px;">
-                                            20
-                                        </h3>
-                                    </div>
-                                    <div class="flot-chart">
-                                        <div class="flot-chart-content" id="flot-chart3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </h3>
+                        <small></small>
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="widget yellw-bg no-padding">
+                    <div class="p-m">
+                        <h3 class="m-xs">Tổng số lớp học</h3>
+
+                        <h3 class="font-bold no-margins">
+
+                        </h3>
+                        <small></small>
+                    </div>
+                    <div class="flot-chart">
+                        <div class="flot-chart-content" id="flot-chart3"></div>
                     </div>
                 </div>
             </div>
