@@ -23,6 +23,12 @@ class CreateMmcEmployeesTable extends Migration
             $table->date('mmc_dateofbirth')->nullable();
             $table->string('mmc_phone',12)->nullable();
             $table->string('mmc_email')->unique();
+
+            $table->string('password');
+            $table->string('mmc_deptid')->nullable();
+            $table->date('mmc_dateofbirth')->nullable();
+            $table->string('mmc_phone',12)->nullable();
+            $table->string('email')->unique();
             $table->tinyInteger('mmc_gender')->nullable();
             $table->string('mmc_placeofbirth')->nullable();
             $table->string('mmc_hometown')->nullable();
@@ -58,6 +64,9 @@ class CreateMmcEmployeesTable extends Migration
                 ->references('mmc_deptid')
                 ->on('mmc_departments')
                 ->onDelete('cascade');
+            $table->string('mmc_level')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class mmc_studentExport implements FromView
     */
      public function view(): View
     {
-        return view('Student.mmc_formExport', [
+        return view('admin.Student.mmc_formExport', [
             'datas' => mmc_student::all()
         ]);
     }

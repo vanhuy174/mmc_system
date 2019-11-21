@@ -10,6 +10,9 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Validators\Failure;
+use App\Http\Controllers\Admin\mmc_ControllerStudent;
+
+
 
 class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFailure
 {
@@ -25,7 +28,7 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
     {
         return new mmc_student([
             'mmc_studentid'     => $row['ma_sinh_vien'],
-            'mmc_classid'    => $row['ma_lop'], 
+            'mmc_classid'    => mmc_ControllerStudent::getclassId($row['ten_lop']), 
             'mmc_fullname'    => $row['ho_va_ten'],
             'mmc_dateofbirth'    => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['ngay_sinh']),
             'mmc_gender'    => $row['gioi_tinh'],
@@ -66,7 +69,7 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
     {
         return [
             'ma_sinh_vien' => ['required','unique:mmc_students,mmc_studentid'],
-            'ma_lop' => 'required',
+            'ten_lop' => 'required',
             'ho_va_ten' => 'required',
             'ngay_sinh' => 'required',
             'gioi_tinh' => 'required',
@@ -84,7 +87,7 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
     {
         return [
             'ma_sinh_vien.required' => 'Mã sinh viên không được để trống',
-            'ma_lop.required' => 'Lớp không được để trống',
+            'ten_lop.required' => 'Lớp không được để trống',
             'ho_va_ten.required' => 'Họ tên không được để trống',
             'ngay_sinh.required' => 'Ngày sinh không được để trống',
             'gioi_tinh.required' => 'Giới tính không được để trống',
