@@ -22,14 +22,6 @@
     <script src="js/app.js" defer></script>
     @yield('css')
 </head>
-
-<body>
-
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    @yield('css')
-</head>
-
 <body>
 
 <div id="wrapper">
@@ -39,7 +31,8 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
+                        {{-- <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/> --}}
+                        <img alt="image" class="img-circle" width="50px" height="50px" style="object-fit: cover;" src="/IMG/{{Auth::user()->mmc_avatar}}">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             {{-- <span class="block m-t-xs font-bold">Bon Bon</span>
                             <span class="text-muted text-xs block">Giảng Viên<b class="caret"></b></span> --}}
@@ -47,7 +40,7 @@
                             <span class="text-muted text-xs block">{{Auth::user()->mmc_position}}<b class="caret"></b></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="dropdown-item" href="profile.html">Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông tin cá nhân</a></li>
                             <li><a class="dropdown-item" href="mailbox.html">Thông báo</a></li>
                             <li class="dropdown-divider"></li>
                             <li>
@@ -72,7 +65,7 @@
                         <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
                         <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
                         <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
-                        <li><a href="">Quản lý giảng viên</a></li>
+                        <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
                         <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
                     </ul>
                 </li>
@@ -161,6 +154,10 @@ $(function($) {
     });
 });
 </script>
+
+{{-- hiện thị ảnh --}}
+<script src="js/img.js"></script>
+
 </body>
 
 </html>

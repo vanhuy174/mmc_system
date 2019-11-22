@@ -3,6 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý Ngành</h2>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý ngành </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -26,7 +27,9 @@
                             <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search" style="
+                                    margin-bottom: 0px;
+                                "></i>
                                 </button>
                             </span>
                         </div>
@@ -69,7 +72,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example" style="padding-left: 1px;">  </nav>
+                            <div class="pagination justify-content-center"> {!! $major->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
                     </div>
                 </div>

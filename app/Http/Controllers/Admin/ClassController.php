@@ -74,7 +74,7 @@ class ClassController extends Controller
         $class->mmc_description=$request->mmc_description;
         $class->mmc_numstudent=$request->mmc_numstudent;
         $class->save();
-        return redirect('admin/class');
+        return redirect('admin/class')->with('flash_message', 'Thêm mới thành công!');
     }
 
     /**

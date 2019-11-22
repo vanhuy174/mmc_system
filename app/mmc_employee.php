@@ -35,4 +35,8 @@ class mmc_employee extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /** lấy thông tin bảng giảng viên */
+    protected $table = "mmc_employees";
+    public $timestamps = false;
 }

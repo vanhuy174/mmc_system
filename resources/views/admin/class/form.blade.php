@@ -24,12 +24,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Giáo viên chủ nhiệm: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
-            <select class="form-control" id="sel1" name="mmc_headteacher">
-                @foreach($teacher as $tc)
-                <option value="{{$tc['mmc_employeeid']}}">{{$tc['mmc_name']}}</option>
-                @endforeach
-            </select>
-           {{--  {!! Form::text('mmc_headteacher', null, ['class' => 'form-control']) !!} --}}
+            {!! Form::text('mmc_headteacher', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
@@ -45,7 +40,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Lớp trưởng: </span>
             </div>
-            {!! Form::text('mmc_monitor', null, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::text('mmc_monitor', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">

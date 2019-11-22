@@ -2,7 +2,8 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý Bộ môn</h2>
+            <h2>Quản lý ngành</h2>
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('major.index')}}">Quản lý ngành</a> > Thêm mới ngành </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
