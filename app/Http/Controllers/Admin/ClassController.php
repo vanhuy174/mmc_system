@@ -152,6 +152,7 @@ class ClassController extends Controller
     {
         $import = new ClassImport();
         $import->import(request()->file('file'));
+       // dd($import);
         $failures = $import->failures();
 
         if (!empty($failures))

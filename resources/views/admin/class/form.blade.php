@@ -29,7 +29,7 @@
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
-                <span class="input-group-text">Mô tả: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+                <span class="input-group-text">Mô tả: </span>
             </div>
             {!! Form::text('mmc_description', null, ['class' => 'form-control']) !!}
 
@@ -38,9 +38,9 @@
     <div class="col-lg-6">
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
-                <span class="input-group-text">Lớp trưởng: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+                <span class="input-group-text">Lớp trưởng: </span>
             </div>
-            {!! Form::text('mmc_monitor', null, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::text('mmc_monitor', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
@@ -52,21 +52,21 @@
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
-                <span class="input-group-text">Lớp phó: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+                <span class="input-group-text">Lớp phó: </span>
             </div>
             {!! Form::text('mmc_vicemonitor', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
-                <span class="input-group-text">Ủy viên: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+                <span class="input-group-text">Ủy viên: </span>
             </div>
             {!! Form::text('mmc_vicesecretary1', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
-                <span class="input-group-text">Ủy viên 2: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+                <span class="input-group-text">Ủy viên 2: </span>
             </div>
             {!! Form::text('mmc_vicesecretary2', null, ['class' => 'form-control']) !!}
         </div>

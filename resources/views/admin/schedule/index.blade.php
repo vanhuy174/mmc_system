@@ -17,16 +17,20 @@
                     <div class="ibox-content">
                         <h3>Thời gian ra vào lớp</h3>
                         <h4 id="clock"></h4>
-                        <p>Tiết 1 :</p>
-                        <p>Tiết 2 </p>
-                        <p>Tiết 3 </p>
-                        <p>Tiết 4 </p>
-                        <p>Tiết 5</p>
-                        <p>Tiết 6 </p>
-                        <p>Tiết 7 </p>
-                        <p>Tiết 8 </p>
-                        <p>Tiết 9 </p>
-                        <p>Tiết 10 </p>
+                        <form method="get" id="form">
+                            <select name="tiethoc">
+                                <option value="1">T1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
 {{--                <div class="ibox ">--}}
@@ -47,6 +51,8 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
+{{--                <button id="acceptOffer">12</button>--}}
+{{--                <button id="declineOffer">1234</button>--}}
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -63,17 +69,7 @@
 @endsection
 @section('scripts')
     <script src="js/plugins/fullcalendar/moment.min.js"></script>
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-
-    <!-- jQuery UI  -->
     <script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
     <!-- iCheck -->
@@ -85,6 +81,15 @@
     <script>
 
         $(document).ready(function() {
+            {{--$("#acceptOffer").click(function () {--}}
+            {{--    alert('1111');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.create')}}").submit();;--}}
+            {{--});--}}
+
+            {{--$("#declineOffer").click(function () {--}}
+            {{--    alert('2222');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.show',['id'=>1])}}").submit();;--}}
+            {{--});--}}
 
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
@@ -116,10 +121,6 @@
             /* initialize the calendar
              -----------------------------------------------------------------*/
             var date = new Date();
-
-            var options = { weekday: "long", year: "numeric", month: "short",
-                day: "numeric" };
-            console.log(date.getHours(),date.getMinutes());
             var d = date.getDate();
             var m = date.getMonth();
             var y = date.getFullYear();

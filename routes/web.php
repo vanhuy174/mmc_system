@@ -12,6 +12,9 @@
 */
 
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/', function (){
@@ -29,6 +32,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::resource('major', 'Admin\MajorController');
     Route::resource('department', 'Admin\DepartmentController');
     Route::resource('schedule', 'Admin\ScheduleController');
-    Route::resource('oneclass', 'Admin\OneClassController');
 
 });

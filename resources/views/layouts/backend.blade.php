@@ -20,7 +20,6 @@
 </head>
 
 <body onload="time()">
-
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -68,7 +67,7 @@
                     <a href="{{route('schedule.index')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Lịch giảng dạy</span>  </a>
                 </li>
                 <li>
-                    <a href="{{route('oneclass.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
+                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
                 </li>
             </ul>
 

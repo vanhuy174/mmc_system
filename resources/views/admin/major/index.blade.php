@@ -54,7 +54,7 @@
                                         <a href="{{ url('/admin/major/'.$item->id.'/edit') }}" title="Sửa ngành"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                         {!! Form::open([
                                             'method' => 'DELETE',
-                                            'url' => ['/admin/major/',$item->id ],
+                                            'url' => ['/admin/major',$item->id ],
                                             'style' => 'display:inline'
                                         ]) !!}
                                         {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
