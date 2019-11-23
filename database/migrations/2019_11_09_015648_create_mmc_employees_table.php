@@ -15,10 +15,10 @@ class CreateMmcEmployeesTable extends Migration
     {
         Schema::create('mmc_employees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            
+
             $table->string('mmc_name'); //Họ và tên
             $table->string('mmc_employeeid')->unique(); //Mã giảng viên
-            $table->string('mmc_deptid');   //Mã bộ môn
+            $table->string('mmc_deptid')->nullable();   //Mã bộ môn
             $table->string('mmc_avatar')->nullable(); //Ảnh đại diện
             $table->date('mmc_dateofbirth')->nullable(); //Ngày tháng và năm sinh
             $table->tinyInteger('mmc_gender')->nullable(); //Giới tính
@@ -26,16 +26,16 @@ class CreateMmcEmployeesTable extends Migration
             $table->date('mmc_dateofpid')->nullable(); //Ngày cấp
             $table->string('mmc_socialinsuranceid')->nullable(); //Số bảo hiểm xã hội
 
-            
+
             $table->string('mmc_phone',12)->nullable(); //Số điện thoại
             $table->string('email')->unique(); //Email
-            $table->string('password'); //Password 
+            $table->string('password'); //Password
             $table->string('mmc_religion')->nullable(); //Dân tộc
             $table->string('mmc_ethnic')->nullable(); //Tôn giáo
             $table->string('mmc_placeofbirth')->nullable(); //Nơi Sinh
             $table->string('mmc_hometown')->nullable(); //Quê quán
             $table->string('mmc_address')->nullable(); //Hộ khẩu thường trú
-            
+
             $table->date('mmc_dateofrecruit')->nullable(); //Ngày tuyển dụng
 
             $table->string('mmc_position')->nullable(); //Chức vụ hiện tại
@@ -55,7 +55,7 @@ class CreateMmcEmployeesTable extends Migration
 
             $table->string('mmc_politiclevel')->nullable(); //Lý luận chính trị
             $table->string('mmc_managementlevel')->nullable(); //Quản lý nhà nước
-            
+
 
             $table->date('mmc_partydate')->nullable(); //Ngày vào Đảng Cộng sản Việt Nam
             $table->date('mmc_partydateprimary')->nullable(); //Ngày chính thức
@@ -65,14 +65,11 @@ class CreateMmcEmployeesTable extends Migration
 
             $table->string('mmc_heathlevel')->nullable(); //Tình trạng sức khoẻ
             $table->string('mmc_bloodgroup')->nullable(); //Nhóm máu
-            
+
             $table->float('mmc_tall')->nullable(); //Chiều cao
             $table->float('mmc_weight')->nullable(); //Cân nặng
 
-            $table->foreign('mmc_deptid')
-                ->references('mmc_deptid')
-                ->on('mmc_departments')
-                ->onDelete('cascade');
+
             $table->string('mmc_level')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

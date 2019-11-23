@@ -73,7 +73,7 @@
     <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
     <script>
-        
+
         $(document).ready(function() {
 
             $('.i-checks').iCheck({
@@ -117,15 +117,6 @@
                     right: 'month,agendaWeek,agendaDay'
                 },
                 lang: 'vi',
-                editable: true,
-                droppable: true, // this allows things to be dropped onto the calendar
-                drop: function() {
-                    // is the "remove after drop" checkbox checked?
-                    if ($('#drop-remove').is(':checked')) {
-                        // if so, remove the element from the "Draggable Events" list
-                        $(this).remove();
-                    }
-                },
                 events: [
                     {
                         title: 'Tiết 1 2 3 4 5',

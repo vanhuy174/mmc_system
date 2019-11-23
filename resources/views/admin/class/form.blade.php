@@ -4,7 +4,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Tên lớp: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
-            {!! Form::text('mmc_classname', null, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::text('mmc_classname', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
