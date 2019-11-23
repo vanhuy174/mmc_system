@@ -18,7 +18,7 @@ class CreateMmcEmployeesTable extends Migration
             
             $table->string('mmc_name'); //Họ và tên
             $table->string('mmc_employeeid')->unique(); //Mã giảng viên
-            $table->string('mmc_deptid');   //Mã bộ môn
+            $table->string('mmc_deptid')->nullable();   //Mã bộ môn
             $table->string('mmc_avatar')->nullable(); //Ảnh đại diện
             $table->date('mmc_dateofbirth')->nullable(); //Ngày tháng và năm sinh
             $table->tinyInteger('mmc_gender')->nullable(); //Giới tính
@@ -69,10 +69,6 @@ class CreateMmcEmployeesTable extends Migration
             $table->float('mmc_tall')->nullable(); //Chiều cao
             $table->float('mmc_weight')->nullable(); //Cân nặng
 
-            $table->foreign('mmc_deptid')
-                ->references('mmc_deptid')
-                ->on('mmc_departments')
-                ->onDelete('cascade');
             $table->string('mmc_level')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
