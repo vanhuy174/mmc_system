@@ -46,11 +46,11 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'mmc_deptname'=>'required',
-            'mmc_description'=>'required',
+            'mmc_deptname'=>'required|unique:mmc_departments,mmc_deptname',
         ],[
-            'mmc_deptname.required'=>'Không được bỏ trống',
-            'mmc_description.required'=>'Không được bỏ trống'
+            'mmc_deptname.required'=>'Tên bộ môn không được bỏ trống',
+            'mmc_deptname.unique'=>'Tên bộ môn đã tồn tại'
+
         ]);
         $department=new mmc_department();
         $department->mmc_deptid="mmc-".Str::slug($request->mmc_deptname);

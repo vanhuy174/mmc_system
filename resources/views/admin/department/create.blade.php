@@ -3,6 +3,8 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý Bộ môn</h2>
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('department.index')}}">Quản lý bộ môn</a> > Thêm mới bộ môn
+<99> m<C3><B4>n </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -30,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     </div>
 @endsection
 

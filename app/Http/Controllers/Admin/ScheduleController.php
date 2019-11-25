@@ -22,9 +22,9 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        dd($request);
+
     }
 
     /**
@@ -46,7 +46,7 @@ class ScheduleController extends Controller
      */
     public function show(Request $request,$id)
     {
-        dd($request);
+
     }
 
     /**

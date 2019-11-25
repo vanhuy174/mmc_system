@@ -1,6 +1,6 @@
 <div class="form-group{{ $errors->has('name') ? ' has-error' : ''}}">
     {!! Form::label('name', 'Tên ngành: ', ['class' => 'control-label']) !!}
-    {!! Form::text('mmc_majorname', null, ['class' => 'form-control', 'required' => 'required']) !!}
+    {!! Form::text('mmc_majorname', null, ['class' => 'form-control']) !!}
     {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group{{ $errors->has('state') ? ' has-error' : ''}}">

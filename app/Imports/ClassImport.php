@@ -28,7 +28,7 @@ class ClassImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailur
     use Importable, SkipsFailures;
     public function model(array $row)
     {
-        dd($row);
+
         return new mmc_class([
             'mmc_classid'=>'mmc-'.Str::slug($row['ten_lop']),
             'mmc_classname'=> $row['ten_lop'],
@@ -37,7 +37,7 @@ class ClassImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailur
     }
     public function headingRow(): int
     {
-        return 10;
+        return 2;
     }
 
     /**

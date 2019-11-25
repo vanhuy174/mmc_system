@@ -3,6 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý lớp</h2>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -13,14 +14,18 @@
                 </div>
             </div>
         @endif
-        @if ($errors->any())
-            <ul class="alert alert-danger error" style="list-style: none">
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                <li>{{ $error }}</li>
                 @endforeach
-            </ul>
+                </ul>
+            </div>
         @endif
-        <div class="row">
+
+                <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Lớp</div>
@@ -37,7 +42,7 @@
                             <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search"></i>
+                                    <i class="fa fa-search" style=" margin-bottom: 0px;"></i>
                                 </button>
                             </span>
                         </div>
@@ -65,7 +70,6 @@
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
-                                            <a href="{{ url('#') }}" title="Hiển thị lớp"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                             <a href="{{ url('/admin/class/'.$item->id.'/edit') }}" title="Sửa lớp"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                                 {!! Form::open([
                                                     'method' => 'DELETE',
@@ -84,7 +88,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example" style="padding-left: 1px;">  </nav>
+                            <div class="pagination justify-content-center"> {!! $class->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
                     </div>
                 </div>
