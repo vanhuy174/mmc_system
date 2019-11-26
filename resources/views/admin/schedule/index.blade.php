@@ -17,18 +17,23 @@
                     <div class="ibox-content">
                         <h3>Thời gian ra vào lớp</h3>
                         <h4 id="clock"></h4>
-                        <p>Tiết 1 :</p>
-                        <p>Tiết 2 </p>
-                        <p>Tiết 3 </p>
-                        <p>Tiết 4 </p>
-                        <p>Tiết 5</p>
-                        <p>Tiết 6 </p>
-                        <p>Tiết 7 </p>
-                        <p>Tiết 8 </p>
-                        <p>Tiết 9 </p>
-                        <p>Tiết 10 </p>
+                        <form method="get" id="form">
+                            <select name="tiethoc">
+                                <option value="1">T1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </form>
                     </div>
                 </div>
+<<<<<<< HEAD
                 {{-- <div class="ibox ">
                     <div class="ibox-title">
                         <h5>Draggable Events</h5>
@@ -47,6 +52,28 @@
                         </div>
                     </div>
                 </div> --}}
+=======
+{{--                <div class="ibox ">--}}
+{{--                    <div class="ibox-title">--}}
+{{--                        <h5>Draggable Events</h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="ibox-content">--}}
+{{--                        <div id='external-events'>--}}
+{{--                            <p>Drag a event and drop into callendar.</p>--}}
+{{--                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>--}}
+{{--                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>--}}
+{{--                            <div class='external-event navy-bg'>Send documents to John.</div>--}}
+{{--                            <div class='external-event navy-bg'>Phone to Sandra.</div>--}}
+{{--                            <div class='external-event navy-bg'>Chat with Michael.</div>--}}
+{{--                            <p class="m-t">--}}
+{{--                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <button id="acceptOffer">12</button>--}}
+{{--                <button id="declineOffer">1234</button>--}}
+>>>>>>> tvduong
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -75,6 +102,15 @@
     <script>
 
         $(document).ready(function() {
+            {{--$("#acceptOffer").click(function () {--}}
+            {{--    alert('1111');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.create')}}").submit();;--}}
+            {{--});--}}
+
+            {{--$("#declineOffer").click(function () {--}}
+            {{--    alert('2222');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.show',['id'=>1])}}").submit();;--}}
+            {{--});--}}
 
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',

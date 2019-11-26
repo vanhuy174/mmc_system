@@ -2,21 +2,17 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý lớp</h2>
-<<<<<<< HEAD
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('class.index')}}"> Quản lý lớp </a> > Sửa lớp</span>
-=======
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('class.index')}}"> Quản lý lớp </a> > Sửa lớp </span>
->>>>>>> tvduong
+            <h2>Quản lý Bộ môn</h2>
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('subject.index')}}">Quản lý bộ môn</a> > Sửa bộ môn </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Sửa lớp</div>
+                    <div class="card-header">Sửa bộ môn </div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/class') }}" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                        <a href="{{ url('/admin/subject') }}" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                         <p>
                         @if ($errors->any())
                             <ul class="alert alert-danger" style="list-style: none">
@@ -26,18 +22,16 @@
                             </ul>
                             @endif
                             </p>
-                            {!! Form::model($class, [
+                            {!! Form::model($subject, [
                             'method' => 'PATCH',
-                            'url' => ['/admin/class', $class->id],
+                            'url' => ['/admin/subject', $subject->id],
                             'class' => 'form-horizontal',
                             'files' => true
                                  ]) !!}
 
-                            @include ('admin.class.form', ['formMode' => 'edit'])
+                            @include ('admin.subject.form', ['formMode' => 'edit'])
 
                             {!! Form::close() !!}
-
-
                     </div>
                 </div>
             </div>

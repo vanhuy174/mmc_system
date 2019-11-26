@@ -22,7 +22,9 @@
     <script src="js/app.js" defer></script>
     @yield('css')
 </head>
-<body>
+
+
+<body onload="time()">
 
 <div id="wrapper">
 
@@ -65,15 +67,19 @@
                         <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
                         <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
                         <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
+
                         <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
                         <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
+
+                        <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
+
                     </ul>
                 </li>
                 <li>
                     <a href="{{route('schedule.index')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Lịch giảng dạy</span>  </a>
                 </li>
                 <li>
-                    <a href="{{route('oneclass.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
+                    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
                 </li>
             </ul>
 

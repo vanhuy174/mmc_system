@@ -64,6 +64,10 @@ class RegisterController extends Controller
 
             'email' => ['required', 'string', 'email', 'max:255', 'unique:mmc_employees'],
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> tvduong
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }

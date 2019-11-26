@@ -26,10 +26,15 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
+<<<<<<< HEAD
                                 <button class="btn btn-secondary" type="submit">
                                     <i class="fa fa-search" style="
                                     margin-bottom: 0px;
                                 "></i>
+=======
+                                <button class="btn btn-secondary" type="submit" style="margin-bottom: 0px;">
+                                    <i class="fa fa-search" ></i>
+>>>>>>> tvduong
                                 </button>
                             </span>
                         </div>
@@ -57,7 +62,7 @@
                                         <a href="{{ url('/admin/major/'.$item->id.'/edit') }}" title="Sửa ngành"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                         {!! Form::open([
                                             'method' => 'DELETE',
-                                            'url' => ['/admin/major/',$item->id ],
+                                            'url' => ['/admin/major',$item->id ],
                                             'style' => 'display:inline'
                                         ]) !!}
                                         {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
