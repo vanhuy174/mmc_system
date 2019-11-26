@@ -15,17 +15,17 @@
             </div>
         @endif
         @if($errors->any())
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <ul>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
                 @endforeach
-                </ul>
-            </div>
+            </ul>
+        </div>
         @endif
-
-                <div class="row">
+        
+        <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Lớp</div>
@@ -43,6 +43,7 @@
                             <span class="input-group-btn">
                                 <button class="btn btn-secondary" type="submit" style=" margin-bottom: 0px;">
                                     <i class="fa fa-search" ></i>
+
                                 </button>
                             </span>
                         </div>

@@ -2,24 +2,30 @@
 <html>
 
 <head>
-    <base href="{{asset('../layout/backend')}}/">
+    <base href="{{asset('layout/backend')}}/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>MMC</title>
+
+    @yield('linkstyle')
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <!-- Toastr style -->
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
-
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet">
+    <script src="js/app.js" defer></script>
     @yield('css')
 </head>
 
+
 <body onload="time()">
+
 <div id="wrapper">
 
     <nav class="navbar-default navbar-static-side" role="navigation">
@@ -27,22 +33,24 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
+                        {{-- <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/> --}}
+                        <img alt="image" class="img-circle" width="50px" height="50px" style="object-fit: cover;" src="/IMG/{{Auth::user()->mmc_avatar}}">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            {{-- <span class="block m-t-xs font-bold">Bon Bon</span>
+                            <span class="text-muted text-xs block">Giảng Viên<b class="caret"></b></span> --}}
                             <span class="block m-t-xs font-bold">{{Auth::user()->mmc_name}}</span>
                             <span class="text-muted text-xs block">{{Auth::user()->mmc_position}}<b class="caret"></b></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="dropdown-item" href="profile.html">Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông tin cá nhân</a></li>
                             <li><a class="dropdown-item" href="mailbox.html">Thông báo</a></li>
                             <li class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ route('logout')}}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
@@ -59,9 +67,10 @@
                         <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
                         <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
                         <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
-                        <li><a href="{{route('department.index')}}">Quản lý giảng viên</a></li>
-                        <li><a href="{{route('department.index')}}">Quản lý sinh viên</a></li>
                         <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
+                        <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
+                        <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
+
                     </ul>
                 </li>
                 <li>
@@ -90,9 +99,9 @@
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
-                        </form>
+                        </form> --}}
                     </li>
                 </ul>
 
@@ -116,10 +125,23 @@
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
+<!-- script -->
+<script src="../../js/alert_flash.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="js/inspinia.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/plugins/fullcalendar/moment.min.js"></script>
+
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Full Calendar -->
+<script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
+@yield('scripts')
 <script>
     $(document).ready(function(){
         setTimeout(function(){
@@ -135,9 +157,11 @@ $(function($) {
         }
     });
 });
-
 </script>
-@yield('scripts')
+
+{{-- hiện thị ảnh --}}
+<script src="js/img.js"></script>
+
 </body>
 
 </html>

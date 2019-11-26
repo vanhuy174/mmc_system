@@ -33,26 +33,24 @@
                         </form>
                     </div>
                 </div>
-{{--                <div class="ibox ">--}}
-{{--                    <div class="ibox-title">--}}
-{{--                        <h5>Draggable Events</h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="ibox-content">--}}
-{{--                        <div id='external-events'>--}}
-{{--                            <p>Drag a event and drop into callendar.</p>--}}
-{{--                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>--}}
-{{--                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>--}}
-{{--                            <div class='external-event navy-bg'>Send documents to John.</div>--}}
-{{--                            <div class='external-event navy-bg'>Phone to Sandra.</div>--}}
-{{--                            <div class='external-event navy-bg'>Chat with Michael.</div>--}}
-{{--                            <p class="m-t">--}}
-{{--                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <button id="acceptOffer">12</button>--}}
-{{--                <button id="declineOffer">1234</button>--}}
+                {{-- <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Draggable Events</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div id='external-events'>
+                            <p>Drag a event and drop into callendar.</p>
+                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>
+                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
+                            <div class='external-event navy-bg'>Send documents to John.</div>
+                            <div class='external-event navy-bg'>Phone to Sandra.</div>
+                            <div class='external-event navy-bg'>Chat with Michael.</div>
+                            <p class="m-t">
+                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
+                            </p>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -79,7 +77,7 @@
     <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
     <script>
-
+        
         $(document).ready(function() {
             {{--$("#acceptOffer").click(function () {--}}
             {{--    alert('1111');--}}
@@ -143,48 +141,14 @@
                 },
                 events: [
                     {
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1)
+                        title: 'Tiết 1 2 3 4 5',
+                        start: new Date(y, m, d,7,30),
+                        end: new Date(y, m, d,11,45)
                     },
                     {
-                        title: 'Long Event',
-                        start: new Date(y, m, d-5),
-                        end: new Date(y, m, d-2)
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d-3, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d+4, 16, 0),
-                        allDay: false
-                    },
-                    {
-                        title: 'Meeting',
-                        start: new Date(y, m, d, 10, 30),
-                        allDay: false
-                    },
-                    {
-                        title: 'Lunch',
-                        start: new Date(y, m, d, 12, 0),
-                        end: new Date(y, m, d, 14, 0),
-                        allDay: false
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d+1, 19, 0),
-                        end: new Date(y, m, d+1, 22, 30),
-                        allDay: false
-                    },
-                    {
-                        title: 'Click for Google',
-                        start: new Date(y, m, 28),
-                        end: new Date(y, m, 29),
-                        url: 'http://google.com/'
+                        title: 'Tiết 6 7 8 9 10',
+                        start: new Date(y, m, d+2),
+                        end: new Date(y, m, d+2)
                     }
                 ]
             });
@@ -208,6 +172,10 @@
                     return i;
                 }
             }
+    $(document).ready(function(){
+    time();
+    });
+
     </script>
 @endsection
 

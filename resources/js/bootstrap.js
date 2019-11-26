@@ -1,7 +1,7 @@
 window._ = require('lodash');
 
 /**
-<<<<<<< HEAD
+
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
@@ -17,6 +17,7 @@ try {
 /**
 =======
 >>>>>>> cc6f1a27b87c4ba5e8f7ddfd1b8f62b34366fc92
+>>>>>>> c38e6f1637f7887df4fd41a13d055cf0f37af8f9
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.

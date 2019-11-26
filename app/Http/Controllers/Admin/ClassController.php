@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ClassImport;
 use App\mmc_class;
 use App\mmc_major;
+use App\mmc_employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -44,8 +45,9 @@ class ClassController extends Controller
      */
     public function create()
     {
+        $teacher= mmc_employee::get();
         $major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
-        return view('admin.class.create',compact('major'));
+        return view('admin.class.create',compact('major', 'teacher'));
     }
 
     /**

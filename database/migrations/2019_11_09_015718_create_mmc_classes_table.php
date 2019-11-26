@@ -21,6 +21,7 @@ class CreateMmcClassesTable extends Migration
             $table->string('mmc_major');
             $table->string('mmc_headteacher')->nullable();
             $table->string('mmc_monitor')->nullable();
+            $table->string('mmc_vicemonitor01')->nullable();
             $table->string('mmc_vicemonitor')->nullable();
             $table->string('mmc_secretary')->nullable();
             $table->string('mmc_vicesecretary1')->nullable();

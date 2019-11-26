@@ -73,6 +73,10 @@ return [
 
 
 
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -83,6 +87,8 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
+
+
 
     'locale' => 'vn',
 
@@ -147,9 +153,9 @@ return [
          * Laravel Framework Service Providers...
          */
 
+
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
 
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -173,6 +179,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -186,6 +193,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
     ],
 
@@ -201,6 +212,7 @@ return [
     */
 
     'aliases' => [
+
 
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
@@ -245,7 +257,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

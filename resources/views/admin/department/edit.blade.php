@@ -3,9 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý Bộ môn</h2>
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('department.index')}}">Quản lý bộ môn</a> > Sửa bộ môn
-<C3><B4>n </span>
-
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('department.index')}}">Quản lý bộ môn</a> > Sửa bộ môn </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
