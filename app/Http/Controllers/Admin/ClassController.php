@@ -13,6 +13,9 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClassExport;
 use Illuminate\Support\Arr;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 
 class ClassController extends Controller
@@ -150,10 +153,12 @@ class ClassController extends Controller
     {
         return Excel::download(new ClassExport, 'classes.xlsx');
     }
-    public function import()
+    public function import(Request $request)
     {
+
+
         $import = new ClassImport();
-        $import->import(request()->file('file'));
+        $import->import($request->file('file'));
         $failures = $import->failures();
 
         if (!empty($failures))
@@ -170,6 +175,6 @@ class ClassController extends Controller
                 }
             return back()->withErrors($errors);
         }
-        return back()->with('flash_message', 'Import thành công!');;
+        return back()->with('flash_message', 'Import thành công!');
     }
 }

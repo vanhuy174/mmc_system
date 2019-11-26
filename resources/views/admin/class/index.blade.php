@@ -19,7 +19,7 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <ul>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
@@ -41,10 +41,9 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="submit">
-                                    <i class="fa fa-search" style="
-                                    margin-bottom: 0px;
-                                "></i>
+                                <button class="btn btn-secondary" type="submit" style=" margin-bottom: 0px;">
+                                    <i class="fa fa-search" ></i>
+
                                 </button>
                             </span>
                         </div>
@@ -72,7 +71,6 @@
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
-                                            {{-- <a href="{{ url('#') }}" title="Hiển thị lớp"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a> --}}
                                             <a href="{{ url('/admin/class/'.$item->id.'/edit') }}" title="Sửa lớp"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                                 {!! Form::open([
                                                     'method' => 'DELETE',

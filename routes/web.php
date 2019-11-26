@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Auth::routes();
 
 Route::get('/', function () {
@@ -26,13 +27,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/', function () {
         return view('admin.index');
     })->name('home');
+    Route::post('subject/import/', 'Admin\SubjectController@import');
     Route::post('class/import/', 'Admin\ClassController@import');
     Route::get('class/export/', 'Admin\ClassController@export');
+    Route::resource('subject', 'Admin\SubjectController');
     Route::resource('class', 'Admin\ClassController');
     Route::resource('major', 'Admin\MajorController');
     Route::resource('department', 'Admin\DepartmentController');
     Route::resource('schedule', 'Admin\ScheduleController');
-    Route::resource('oneclass', 'Admin\OneClassController');
 
     Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
     Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');

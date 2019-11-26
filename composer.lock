@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "e33440194799cff6b09303d19330c217",
+
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3651,6 +3653,64 @@
             "time": "2019-08-29T07:01:03+00:00"
         },
         {
+
+            "name": "doctrine/instantiator",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/instantiator.git",
+                "reference": "ae466f726242e637cebdd526a7d991b9433bacf1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/ae466f726242e637cebdd526a7d991b9433bacf1",
+                "reference": "ae466f726242e637cebdd526a7d991b9433bacf1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^6.0",
+                "ext-pdo": "*",
+                "ext-phar": "*",
+                "phpbench/phpbench": "^0.13",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-shim": "^0.11",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://ocramius.github.com/"
+                }
+            ],
+            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "homepage": "https://www.doctrine-project.org/projects/instantiator.html",
+            "keywords": [
+                "constructor",
+                "instantiate"
+            ],
+            "time": "2019-10-21T16:45:58+00:00"
+        },
+        {
+
             "name": "facade/flare-client-php",
             "version": "1.2.1",
             "source": {
@@ -3927,6 +3987,56 @@
                 "fixtures"
             ],
             "time": "2019-11-14T13:13:06+00:00"
+
+        },
+        {
+            "name": "hamcrest/hamcrest-php",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamcrest/hamcrest-php.git",
+                "reference": "776503d3a8e85d4f9a1148614f95b7a608b046ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/776503d3a8e85d4f9a1148614f95b7a608b046ad",
+                "reference": "776503d3a8e85d4f9a1148614f95b7a608b046ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3|^7.0"
+            },
+            "replace": {
+                "cordoval/hamcrest-php": "*",
+                "davedevelopment/hamcrest-php": "*",
+                "kodova/hamcrest-php": "*"
+            },
+            "require-dev": {
+                "phpunit/php-file-iterator": "1.3.3",
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "hamcrest"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "description": "This is the PHP port of Hamcrest Matchers",
+            "keywords": [
+                "test"
+            ],
+            "time": "2016-01-20T08:20:44+00:00"
+
         },
         {
             "name": "laravel/ui",
@@ -4111,9 +4221,6 @@
                 "highlight.php",
                 "syntax"
             ],
-            "time": "2019-08-27T04:27:48+00:00"
-        }
-    ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],

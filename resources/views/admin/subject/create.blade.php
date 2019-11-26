@@ -2,18 +2,17 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý Bộ môn</h2>
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('major.index')}}">Quản lý ngành</a> >Sửa ngành </span>
-
+            <h2>Quản lý môn học</h2>
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('subject.index')}}">Quản lý môn học</a> > Thêm mới môn học </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Sửa ngành</div>
+                    <div class="card-header">Thêm mới môn học</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/major') }}" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                        <a href="{{ url('/admin/subject') }}" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                         <p>
                         @if ($errors->any())
                             <ul class="alert alert-danger" style="list-style: none">
@@ -23,17 +22,11 @@
                             </ul>
                             @endif
                             </p>
-                            {!! Form::model($major, [
-                            'method' => 'PATCH',
-                            'url' => ['/admin/major', $major->id],
-                            'class' => 'form-horizontal',
-                            'files' => true
-                                 ]) !!}
+                            {!! Form::open(['url' => '/admin/subject', 'class' => 'form-horizontal']) !!}
 
-                            @include ('admin.major.form', ['formMode' => 'edit'])
+                            @include ('admin.subject.form', ['formMode' => 'create'])
 
                             {!! Form::close() !!}
-
 
                     </div>
                 </div>
