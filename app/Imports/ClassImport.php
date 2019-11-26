@@ -28,7 +28,6 @@ class ClassImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailur
     use Importable, SkipsFailures;
     public function model(array $row)
     {
-
         return new mmc_class([
             'mmc_classid'=>'mmc-'.Str::slug($row['ten_lop']),
             'mmc_classname'=> $row['ten_lop'],

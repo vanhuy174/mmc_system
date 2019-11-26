@@ -12,6 +12,9 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClassExport;
 use Illuminate\Support\Arr;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
 
 class ClassController extends Controller
@@ -72,7 +75,7 @@ class ClassController extends Controller
         $class->mmc_description=$request->mmc_description;
         $class->mmc_numstudent=$request->mmc_numstudent;
         $class->save();
-        return redirect('admin/class')->with('flash_message','Thêm mới thành công');
+        return redirect('admin/class')->with('flash_message', 'Thêm mới thành công!');
     }
 
     /**
@@ -148,11 +151,12 @@ class ClassController extends Controller
     {
         return Excel::download(new ClassExport, 'classes.xlsx');
     }
-    public function import()
+    public function import(Request $request)
     {
+
+
         $import = new ClassImport();
-        $import->import(request()->file('file'));
-       // dd($import);
+        $import->import($request->file('file'));
         $failures = $import->failures();
 
         if (!empty($failures))
@@ -169,6 +173,6 @@ class ClassController extends Controller
                 }
             return back()->withErrors($errors);
         }
-        return back()->with('flash_message', 'Import thành công!');;
+        return back()->with('flash_message', 'Import thành công!');
     }
 }
