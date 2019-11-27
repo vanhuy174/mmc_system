@@ -3,7 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý lớp</h2>
-            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp
+            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp</span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -66,7 +66,7 @@
                                     <tr>
                                         <td>{{$item->mmc_classname}}</td>
                                         <td>{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_major)}}</td>
-                                        <td>{{$item->mmc_headteacher}}</td>
+                                        <td>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</td>
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>

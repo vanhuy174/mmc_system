@@ -21,7 +21,8 @@ class MajorController extends Controller
         $perPage = 5;
 
         if (!empty($keyword)) {
-            $major = mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            $department="mmc-".Str::slug($keyword);
+            $major = mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->orwhere('mmc_deptid', 'LIKE', "%$department%")->latest()->paginate($perPage);
         } else {
             $major = mmc_major::latest()->paginate($perPage);
         }
