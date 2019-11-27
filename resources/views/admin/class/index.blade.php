@@ -66,7 +66,7 @@
                                     <tr>
                                         <td>{{$item->mmc_classname}}</td>
                                         <td>{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_major)}}</td>
-                                        <td>{{$item->mmc_headteacher}}</td>
+                                        <td>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</td>
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>

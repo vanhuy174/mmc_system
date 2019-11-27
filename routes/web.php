@@ -37,6 +37,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::resource('major', 'Admin\MajorController');
     Route::resource('department', 'Admin\DepartmentController');
     Route::resource('schedule', 'Admin\ScheduleController');
+    Route::resource('oneclass', 'Admin\OneClassController');
 
     Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
     Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');
