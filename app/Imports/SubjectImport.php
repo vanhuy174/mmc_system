@@ -2,17 +2,15 @@
 
 namespace App\Imports;
 
-use App\Http\Controllers\Admin\ClassController;
+
 use App\mmc_subject;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Maatwebsite\Excel\Validators\Failure;
 
 class SubjectImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
 {
@@ -34,27 +32,26 @@ class SubjectImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFail
     {
         return 2;
     }
-    /**
-     * @param Failure[] $failures
-     */
-    public function failures()
-    {
-        return $this->failures;
-    }
-
-    /**
-     * @return array
-     */
     public function rules(): array
     {
         return [
-
+            'ten_mon_hoc' => ['required','unique:mmc_subjects,mmc_subjectname'],
+            'so_tin_chi' => ['required','numeric','max:5','min:1'],
         ];
     }
     public function customValidationMessages()
     {
         return [
-
+            'ten_mon_hoc.required' => 'tên môn học không được bỏ trông',
+            'ten_mon_hoc.unique'=>'tên môn học không được trùng',
+            'so_tin_chi.required'=>'số tín chỉ không được bỏ trống',
+            'so_tin_chi.max'=>'Số tín chỉ phải nhỏ hơn 5',
+            'so_tin_chi.min'=>'Số tín chỉ phải lớn hơn 1',
         ];
     }
+    public function failures()
+    {
+        return $this->failures;
+    }
+
 }

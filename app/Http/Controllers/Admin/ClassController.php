@@ -8,14 +8,10 @@ use App\mmc_class;
 use App\mmc_major;
 use App\mmc_employee;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClassExport;
-use Illuminate\Support\Arr;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Reader\Xls;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+
 
 
 class ClassController extends Controller
@@ -155,8 +151,6 @@ class ClassController extends Controller
     }
     public function import(Request $request)
     {
-
-
         $import = new ClassImport();
         $import->import($request->file('file'));
         $failures = $import->failures();

@@ -17,23 +17,18 @@
                     <div class="ibox-content">
                         <h3>Thời gian ra vào lớp</h3>
                         <h4 id="clock"></h4>
-                        <form method="get" id="form">
-                            <select name="tiethoc">
-                                <option value="1">T1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </form>
+                        <p>Tiết 1 :</p>
+                        <p>Tiết 2 </p>
+                        <p>Tiết 3 </p>
+                        <p>Tiết 4 </p>
+                        <p>Tiết 5</p>
+                        <p>Tiết 6 </p>
+                        <p>Tiết 7 </p>
+                        <p>Tiết 8 </p>
+                        <p>Tiết 9 </p>
+                        <p>Tiết 10 </p>
                     </div>
                 </div>
-<<<<<<< HEAD
                 {{-- <div class="ibox ">
                     <div class="ibox-title">
                         <h5>Draggable Events</h5>
@@ -52,7 +47,7 @@
                         </div>
                     </div>
                 </div> --}}
-=======
+
 {{--                <div class="ibox ">--}}
 {{--                    <div class="ibox-title">--}}
 {{--                        <h5>Draggable Events</h5>--}}
@@ -73,7 +68,6 @@
 {{--                </div>--}}
 {{--                <button id="acceptOffer">12</button>--}}
 {{--                <button id="declineOffer">1234</button>--}}
->>>>>>> tvduong
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">

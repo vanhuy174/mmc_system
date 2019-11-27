@@ -131,6 +131,7 @@ class SubjectController extends Controller
     {
         $import = new SubjectImport();
         $import->import($request->file('file'));
+
         $failures = $import->failures();
 
         if (!empty($failures))

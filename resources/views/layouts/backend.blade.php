@@ -17,9 +17,6 @@
     <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/app.css" rel="stylesheet">
-    <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet">
-    <script src="js/app.js" defer></script>
     @yield('css')
 </head>
 

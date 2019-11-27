@@ -8,10 +8,20 @@
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         @if (Session::has('flash_message'))
-            <div class="container col-md-12 error">
+            <div class="error">
                 <div class="alert alert-success">
                     {{ Session::get('flash_message') }}
                 </div>
+            </div>
+        @endif
+        @if($errors->any())
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <ul style="list-style: none;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
         <div class="row">
@@ -63,7 +73,7 @@
                                                     'type' => 'submit',
                                                     'class' => 'btn btn-danger btn-sm',
                                                     'title' => 'Xóa môn học',
-                                                    'onclick'=>'return confirm("Confirm delete?")'
+                                                    'onclick'=>'return confirm("Xóa nhận xóa?")'
                                             )) !!}
                                             {!! Form::close() !!}
                                         </td>

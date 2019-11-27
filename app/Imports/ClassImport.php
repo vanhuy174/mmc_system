@@ -5,17 +5,14 @@ namespace App\Imports;
 use App\Http\Controllers\Admin\ClassController;
 use App\mmc_class;
 use Illuminate\Validation\Rule;
-use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\WithValidation;
-use Maatwebsite\Excel\Validators\Failure;
-use Throwable;
+
 
 
 class ClassImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
