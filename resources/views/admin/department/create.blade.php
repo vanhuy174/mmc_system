@@ -3,12 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý Bộ môn</h2>
-<<<<<<< HEAD
             <span><a href="{{route('home')}}">Home</a> > <a href="{{route('department.index')}}">Quản lý bộ môn</a> > Thêm mới bộ môn </span>
-=======
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('department.index')}}">Quản lý bộ môn</a> > Thêm mới bộ môn
-<99> m<C3><B4>n </span>
->>>>>>> tvduong
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -37,9 +32,12 @@
             </div>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> tvduong
+=======
+>>>>>>> 5f2ca2affd78a1fab7bbdba3df954fc225a1bd62
     </div>
 @endsection
 

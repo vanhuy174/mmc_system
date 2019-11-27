@@ -48,6 +48,7 @@
                     </div>
                 </div> --}}
 
+
 {{--                <div class="ibox ">--}}
 {{--                    <div class="ibox-title">--}}
 {{--                        <h5>Draggable Events</h5>--}}
@@ -68,6 +69,7 @@
 {{--                </div>--}}
 {{--                <button id="acceptOffer">12</button>--}}
 {{--                <button id="declineOffer">1234</button>--}}
+
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">

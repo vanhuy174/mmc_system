@@ -64,10 +64,8 @@
                         <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
                         <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
                         <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
-
                         <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
                         <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
-
                         <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
 
                     </ul>
