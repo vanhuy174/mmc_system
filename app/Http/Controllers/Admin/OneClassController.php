@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\mmc_Student;
+
 use App\mmc_class;
-use Auth;
+use App\mmc_student;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class OneClassController extends Controller
 {
@@ -17,19 +19,31 @@ class OneClassController extends Controller
      */
     public function index(Request $request)
     {
-        $userid= Auth::user()->mmc_employeeid;
-        $classid= mmc_class::where('mmc_headteacher', '=', "$userid")->value('mmc_classid');
-        dd($classid);
 
         $keyword = $request->get('search');
         $perPage = 5;
+        $idgv=Auth::user()->mmc_employeeid;
+        $idlop=mmc_class::where('mmc_headteacher', '=', "$idgv")->value('mmc_classid');
 
-        if (!empty($keyword)) {
-            $data = mmc_student::where('mmc_namestudent', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
-        } else {
-            $data = mmc_student::latest()->paginate($perPage);
+        if($idlop!=null)
+        {
+            $lop=mmc_class::where('mmc_headteacher', '=', "$idgv")->first();
+            if (!empty($keyword)) {
+                $student = mmc_student::where('mmc_classid', '=', "$idlop")->where(function ($query) use ($keyword) {
+                    $query->where('mmc_studentid', 'LIKE', "%$keyword%")
+                        ->orwhere('mmc_fullname', 'LIKE',"%$keyword%");
+                })->latest()->paginate($perPage);
+            } else {
+                $student = mmc_student::where('mmc_classid', '=', "$idlop")->latest()->paginate($perPage);
+            }
+            return view('admin.oneclass.index',compact('student','lop'));
         }
-        return view('admin.oneclass.index', compact('student'));
+        else
+        {
+            $flash_message='Giáo viên không chủ nhiệm lớp nào!';
+            return view('admin.oneclass.index',compact('flash_message'));
+        }
+
     }
 
     /**

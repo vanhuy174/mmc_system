@@ -78,12 +78,12 @@ class mmc_ControllerStudent extends Controller
                 'mmc_ethnic.required' => 'Dân tộc không được để trống',
                 'mmc_religion.required' => 'Tôn giáo không được để trống',
                 'mmc_personalid.required' => 'Số CMND không được để trống',
-                
+
                 'mmc_studentid.unique' => 'Mã sinh viên đã tồn tại',
                 'mmc_email.unique' => 'Email đã tồn tại',
                 'mmc_phone.unique' => 'Số điện thoại đã tồn tại',
                 'mmc_personalid.unique' => 'Số CMND đã tồn tại',
-                
+
                 'mmc_email.email' => 'Bạn phải nhập đúng định dạng email',
 
                 'mmc_phone.numeric' => 'Số điện thoại không hợp lệ',
@@ -108,7 +108,7 @@ class mmc_ControllerStudent extends Controller
     public function store(Request $request)
     {
         //
-        
+
     }
 
     /**
@@ -167,12 +167,12 @@ class mmc_ControllerStudent extends Controller
                 'mmc_ethnic.required' => 'Dân tộc không được để trống',
                 'mmc_religion.required' => 'Tôn giáo không được để trống',
                 'mmc_personalid.required' => 'Số CMND không được để trống',
-                
+
                 'mmc_studentid.unique' => 'Mã sinh viên đã tồn tại',
                 'mmc_email.unique' => 'Email đã tồn tại',
                 'mmc_phone.unique' => 'Số điện thoại đã tồn tại',
                 'mmc_personalid.unique' => 'Số CMND đã tồn tại',
-                
+
                 'mmc_email.email' => 'Bạn phải nhập đúng định dạng email',
 
                 'mmc_phone.numeric' => 'Số điện thoại không hợp lệ',
@@ -186,14 +186,14 @@ class mmc_ControllerStudent extends Controller
                 unset($data['_method']);
                 return redirect('homeStudent')->with('status', 'Sửa sinh viên thành công!');
             }
-       
+
     }
 
     /**
         Hàm destroy dùng để xoá một sinh viên có id = $id khỏi csdl.
      */
     public function destroy($id)
-    {   
+    {
         mmc_Student::destroy($id);
         return back()->with('status', 'Xoá sinh viên thành công!');
     }
@@ -205,20 +205,20 @@ class mmc_ControllerStudent extends Controller
     {
        return view('import');
     }
-   
+
     /**
         Hàm export dùng để xuất ra danh sách tất cả các sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
     */
-    public function export() 
+    public function export()
     {
         return Excel::download(new mmc_StudentExport, 'Danh-sach-sinh-vien.xlsx');
         return back();
     }
-   
+
     /**
         Hàm import dùng để thêm thông tin của những sinh viên có trong 1 file excel vào trong csdl sinh viên. (Cần có chuẩn file excel để hệ thống không bị lỗi khi thêm)
     */
-    public function import() 
+    public function import()
     {
         $import = new mmc_StudentImport();
         $import->import(request()->file('file'));
@@ -254,5 +254,9 @@ class mmc_ControllerStudent extends Controller
     public function downloadfileExcel(){
         $filename= "mau-them-sinh-vien.xlsx";
         return response()->download(storage_path('file/' . $filename));
+    }
+    public static function count()
+    {
+        return mmc_Student::count();
     }
 }

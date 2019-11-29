@@ -4,7 +4,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Tên lớp: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
-            {!! Form::text('mmc_classname', null, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! Form::text('mmc_classname', null, ['class' => 'form-control']) !!}
 
         </div>
         <div class="input-group mb-3 input-group-sm">
@@ -24,8 +24,21 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Giáo viên chủ nhiệm: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
-            {!! Form::text('mmc_headteacher', null, ['class' => 'form-control']) !!}
-
+            <select name="mmc_headteacher" class="form-control">
+                @foreach($department as $item)
+                    <optgroup label="{{$item->mmc_deptname}}">
+                        @foreach($employee as $employeeitem)
+                            @if($employeeitem->mmc_deptid == $item->mmc_deptid)
+                                @if(isset($class) && $employeeitem->mmc_employeeid == $class->mmc_headteacher)
+                                  <option value="{{$employeeitem->mmc_employeeid}}" selected>{{$employeeitem->mmc_name}}</option>
+                                @else
+                                    <option value="{{$employeeitem->mmc_employeeid}}">{{$employeeitem->mmc_name}}</option>
+                                @endif
+                            @endif
+                        @endforeach
+                    </optgroup>
+                @endforeach
+            </select>
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">

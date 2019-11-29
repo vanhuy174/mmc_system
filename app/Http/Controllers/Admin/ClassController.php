@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\ClassImport;
 use App\mmc_class;
-use App\mmc_major;
+use App\mmc_department;
 use App\mmc_employee;
+use App\mmc_major;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClassExport;
-use Illuminate\Support\Arr;
+
 
 
 class ClassController extends Controller
@@ -26,9 +26,10 @@ class ClassController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 5;
-
-        if (!empty($keyword)) {
-            $class = mmc_class::where('mmc_classname', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+        if (!empty($keyword)){
+            $major= mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->pluck('mmc_majorid');
+            $employ=mmc_employee::where('mmc_name', 'LIKE', "%$keyword%")->pluck('mmc_employeeid');
+            $class = mmc_class::where('mmc_classname', 'LIKE', "%$keyword%")->orwhereIn('mmc_major',$major)->orwhereIn('mmc_headteacher',$employ)->latest()->paginate($perPage);
         } else {
             $class = mmc_class::latest()->paginate($perPage);
         }
@@ -42,9 +43,12 @@ class ClassController extends Controller
      */
     public function create()
     {
-        $teacher= mmc_employee::get();
+
+        $employee=mmc_employee::select('mmc_employeeid','mmc_name','mmc_deptid')->get();
+        $department = mmc_department::select('mmc_deptid','mmc_deptname')->get();
         $major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
-        return view('admin.class.create',compact('major', 'teacher'));
+        return view('admin.class.create',compact('major','employee','department'));
+
     }
 
     /**
@@ -96,9 +100,11 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
+        $employee=mmc_employee::select('mmc_employeeid','mmc_name','mmc_deptid')->get();
+        $department = mmc_department::select('mmc_deptid','mmc_deptname')->get();
         $major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
         $class= mmc_class::findOrFail($id);
-        return view('admin.class.edit', compact('class','major'));
+        return view('admin.class.edit', compact('class','major','employee','department'));
     }
 
     /**
@@ -138,6 +144,10 @@ class ClassController extends Controller
     {
             return $major = mmc_major::where('mmc_majorid', '=', "$id")->value('mmc_majorname');
     }
+    public static function getemployee($id)
+    {
+        return  mmc_employee::where('mmc_employeeid', '=', "$id")->value('mmc_name');
+    }
     public static function getmajorid($id)
     {
         return mmc_major::where('mmc_majorname', '=', "$id")->value('mmc_majorid');
@@ -146,14 +156,19 @@ class ClassController extends Controller
     {
         return mmc_major::get()->pluck('mmc_majorname');
     }
+    public static function count()
+    {
+        return mmc_class::count();
+    }
     public function export()
     {
         return Excel::download(new ClassExport, 'classes.xlsx');
     }
-    public function import()
+    public function import(Request $request)
     {
+
         $import = new ClassImport();
-        $import->import(request()->file('file'));
+        $import->import($request->file('file'));
         $failures = $import->failures();
 
         if (!empty($failures))
@@ -170,6 +185,6 @@ class ClassController extends Controller
                 }
             return back()->withErrors($errors);
         }
-        return back()->with('flash_message', 'Import thành công!');;
+        return back()->with('flash_message', 'Import thành công!');
     }
 }

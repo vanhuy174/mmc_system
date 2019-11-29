@@ -135,6 +135,7 @@ class GiangVienController extends Controller
 
             return redirect()->route('danh-sach-giang-vien')->with('thongbao','thêm giảng viên thành công');
         }
+
     }
     // sửa thông tin giảng viên
     public function getSuaGV($id){
@@ -174,7 +175,7 @@ class GiangVienController extends Controller
 
             $sua->mmc_avatar = $name; //Ảnh đại điện
         }
-        
+
         $sua->mmc_dateofbirth = $request->mmc_dateofbirth; //Ngày tháng và năm sinh
         $sua->mmc_gender = $request->mmc_gender; //Giới tính
         $sua->mmc_personalid = $request->mmc_personalid; //Số chứng minh nhân dân
@@ -182,7 +183,7 @@ class GiangVienController extends Controller
         $sua->mmc_socialinsuranceid = $request->mmc_socialinsuranceid; //Số bảo hiểm xã hội
         $sua->mmc_phone = $request->mmc_phone; //Số điện thoại
         $sua->email = $request->email; //Email
-        //$sua->password = $request->password; //Password 
+        //$sua->password = $request->password; //Password
         $sua->mmc_religion = $request->mmc_religion; //Dân tộc
         $sua->mmc_ethnic = $request->mmc_ethnic; //Tôn giáo
         $sua->mmc_placeofbirth = $request->mmc_placeofbirth; //Nơi Sinh
@@ -201,7 +202,7 @@ class GiangVienController extends Controller
         $sua->mmc_salaryother= $request->mmc_salaryother;//Phụ cấp khác
 
         $sua->mmc_degree= $request->mmc_degree; //Trình độ chuyên môn cao nhất
-        $sua->mmc_language= $request->mmc_language; //Ngoại ngữ 
+        $sua->mmc_language= $request->mmc_language; //Ngoại ngữ
         $sua->mmc_itlevel= $request->mmc_itlevel; //Tin học
         $sua->mmc_politiclevel= $request->mmc_politiclevel; //Lý luận chính trị
         $sua->mmc_managementlevel= $request->mmc_managementlevel; //Quản lý nhà nước
@@ -214,7 +215,7 @@ class GiangVienController extends Controller
         $sua->mmc_bloodgroup= $request->mmc_bloodgroup; //Nhóm máu
         $sua->mmc_tall= $request->mmc_tall; //Chiều cao
         $sua->mmc_weight= $request->mmc_weight; //Cân nặng
-        
+
         $sua->save();
 
         return redirect()->route('get-sua-thong-tin-giang-vien',$id)->with('thongbao','Sửa thông tin giảng viên thành công');
@@ -236,7 +237,7 @@ class GiangVienController extends Controller
         $xoa -> delete();
 
         return redirect()->route('danh-sach-giang-vien')->with('thongbao','xóa giảng viên thành công');
-    } 
+    }
 
     // thông tin cá nhân
     public function getThongTinCN($id){
@@ -279,7 +280,7 @@ class GiangVienController extends Controller
 
             $sua->mmc_avatar = $name; //Ảnh đại điện
         }
-        
+
         $sua->mmc_dateofbirth = $request->mmc_dateofbirth; //Ngày tháng và năm sinh
         $sua->mmc_gender = $request->mmc_gender; //Giới tính
         $sua->mmc_personalid = $request->mmc_personalid; //Số chứng minh nhân dân
@@ -287,7 +288,7 @@ class GiangVienController extends Controller
         $sua->mmc_socialinsuranceid = $request->mmc_socialinsuranceid; //Số bảo hiểm xã hội
         $sua->mmc_phone = $request->mmc_phone; //Số điện thoại
         $sua->email = $request->email; //Email
-        //$sua->password = $request->password; //Password 
+        //$sua->password = $request->password; //Password
         $sua->mmc_religion = $request->mmc_religion; //Dân tộc
         $sua->mmc_ethnic = $request->mmc_ethnic; //Tôn giáo
         $sua->mmc_placeofbirth = $request->mmc_placeofbirth; //Nơi Sinh
@@ -306,7 +307,7 @@ class GiangVienController extends Controller
         $sua->mmc_salaryother= $request->mmc_salaryother;//Phụ cấp khác
 
         $sua->mmc_degree= $request->mmc_degree; //Trình độ chuyên môn cao nhất
-        $sua->mmc_language= $request->mmc_language; //Ngoại ngữ 
+        $sua->mmc_language= $request->mmc_language; //Ngoại ngữ
         $sua->mmc_itlevel= $request->mmc_itlevel; //Tin học
         $sua->mmc_politiclevel= $request->mmc_politiclevel; //Lý luận chính trị
         $sua->mmc_managementlevel= $request->mmc_managementlevel; //Quản lý nhà nước
@@ -319,7 +320,7 @@ class GiangVienController extends Controller
         $sua->mmc_bloodgroup= $request->mmc_bloodgroup; //Nhóm máu
         $sua->mmc_tall= $request->mmc_tall; //Chiều cao
         $sua->mmc_weight= $request->mmc_weight; //Cân nặng
-        
+
         $sua->save();
 
         return redirect()->route('get-sua-thong-tin-ca-nhan',$id)->with('thongbao','Sửa thông tin cá nhânh thành công');
@@ -351,10 +352,14 @@ class GiangVienController extends Controller
             return redirect()->route('get-doi-pass',$id)->with('errors','PassWord mới nhập lại không đúng');
         }
 
-        
-        
-        
+
+
+
     }
-    
+    public static function count()
+    {
+        return mmc_employee::count();
+    }
+
 
 }

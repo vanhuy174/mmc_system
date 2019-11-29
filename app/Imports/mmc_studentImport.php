@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Validators\Failure;
 use App\Http\Controllers\Admin\mmc_ControllerStudent;
-
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 
 class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFailure
@@ -28,9 +28,9 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
     {
         return new mmc_student([
             'mmc_studentid'     => $row['ma_sinh_vien'],
-            'mmc_classid'    => mmc_ControllerStudent::getclassId($row['ten_lop']), 
+            'mmc_classid'    => mmc_ControllerStudent::getclassId($row['ten_lop']),
             'mmc_fullname'    => $row['ho_va_ten'],
-            'mmc_dateofbirth'    => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['ngay_sinh']),
+            'mmc_dateofbirth'    => Date::excelToDateTimeObject($row['ngay_sinh']),
             'mmc_gender'    => $row['gioi_tinh'],
             'mmc_email'    => $row['email'],
             'mmc_phone'    => $row['so_dien_thoai'],
@@ -56,13 +56,13 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
             'mmc_motherphone'    => $row['so_dien_thoai_me'],
             'mmc_motheremail'    => $row['email_me'],
             'mmc_motherjob'    => $row['nghe_ngiep_me'],
-            
+
         ]);
     }
 
     public function headingRow(): int
     {
-        return 3;
+        return 1;
     }
 
     public function rules(): array
@@ -97,12 +97,12 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
             'dan_toc.required' => 'Dân tộc không được để trống',
             'ton_giao.required' => 'Tôn giáo không được để trống',
             'so_cmnd.required' => 'Số CMND không được để trống',
-                
+
             'ma_sinh_vien.unique' => 'Mã sinh viên đã tồn tại',
             'email.unique' => 'Email đã tồn tại',
             'so_dien_thoai.unique' => 'Số điện thoại đã tồn tại',
             'so_cmnd.unique' => 'Số CMND đã tồn tại',
-                
+
             'email.email' => 'Bạn phải nhập đúng định dạng email',
 
             'so_dien_thoai.numeric' => 'Số điện thoại không hợp lệ',

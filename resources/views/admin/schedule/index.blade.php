@@ -47,6 +47,29 @@
                         </div>
                     </div>
                 </div> --}}
+
+
+{{--                <div class="ibox ">--}}
+{{--                    <div class="ibox-title">--}}
+{{--                        <h5>Draggable Events</h5>--}}
+{{--                    </div>--}}
+{{--                    <div class="ibox-content">--}}
+{{--                        <div id='external-events'>--}}
+{{--                            <p>Drag a event and drop into callendar.</p>--}}
+{{--                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>--}}
+{{--                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>--}}
+{{--                            <div class='external-event navy-bg'>Send documents to John.</div>--}}
+{{--                            <div class='external-event navy-bg'>Phone to Sandra.</div>--}}
+{{--                            <div class='external-event navy-bg'>Chat with Michael.</div>--}}
+{{--                            <p class="m-t">--}}
+{{--                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <button id="acceptOffer">12</button>--}}
+{{--                <button id="declineOffer">1234</button>--}}
+
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -73,8 +96,17 @@
     <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
     <script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
     <script>
-        
+
         $(document).ready(function() {
+            {{--$("#acceptOffer").click(function () {--}}
+            {{--    alert('1111');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.create')}}").submit();;--}}
+            {{--});--}}
+
+            {{--$("#declineOffer").click(function () {--}}
+            {{--    alert('2222');--}}
+            {{--    $("#form").attr("action", "{{route('schedule.show',['id'=>1])}}").submit();;--}}
+            {{--});--}}
 
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
@@ -109,7 +141,7 @@
             var d = date.getDate();
             var m = date.getMonth();
             var y = date.getFullYear();
-
+            console.log(date,d,y,m);
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -117,26 +149,22 @@
                     right: 'month,agendaWeek,agendaDay'
                 },
                 lang: 'vi',
-                editable: true,
-                droppable: true, // this allows things to be dropped onto the calendar
-                drop: function() {
-                    // is the "remove after drop" checkbox checked?
-                    if ($('#drop-remove').is(':checked')) {
-                        // if so, remove the element from the "Draggable Events" list
-                        $(this).remove();
-                    }
-                },
                 events: [
-                    {
-                        title: 'Tiết 1 2 3 4 5',
-                        start: new Date(y, m, d,7,30),
-                        end: new Date(y, m, d,11,45)
-                    },
-                    {
-                        title: 'Tiết 6 7 8 9 10',
-                        start: new Date(y, m, d+2),
-                        end: new Date(y, m, d+2)
-                    }
+                    <?php for( $i=0; $i< count($calendar) ; $i++){?>
+                        {
+                            title: 'Tiết {{$calendar[$i]['tiethoc']}}{{$calendar[$i]['tenlophocphan']}}',
+                            <?php 
+                                $m3=explode("-",$calendar[$i]['ngayhoc']);
+                                $y= (int)$m3[0];
+                                $m= (int)$m3[1]-1;
+                                $d= (int)$m3[2];
+
+                                $m3=explode(",",$calendar[$i]['tiethoc']);
+                                
+                            ?>  
+                            start: new Date({{$y}},{{$m}},{{$d}})
+                        },
+                    <?php } ?> 
                 ]
             });
         });

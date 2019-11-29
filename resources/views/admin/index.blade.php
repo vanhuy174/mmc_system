@@ -6,14 +6,20 @@
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
-        <div class="row">
-            <div class="col-lg-6">
+        @if (Session::has('flash_message'))
+            <div class="container col-md-12 error">
+                <div class="alert alert-success">
+                    {{ Session::get('flash_message') }}
+                </div>
+            </div>
+        @endif
+        <div class="row " >
+            <div class="col-lg-4 " style="padding-right: 0px">
                 <div class="widget navy-bg no-padding">
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số giảng viên</h3>
-
-                        <h3 class="font-bold no-margins">
-
+                        <h3 class="font-bold no-margins" style="padding-left: 15px">
+                            {{\App\Http\Controllers\GiangVienController::count()}}
                         </h3>
                         <small></small>
                     </div>
@@ -22,13 +28,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4 " style="padding-right: 0px">
                 <div class="widget lazur-bg no-padding">
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số sinh viên</h3>
-
-                        <h3 class="font-bold no-margins">
-
+                        <h3 class="font-bold no-margins" style="padding-left: 15px">
+                            {{\App\Http\Controllers\Admin\mmc_ControllerStudent::count()}}
                         </h3>
                         <small></small>
                     </div>
@@ -37,13 +42,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="widget yellw-bg no-padding">
+            <div class="col-lg-4">
+                <div class="widget yellw-bg no-padding" >
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số lớp học</h3>
-
-                        <h3 class="font-bold no-margins">
-
+                        <h3 class="font-bold no-margins" style="padding-left: 15px">
+                            {{\App\Http\Controllers\Admin\ClassController::count()}}
                         </h3>
                         <small></small>
                     </div>
