@@ -156,12 +156,17 @@ class ClassController extends Controller
     {
         return mmc_major::get()->pluck('mmc_majorname');
     }
+    public static function count()
+    {
+        return mmc_class::count();
+    }
     public function export()
     {
         return Excel::download(new ClassExport, 'classes.xlsx');
     }
     public function import(Request $request)
     {
+
         $import = new ClassImport();
         $import->import($request->file('file'));
         $failures = $import->failures();

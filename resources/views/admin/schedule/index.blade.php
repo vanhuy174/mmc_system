@@ -141,7 +141,7 @@
             var d = date.getDate();
             var m = date.getMonth();
             var y = date.getFullYear();
-
+            console.log(date,d,y,m);
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',

@@ -58,18 +58,20 @@
                         MMC+
                     </div>
                 </li>
-                <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
-                        <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
-                        <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
-                        <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
-                        <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
-                        <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
+                @if(Auth::user()->mmc_level==1)
+                    <li>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
+                            <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>
+                            <li><a href="{{route('class.index')}}">Quản lý lớp học</a></li>
+                            <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
+                            <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
+                            <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                @endif
                 <li>
                     <a href="{{route('schedule.index')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Lịch giảng dạy</span>  </a>
                 </li>

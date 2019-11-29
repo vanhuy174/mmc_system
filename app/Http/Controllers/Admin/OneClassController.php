@@ -24,9 +24,10 @@ class OneClassController extends Controller
         $perPage = 5;
         $idgv=Auth::user()->mmc_employeeid;
         $idlop=mmc_class::where('mmc_headteacher', '=', "$idgv")->value('mmc_classid');
+
         if($idlop!=null)
         {
-
+            $lop=mmc_class::where('mmc_headteacher', '=', "$idgv")->first();
             if (!empty($keyword)) {
                 $student = mmc_student::where('mmc_classid', '=', "$idlop")->where(function ($query) use ($keyword) {
                     $query->where('mmc_studentid', 'LIKE', "%$keyword%")
@@ -35,7 +36,7 @@ class OneClassController extends Controller
             } else {
                 $student = mmc_student::where('mmc_classid', '=', "$idlop")->latest()->paginate($perPage);
             }
-            return view('admin.oneclass.index',compact('student'));
+            return view('admin.oneclass.index',compact('student','lop'));
         }
         else
         {

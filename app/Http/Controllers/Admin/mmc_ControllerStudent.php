@@ -255,4 +255,8 @@ class mmc_ControllerStudent extends Controller
         $filename= "mau-them-sinh-vien.xlsx";
         return response()->download(storage_path('file/' . $filename));
     }
+    public static function count()
+    {
+        return mmc_Student::count();
+    }
 }

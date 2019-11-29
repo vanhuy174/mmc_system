@@ -30,6 +30,28 @@
                         {!! Form::close() !!}
                         <br/>
                         <br/>
+                        <h1 style="text-align: center;"><b>Thông tin cơ bản</b></h1>
+                        <div class="table-responsive container" style="width: 50%;">
+                            <table class="table">
+                                <tr>
+                                    <th>Tên lớp:</th>
+                                    <td style="text-align: center">{{$lop->mmc_classname}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Số sinh viên:</th>
+                                    <td style="text-align: center">{{$lop->mmc_numstudent}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Lớp trưởng:</th>
+                                    <td style="text-align: center">{{$lop->mmc_monitor}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Bí thư:</th>
+                                    <td style="text-align: center">{{$lop->mmc_secretary}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <h1 style="text-align: center;"><b>Bảng sinh viên lớp</b></h1>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
