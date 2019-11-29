@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
+use App\mmc_calendar;
+use App\mmc_subjectclass;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,24 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('admin.schedule.index');
+        $key = Auth::user()->mmc_employeeid;
+        $subjectclass= mmc_subjectclass::where('mmc_employeeid', '=', $key)->get();
+        $calendar =[];
+        $k=0;
+        for ($i=0; $i < count($subjectclass); $i++) { 
+            $data= mmc_calendar::where('mmc_subjectclassid', '=', $subjectclass[$i]->mmc_subjectclassid)->get();
+            for ($j=0; $j < count($data); $j++) {
+                $calendar[$k]=[
+                    'tenlophocphan' => $subjectclass[$i]['mmc_subjectclassname'],
+                    'ngayhoc' => $data[$j]->mmc_schedule,
+                    'phonghoc' => $data[$j]->mmc_classroom,
+                    'tiethoc' => $data[$j]->mmc_class,
+                ];
+                $k++;
+            }
+        }
+        // dd($calendar);   
+        return view('admin.schedule.index',compact('calendar'));
     }
 
     /**
@@ -24,7 +44,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -44,9 +64,9 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show($id)
     {
-
+        //
     }
 
     /**

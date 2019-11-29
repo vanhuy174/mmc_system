@@ -150,16 +150,21 @@
                 },
                 lang: 'vi',
                 events: [
-                    {
-                        title: 'Tiết 1 2 3 4 5',
-                        start: new Date(y, m, d,7,30),
-                        end: new Date(y, m, d,11,45)
-                    },
-                    {
-                        title: 'Tiết 6 7 8 9 10',
-                        start: new Date(y, m, d+2),
-                        end: new Date(y, m, d+2)
-                    }
+                    <?php for( $i=0; $i< count($calendar) ; $i++){?>
+                        {
+                            title: 'Tiết {{$calendar[$i]['tiethoc']}}{{$calendar[$i]['tenlophocphan']}}',
+                            <?php 
+                                $m3=explode("-",$calendar[$i]['ngayhoc']);
+                                $y= (int)$m3[0];
+                                $m= (int)$m3[1]-1;
+                                $d= (int)$m3[2];
+
+                                $m3=explode(",",$calendar[$i]['tiethoc']);
+                                
+                            ?>  
+                            start: new Date({{$y}},{{$m}},{{$d}})
+                        },
+                    <?php } ?> 
                 ]
             });
         });
