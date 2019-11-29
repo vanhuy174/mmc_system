@@ -7,16 +7,9 @@
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
-        {{-- @if (Session::has('flash_message'))
-            <div class="container col-md-12 error">
-                <div class="alert alert-success">
-                    {{ Session::get('flash_message') }}
-                </div>
-            </div>
-        @endif --}}
         @if (session('thongbao'))
             <div class="alert alert-success ">
-                <strong>Success! </strong> {{session('thongbao')}}
+                <strong>Thành Công! </strong> {{session('thongbao')}}
             </div>
         @endif
 
@@ -29,7 +22,12 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
                         </a>
 
-                        {!! Form::open(['method' => 'post', 'url' => '/admin/giang-vien/tim-kiem-thong-tin-giang-vien', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
+                        {!! Form::open([
+                            'method' => 'post', 
+                            'url' => '/admin/giang-vien/tim-kiem-thong-tin-giang-vien', 
+                            'class' => 'form-inline my-2 my-lg-0 float-right',
+                            'role' => 'search'
+                            ])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control " name="tukhoa" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
@@ -45,7 +43,6 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Tên giảng viên</th>
                                     <th>Mã giảng viên</th>
                                     <th>Email</th>
@@ -56,7 +53,6 @@
                                 <tbody>
                                 @foreach($danhsach as $ds)
                                     <tr>
-                                        <td>{{$ds->id}}</td>
                                         <td><a href="{{route('get-thong-tin-giang-vien',$ds->id)}}">{{$ds->mmc_name}}</a></td>
                                         <td>{{$ds->mmc_employeeid}}</td>
                                         <td>{{$ds->email}}</td>
@@ -64,9 +60,9 @@
                                         <td>
                                             <a href="{{route('get-thong-tin-giang-vien',$ds->id)}}" title="Xem"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                             <a href="{{route('get-sua-thong-tin-giang-vien',$ds->id)}}" title="Sửa Giảng Viên"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                            <a href="{{route('get-xoa-giang-vien',$ds->id)}}" title="Xóa"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
-                                            {{-- {!! Form::open([
-                                                'method' => 'DELETE',
+                                            {{-- <a href="{{route('get-xoa-giang-vien',$ds->id)}}" title="Xóa"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> --}}
+                                            {!! Form::open([
+                                                'method' => 'get',
                                                 'url' => ['/admin/giang-vien/xoa-giang-vien',$ds->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
@@ -76,13 +72,13 @@
                                                     'title' => 'Xóa bộ môn',
                                                     'onclick'=>'return confirm("Xác nhận xóa?")'
                                             )) !!}
-                                            {!! Form::close() !!} --}}
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation example" style="padding-left: 1px;">  </nav>
+                            {!! $danhsach->links() !!}
                         </div>
                     </div>
                 </div>

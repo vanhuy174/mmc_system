@@ -25,14 +25,14 @@
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $err)
-                        <strong>Warning! </strong>{{$err}}<br>
+                        <strong>Lỗi! </strong>{{$err}}<br>
                     @endforeach
                 </div> 
             @endif
 
             @if (session('thongbao'))
                 <div class="alert alert-success ">
-                    <strong>Success! </strong> {{session('thongbao')}}
+                    <strong>Thành Công! </strong> {{session('thongbao')}}
                 </div>
             @endif
         </div>
@@ -97,7 +97,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Mã giảng viên: <b style="color:red;" >*</b></span>
                                                     </div>
-                                                    <input type="text" name="mmc_employeeid" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{$sua->mmc_employeeid}}">
+                                                    <input type="text" name="mmc_employeeid" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{$sua->mmc_employeeid}}" readonly>
                                                 </div>
                                                 <div class="input-group mb-3 input-group-sm">
                                                     <div class="input-group-prepend">
@@ -160,7 +160,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Email: <b style="color:red;" >*</b> </span>
                                                     </div>
-                                                    <input type="email" name="email" class="form-control" required autocomplete="off" value="{{$sua->email}}">
+                                                    <input type="email" name="email" minlength="3" maxlength="225" class="form-control" required autocomplete="off" value="{{$sua->email}}">
                                                 </div>
                                                 {{-- <div class="input-group mb-3 input-group-sm">
                                                     <div class="input-group-prepend">

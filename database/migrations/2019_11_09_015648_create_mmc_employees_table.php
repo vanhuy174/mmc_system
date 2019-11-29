@@ -14,6 +14,7 @@ class CreateMmcEmployeesTable extends Migration
     public function up()
     {
         Schema::create('mmc_employees', function (Blueprint $table) {
+            
             $table->bigIncrements('id');
             
             $table->string('mmc_name'); //Họ và tên
