@@ -1,9 +1,11 @@
+<h2>Danh sách sinh viên</h2>
+<p><b>Chú thích: </b>Danh sách gồm tất cả các sinh viên thuộc khoa</p>
 <table>
     <thead>
     <tr>
         <th><b>STT</b></th>
         <th><b>Mã sinh viên</b></th>
-        <th><b>Mã lớp</b></th>
+        <th><b>Tên lớp</b></th>
         <th><b>Họ và tên</b></th>
         <th><b>Ngày sinh</b></th>
         <th><b>Giới tính</b></th>
@@ -35,11 +37,17 @@
     </thead>
     <tbody>
     <?php $i= 1; ?>
-    @foreach($datas as $data)
+    @foreach($datastudent as $data)
         <tr>
             <td>{{$i++}}</td>
             <td>{{ $data->mmc_studentid }}</td>
-            <td>{{ $data->mmc_classid }}</td>
+            <td>
+                @foreach($dataclass as $class)
+                    @if($data->mmc_classid == $class->mmc_classid)
+                    {{ $class->mmc_classname }}
+                    @endif
+                @endforeach
+            </td>
             <td>{{ $data->mmc_fullname }}</td>
             <td>{{ date('d-m-Y', strtotime($data->mmc_dateofbirth)) }}</td>
             <td>

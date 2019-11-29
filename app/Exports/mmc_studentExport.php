@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\mmc_student;
+use App\mmc_class;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
@@ -13,8 +14,11 @@ class mmc_studentExport implements FromView
     */
      public function view(): View
     {
+        $datastudent= mmc_student::all();
+    	$dataclass= mmc_class::all();
         return view('admin.Student.mmc_formExport', [
-            'datas' => mmc_student::all()
+            'datastudent' => $datastudent, 
+            'dataclass' => $dataclass 
         ]);
     }
 }
