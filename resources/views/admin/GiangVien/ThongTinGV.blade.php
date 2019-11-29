@@ -28,7 +28,7 @@
                             <p class="font-weight-bold "><i class="glyphicon glyphicon-qrcode fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{$hien->mmc_employeeid}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{$hien->email}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{$hien->mmc_phone}}</span></p>
-                            <p class="font-weight-bold "><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class=" ml-5">{{$hien->mmc_dateofbirth}}</span></p>
+                            {{-- <p class="font-weight-bold "><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class=" ml-5">{{$hien->mmc_dateofbirth}}</span></p> --}}
                         </div>
                     </div>
                     <br>

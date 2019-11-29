@@ -114,6 +114,6 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         mmc_department::destroy($id);
-        return redirect('admin/department')->with('flash_message', 'Xóa thành công!');//
+        return redirect('admin/department')->with('flash_message', 'Xóa thành công!');
     }
 }

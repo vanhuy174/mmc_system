@@ -5,7 +5,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
 		<h2>Đổi PassWord</h2>
-		<span><a href="{{route('home')}}">Home</a> > <a href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông Tin Cá Nhân</a> > <a href="{{route('get-doi-pass',Auth::user()->id)}}">Đổi PassWord</a></span>
+		<span><a href="{{route('home')}}">Home</a> > <a href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông Tin Cá Nhân</a> > <a href="{{route('get-doi-pass',Auth::user()->id)}}">Đổi Mật Khẩu</a></span>
 	</div>
 </div>
 {{-- <div class="row wrapper border-bottom white-bg page-heading">
@@ -50,27 +50,27 @@
 					<form action="{{route('post-doi-pass',Auth::user()->id)}}" method="post">
                         {{ csrf_field() }}
                         <div class="col-lg-12 bg-white mt-3">
-                            <h2 class="text-center">Đổi Pass Word</h2>
+                            <h2 class="text-center">Đổi Mật Khẩu</h2>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Password Cũ: <b style="color:red;" >*</b></span>
+                                    <span class="input-group-text">Mật Khẩu Cũ: <b style="color:red;" >*</b></span>
                                 </div>
-                                <input type="text" name="password_Cu" minlength="3" class="form-control" required autocomplete="off" >
+                                <input type="password" name="password_Cu" minlength="3" class="form-control" required autocomplete="off" >
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Password Mới: <b style="color:red;" >*</b></span>
+                                    <span class="input-group-text">Mật Khẩu Mới: <b style="color:red;" >*</b></span>
                                 </div>
-                                <input type="text" name="password_Moi1" minlength="3" class="form-control" required autocomplete="off" >
+                                <input type="password" name="password_Moi1" minlength="3" class="form-control" required autocomplete="off" >
                             </div>
                             <div class="input-group mb-3 input-group-sm">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Nhập lại Password Mới: <b style="color:red;" >*</b></span>
+                                    <span class="input-group-text">Nhập lại Mật Khẩu Mới: <b style="color:red;" >*</b></span>
                                 </div>
-                                <input type="text" name="password_Moi2" minlength="3" class="form-control" required autocomplete="off" >
+                                <input type="password" name="password_Moi2" minlength="3" class="form-control" required autocomplete="off" >
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success float-right">Thay đổi password </button>
+                        <button type="submit" class="btn btn-success float-right">Thay đổi Mật Khẩu </button>
                     </form>
 
                 </div>

@@ -161,6 +161,8 @@ $(function($) {
 
 {{-- hiện thị ảnh --}}
 <script src="js/img.js"></script>
+{{-- hiện thị --}}
+<script src="js/input.js"></script>
 
 </body>
 

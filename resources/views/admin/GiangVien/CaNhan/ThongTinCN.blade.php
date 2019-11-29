@@ -11,7 +11,7 @@
             <i class=" fa fa-user" aria-hidden="true"></i> Sửa Thông Tin Cá Nhân
         </a>
         <a href="{{route('get-doi-pass',Auth::user()->id)}}" class="btn btn-primary btn-sm " title="Đổi PassWord">
-            <i class="fa fa-lock" aria-hidden="true"></i> Đổi PassWord
+            <i class="fa fa-lock" aria-hidden="true"></i> Đổi Mật Khẩu
         </a>
         <a href="" class="btn btn-primary btn-sm float-right" title="Xuất File">
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
@@ -31,7 +31,7 @@
                             <p class="font-weight-bold "><i class="glyphicon glyphicon-qrcode fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->mmc_employeeid}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->email}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->mmc_phone}}</span></p>
-                            <p class="font-weight-bold "><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class=" ml-5">{{Auth::user()->mmc_dateofbirth}}</span></p>
+                            {{-- <p class="font-weight-bold "><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class=" ml-5">{{Auth::user()->mmc_dateofbirth}}</span></p> --}}
                         </div>
                     </div>
                     <br>
