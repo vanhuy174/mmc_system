@@ -60,7 +60,7 @@
                 </li>
                 @if(Auth::user()->mmc_level==1)
                     <li>
-                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
+                        <a href="{{route('home')}}"><i class="fa fa-th-large"></i> <span class="nav-label">Admin</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li><a href="{{route('department.index')}}">Quản lý bộ môn</a></li>
                             <li><a href="{{route('major.index')}}">Quản lý ngành</a></li>

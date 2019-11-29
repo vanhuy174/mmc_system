@@ -805,17 +805,17 @@
     },
     {
         "name": "giggsey/libphonenumber-for-php",
-        "version": "8.10.23",
-        "version_normalized": "8.10.23.0",
+        "version": "8.11.0",
+        "version_normalized": "8.11.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-            "reference": "e5643cc3e10b3e071632b23c973ec5fe20137a56"
+            "reference": "356a97b1601edde8256dace68fe7ffeec0d777f9"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/e5643cc3e10b3e071632b23c973ec5fe20137a56",
-            "reference": "e5643cc3e10b3e071632b23c973ec5fe20137a56",
+            "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/356a97b1601edde8256dace68fe7ffeec0d777f9",
+            "reference": "356a97b1601edde8256dace68fe7ffeec0d777f9",
             "shasum": ""
         },
         "require": {
@@ -832,7 +832,7 @@
             "phpunit/phpunit": "^4.8.36|^5.0",
             "symfony/console": "^2.8|^3.0"
         },
-        "time": "2019-11-13T09:59:46+00:00",
+        "time": "2019-11-26T16:09:47+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3318,6 +3318,69 @@
             "phpunit",
             "testing",
             "xunit"
+        ]
+    },
+    {
+        "name": "propaganistas/laravel-phone",
+        "version": "4.2.2",
+        "version_normalized": "4.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Propaganistas/Laravel-Phone.git",
+            "reference": "2dc21369a03ab6a9eb80874d6959d293e9a1b9ba"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Propaganistas/Laravel-Phone/zipball/2dc21369a03ab6a9eb80874d6959d293e9a1b9ba",
+            "reference": "2dc21369a03ab6a9eb80874d6959d293e9a1b9ba",
+            "shasum": ""
+        },
+        "require": {
+            "giggsey/libphonenumber-for-php": "^7.0|^8.0",
+            "illuminate/support": "^5.5|^6.0",
+            "illuminate/validation": "^5.5|^6.0",
+            "league/iso3166": "^2.0",
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "orchestra/testbench": "*",
+            "phpunit/phpunit": "*"
+        },
+        "time": "2019-09-04T18:45:21+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Propaganistas\\LaravelPhone\\PhoneServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Propaganistas\\LaravelPhone\\": "src/"
+            },
+            "files": [
+                "src/helpers.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Propaganistas",
+                "email": "Propaganistas@users.noreply.github.com"
+            }
+        ],
+        "description": "Adds phone number functionality to Laravel and Lumen based on Google's libphonenumber API.",
+        "keywords": [
+            "laravel",
+            "libphonenumber",
+            "lumen",
+            "phone",
+            "validation"
         ]
     },
     {

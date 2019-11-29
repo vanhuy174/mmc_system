@@ -3,6 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý lớp giảng dạy</h2>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp giảng dạy </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\mmc_time;
 use Auth;
 use App\mmc_calendar;
 use App\mmc_subjectclass;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 
 class ScheduleController extends Controller
 {
@@ -21,7 +23,7 @@ class ScheduleController extends Controller
         $subjectclass= mmc_subjectclass::where('mmc_employeeid', '=', $key)->get();
         $calendar =[];
         $k=0;
-        for ($i=0; $i < count($subjectclass); $i++) { 
+        for ($i=0; $i < count($subjectclass); $i++) {
             $data= mmc_calendar::where('mmc_subjectclassid', '=', $subjectclass[$i]->mmc_subjectclassid)->get();
             for ($j=0; $j < count($data); $j++) {
                 $calendar[$k]=[
@@ -33,7 +35,7 @@ class ScheduleController extends Controller
                 $k++;
             }
         }
-        // dd($calendar);   
+        // dd($calendar);
         return view('admin.schedule.index',compact('calendar'));
     }
 
@@ -101,5 +103,14 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public static function getstar($id)
+    {
+
+         return mmc_time::where('class_time', '=', "$id")->value('time_in');
+    }
+    public static function getend($id)
+    {
+        return mmc_time::where('class_time', '=', "$id")->value('time_out');
     }
 }

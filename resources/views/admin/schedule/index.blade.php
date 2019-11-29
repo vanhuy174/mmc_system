@@ -8,6 +8,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-8">
             <h2>Lịch giảng dạy</h2>
+            <span><a href="{{route('home')}}">Home</a> > Lịch giảng dạy </span>
         </div>
     </div>
     <div class="wrapper wrapper-content">
@@ -27,49 +28,12 @@
                         <p>Tiết 8 </p>
                         <p>Tiết 9 </p>
                         <p>Tiết 10 </p>
+                        <p>Tiết 11 </p>
+                        <p>Tiết 12 </p>
+                        <p>Tiết 13 </p>
+                        <p>Tiết 14 </p>
                     </div>
                 </div>
-                {{-- <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>Draggable Events</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div id='external-events'>
-                            <p>Drag a event and drop into callendar.</p>
-                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>
-                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
-                            <div class='external-event navy-bg'>Send documents to John.</div>
-                            <div class='external-event navy-bg'>Phone to Sandra.</div>
-                            <div class='external-event navy-bg'>Chat with Michael.</div>
-                            <p class="m-t">
-                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
-                            </p>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-{{--                <div class="ibox ">--}}
-{{--                    <div class="ibox-title">--}}
-{{--                        <h5>Draggable Events</h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="ibox-content">--}}
-{{--                        <div id='external-events'>--}}
-{{--                            <p>Drag a event and drop into callendar.</p>--}}
-{{--                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>--}}
-{{--                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>--}}
-{{--                            <div class='external-event navy-bg'>Send documents to John.</div>--}}
-{{--                            <div class='external-event navy-bg'>Phone to Sandra.</div>--}}
-{{--                            <div class='external-event navy-bg'>Chat with Michael.</div>--}}
-{{--                            <p class="m-t">--}}
-{{--                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <button id="acceptOffer">12</button>--}}
-{{--                <button id="declineOffer">1234</button>--}}
-
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -137,11 +101,7 @@
 
             /* initialize the calendar
              -----------------------------------------------------------------*/
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-            console.log(date,d,y,m);
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -152,19 +112,21 @@
                 events: [
                     <?php for( $i=0; $i< count($calendar) ; $i++){?>
                         {
-                            title: 'Tiết {{$calendar[$i]['tiethoc']}}{{$calendar[$i]['tenlophocphan']}}',
-                            <?php 
+                            title: 'Tiết {{$calendar[$i]['tiethoc']}}\n{{$calendar[$i]['tenlophocphan']}}\n{{$calendar[$i]['phonghoc']}}',
+                            <?php
                                 $m3=explode("-",$calendar[$i]['ngayhoc']);
                                 $y= (int)$m3[0];
                                 $m= (int)$m3[1]-1;
                                 $d= (int)$m3[2];
-
                                 $m3=explode(",",$calendar[$i]['tiethoc']);
-                                
-                            ?>  
-                            start: new Date({{$y}},{{$m}},{{$d}})
+                                $tiethoc=explode(",",$calendar[$i]['tiethoc']);
+                                $start=explode(":",App\Http\Controllers\Admin\ScheduleController::getstar($tiethoc[0]));
+                                $end=explode(":",App\Http\Controllers\Admin\ScheduleController::getend($tiethoc[count($tiethoc)-1]));
+                            ?>
+                            start: new Date({{$y}},{{$m}},{{$d}},{{$start[0]}},{{$start[1]}}),
+                            end: new Date({{$y}},{{$m}},{{$d}},{{$end[0]}},{{$end[1]}})
                         },
-                    <?php } ?> 
+                    <?php } ?>
                 ]
             });
         });
