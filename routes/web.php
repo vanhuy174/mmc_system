@@ -46,6 +46,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
+        //lịch
+        Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
+        Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');
+
         // giảng viên
         Route::group(['prefix' => '/giang-vien'], function () {
             // danh sách giảng viên: /admin/giang-vien/danh-sach-giang-vien
@@ -111,8 +115,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
                 'uses'=>'GiangVienController@postDoiPass'
             ]);
         });
+    });
     Route::resource('schedule', 'Admin\ScheduleController');
     Route::resource('oneclass', 'Admin\OneClassController');
-    });
 });
 
