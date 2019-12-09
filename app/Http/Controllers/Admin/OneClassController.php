@@ -32,9 +32,10 @@ class OneClassController extends Controller
                 $student = mmc_student::where('mmc_classid', '=', "$idlop")->where(function ($query) use ($keyword) {
                     $query->where('mmc_studentid', 'LIKE', "%$keyword%")
                         ->orwhere('mmc_fullname', 'LIKE',"%$keyword%");
-                })->latest()->paginate($perPage);
+                })->get();
             } else {
-                $student = mmc_student::where('mmc_classid', '=', "$idlop")->latest()->paginate($perPage);
+                // $student = mmc_student::where('mmc_classid', '=', "$idlop")->latest()->paginate($perPage);
+                $student = mmc_student::where('mmc_classid', '=', "$idlop")->get();
             }
             return view('admin.oneclass.index',compact('student','lop'));
         }

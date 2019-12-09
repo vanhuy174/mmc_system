@@ -68,6 +68,7 @@
                             <li><a href="{{route('danh-sach-giang-vien')}}">Quản lý giảng viên</a></li>
                             <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
                             <li><a href="{{route('subject.index')}}">Quản lý môn học</a></li>
+                            <li><a href="{{route('studentpoint')}}">Quản lý điểm sinh viên</a></li>
                             <li><a href="{{route('homeCalendar')}}">Quản lý lịch giảng dạy</a></li>
 
                         </ul>
@@ -77,7 +78,10 @@
                     <a href="{{route('schedule.index')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Lịch giảng dạy</span>  </a>
                 </li>
                 <li>
-                    <a href="{{route('oneclass.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
+                    <a href="{{route('oneclass.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Lớp chủ nhiệm</span>  </a>
+                </li>
+                <li>
+                    <a href="{{route('subjectclass.index')}}"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
                 </li>
             </ul>
 

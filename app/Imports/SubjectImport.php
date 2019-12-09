@@ -23,30 +23,24 @@ class SubjectImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFail
     public function model(array $row)
     {
         return new mmc_subject([
-            'mmc_subjectid'=>'mmc-'.Str::slug($row['ten_mon_hoc']),
-            'mmc_subjectname'=> $row['ten_mon_hoc'],
-            'mmc_tinchi' => $row['so_tin_chi'],
+            'mmc_subjectid'=>$row['ma_hoc_phan'],
+            'mmc_subjectname'=> $row['ten_hoc_phan'],
+            'mmc_theory' => $row['so_tin_ly_thuyet'],
+            'mmc_practice' => $row['so_tin_thuc_hanh'],
         ]);
     }
     public function headingRow(): int
     {
-        return 2;
+        return 1;
     }
     public function rules(): array
     {
         return [
-            'ten_mon_hoc' => ['required','unique:mmc_subjects,mmc_subjectname'],
-            'so_tin_chi' => ['required','numeric','max:5','min:1'],
         ];
     }
     public function customValidationMessages()
     {
         return [
-            'ten_mon_hoc.required' => 'tên môn học không được bỏ trông',
-            'ten_mon_hoc.unique'=>'tên môn học không được trùng',
-            'so_tin_chi.required'=>'số tín chỉ không được bỏ trống',
-            'so_tin_chi.max'=>'Số tín chỉ phải nhỏ hơn 5',
-            'so_tin_chi.min'=>'Số tín chỉ phải lớn hơn 1',
         ];
     }
     public function failures()

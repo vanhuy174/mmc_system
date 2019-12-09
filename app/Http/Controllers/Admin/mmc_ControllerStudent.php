@@ -229,7 +229,7 @@ class mmc_ControllerStudent extends Controller
         {
             $errors=[];
                 foreach ($failures as $key=>$error)//Lấy được cả key và value
-                {
+                {   
                     $arrerror="";
                     foreach ($error->errors() as $item)
                     {

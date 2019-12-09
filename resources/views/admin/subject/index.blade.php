@@ -49,8 +49,11 @@
                             <table class="table">
                                 <thead>
                                 <tr>
+                                    <th>Mã học phần</th>
                                     <th>Tên môn học</th>
                                     <th>Số tín chỉ</th>
+                                    <th>Số tín lý thuyết</th>
+                                    <th>Số tín thực hành</th>
                                     <th>Mô Tả</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -58,8 +61,11 @@
                                 <tbody>
                                 @foreach($subject as $item)
                                     <tr>
+                                        <td>{{$item->mmc_subjectid}}</td>
                                         <td>{{$item->mmc_subjectname}}</td>
-                                        <td>{{$item->mmc_tinchi}}</td>
+                                        <td>{{$item->mmc_practice+$item->mmc_theory}}</td>
+                                         <td>{{$item->mmc_practice}}</td>
+                                          <td>{{$item->mmc_theory}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
 

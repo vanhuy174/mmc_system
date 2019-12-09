@@ -35,6 +35,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::resource('class', 'Admin\ClassController');
         Route::resource('major', 'Admin\MajorController');
         Route::resource('department', 'Admin\DepartmentController');
+
+        //route sinh viên.
         Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
         Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');
         Route::post('/createstudent', 'Admin\mmc_ControllerStudent@create')->name('createStudent');
@@ -46,11 +48,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
-        //lịch
+        //route lịch
         Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
         Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');
+        Route::post('/edittime', 'Admin\ScheduleController@store')->name('edittime');
 
-        // giảng viên
+
+        //route giảng viên
         Route::group(['prefix' => '/giang-vien'], function () {
             // danh sách giảng viên: /admin/giang-vien/danh-sach-giang-vien
             Route::get('/danh-sach-giang-vien',[
@@ -118,5 +122,15 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     });
     Route::resource('schedule', 'Admin\ScheduleController');
     Route::resource('oneclass', 'Admin\OneClassController');
+    Route::resource('subjectclass', 'Admin\subjectclassController');
+
+    //Route điểm sinh viên.
+
+    Route::get('/studentpoint', 'Admin\studentpointController@index')->name('studentpoint');
+    Route::get('/studentpoint/{id}', 'Admin\studentpointController@getclass')->name('getstudentpoint');
+    Route::post('/addinfor', 'Admin\studentpointController@infoStudent')->name('infoStudent');
+    Route::post('/addpoint', 'Admin\studentpointController@pointstudent')->name('pointstudent');
+//     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
+//     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
 });
 

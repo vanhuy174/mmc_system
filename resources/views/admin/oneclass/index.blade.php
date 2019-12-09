@@ -16,9 +16,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Lớp giảng dạy</div>
+                    <div class="card-header">Lớp chủ nhiệm</div>
                     <div class="card-body">
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/oneclass', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
+                        {{-- {!! Form::open(['method' => 'GET', 'url' => '/admin/oneclass', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
@@ -27,7 +27,7 @@
                                 </button>
                             </span>
                         </div>
-                        {!! Form::close() !!}
+                        {!! Form::close() !!} --}}
                         <br/>
                         <br/>
                         <h1 style="text-align: center;"><b>Thông tin cơ bản</b></h1>
@@ -60,6 +60,8 @@
                                     <th>Tên sinh viên</th>
                                     <th>Email</th>
                                     <th>SĐT</th>
+                                    <th>Điểm hệ 4</th>
+                                    <th>Điểm hệ 10</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -69,11 +71,13 @@
                                         <td>{{$item->mmc_fullname}}</td>
                                         <td>{{$item->mmc_email}}</td>
                                         <td>{{$item->mmc_phone}}</td>
+                                        <td>2.5</td>
+                                        <td>6.75</td>
                                     </tr>
                                  @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination justify-content-center"> {!! $student->appends(['search' => Request::get('search')])->render() !!} </div>
+                            {{-- <div class="pagination justify-content-center"> {!! $student->appends(['search' => Request::get('search')])->render() !!} </div> --}}
 
                         </div>
                     </div>
