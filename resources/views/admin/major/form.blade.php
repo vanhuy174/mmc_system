@@ -1,11 +1,6 @@
 <div class="form-group">
     {!! Form::label('name', 'Tên ngành: ', ['class' => 'control-label']) !!}
     {!! Form::text('mmc_majorname', null, ['class' => 'form-control']) !!}
-<<<<<<< HEAD
-    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-=======
-
->>>>>>> tvduong
 </div>
 <div class="form-group">
     {!! Form::label('mmc_deptid', 'Bộ môn: ', ['class' => 'control-label']) !!}

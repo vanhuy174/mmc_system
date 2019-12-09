@@ -34,6 +34,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::resource('subject', 'Admin\SubjectController');
         Route::resource('class', 'Admin\ClassController');
         Route::resource('major', 'Admin\MajorController');
+        Route::resource('educationprogram', 'Admin\EducationProgramController');
         Route::resource('department', 'Admin\DepartmentController');
         Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
         Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');
@@ -45,7 +46,6 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::post('/importStudent', 'Admin\mmc_ControllerStudent@import')->name('importStudent');
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
-
         //lịch
         Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
         Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');

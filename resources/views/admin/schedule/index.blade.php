@@ -62,16 +62,6 @@
     <script>
 
         $(document).ready(function() {
-            {{--$("#acceptOffer").click(function () {--}}
-            {{--    alert('1111');--}}
-            {{--    $("#form").attr("action", "{{route('schedule.create')}}").submit();;--}}
-            {{--});--}}
-
-            {{--$("#declineOffer").click(function () {--}}
-            {{--    alert('2222');--}}
-            {{--    $("#form").attr("action", "{{route('schedule.show',['id'=>1])}}").submit();;--}}
-            {{--});--}}
-
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green'
@@ -110,10 +100,10 @@
                 },
                 lang: 'vi',
                 events: [
-                    <?php for( $i=0; $i< count($calendar) ; $i++){?>
+                    @for( $i=0; $i< count($calendar) ; $i++)
                         {
-                            title: 'Tiết {{$calendar[$i]['tiethoc']}}\n{{$calendar[$i]['tenlophocphan']}}\n{{$calendar[$i]['phonghoc']}}',
-                            <?php
+                            title: 'Tiết {{$calendar[$i]['tiethoc']}}\n {{$calendar[$i]['tenlophocphan']}}\n {{$calendar[$i]['phonghoc']}}',
+                            @php
                                 $m3=explode("-",$calendar[$i]['ngayhoc']);
                                 $y= (int)$m3[0];
                                 $m= (int)$m3[1]-1;
@@ -122,11 +112,11 @@
                                 $tiethoc=explode(",",$calendar[$i]['tiethoc']);
                                 $start=explode(":",App\Http\Controllers\Admin\ScheduleController::getstar($tiethoc[0]));
                                 $end=explode(":",App\Http\Controllers\Admin\ScheduleController::getend($tiethoc[count($tiethoc)-1]));
-                            ?>
+                            @endphp
                             start: new Date({{$y}},{{$m}},{{$d}},{{$start[0]}},{{$start[1]}}),
                             end: new Date({{$y}},{{$m}},{{$d}},{{$end[0]}},{{$end[1]}})
                         },
-                    <?php } ?>
+                   @endfor
                 ]
             });
         });
@@ -152,7 +142,35 @@
     $(document).ready(function(){
     time();
     });
-
+    $(document).ready(function(){
+        $(document).on('click', '.click', function () {//load document
+            var s=$(this).children(".fc-time").text();
+            var t=$(this).children(".fc-title").text();
+            var p=t.substr(t.length-6, 6);
+            var m=t.substring(0,t.length-6);
+            $("#tg").text(s);
+            $("#mh").text(m);
+            $("#ph").text(p);
+        });
+    });
     </script>
 @endsection
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Lịch</h4>
+        </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <b>Thời gian : </b> <span id="tg"> </span><br>
+                <b>Dạy : </b> <span id="mh"> </span><br>
+                <b>Phòng học : </b> <span id="ph"> </span><br>
+            </div>
+        </div>
+    </div>
+</div>
 

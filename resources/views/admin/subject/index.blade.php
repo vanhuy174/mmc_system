@@ -3,7 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý môn học</h2>
-            <span><a href="{{route('home')}}">Home</a> > Quản lý môn học </span>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý học phần </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Môn học</div>
+                    <div class="card-header">Học phần</div>
                     <div class="card-body">
                         <a href="{{route('subject.create')}}" class="btn btn-primary btn-sm" title="Thêm mới môn học">
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
@@ -49,8 +49,10 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Tên môn học</th>
-                                    <th>Số tín chỉ</th>
+                                    <th>Mã học phần</th>
+                                    <th>Tên học phần</th>
+                                    <th>Số tín lý thuyết</th>
+                                    <th>Số tín thực hành</th>
                                     <th>Mô Tả</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -58,8 +60,10 @@
                                 <tbody>
                                 @foreach($subject as $item)
                                     <tr>
+                                        <td>{{$item->mmc_subjectid}}</td>
                                         <td>{{$item->mmc_subjectname}}</td>
-                                        <td>{{$item->mmc_tinchi}}</td>
+                                        <td>{{$item->mmc_theory}}</td>
+                                        <td>{{$item->mmc_practice}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
 

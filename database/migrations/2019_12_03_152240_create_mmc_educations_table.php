@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMmcSubjectsTable extends Migration
+class CreateMmcEducationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateMmcSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mmc_subjects', function (Blueprint $table) {
+        Schema::create('mmc_educations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('mmc_subjectid')->unique();
-            $table->string('mmc_subjectname');
-            $table->integer('mmc_theory');
-            $table->integer('mmc_practice');
-            $table->text('mmc_description')->nullable();
-
+            $table->string('mmc_majorid');
+            $table->string('mmc_course');
+            $table->integer('mmc_total');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateMmcSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mmc_subjects');
+        Schema::dropIfExists('mmc_educations');
     }
 }

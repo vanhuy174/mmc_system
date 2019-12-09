@@ -2,18 +2,10 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý Bộ môn</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('major.index')}}">Quản lý ngành</a> >Sửa ngành </span>
-=======
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('major.index')}}">Quản lý ngành</a> > Sửa ngành </span>
->>>>>>> tvduong
-=======
+            <h2>Quản lý ngành</h2>
             <span><a href="{{route('home')}}">Home</a> > <a href="{{route('major.index')}}">Quản lý ngành</a> >Sửa ngành </span>
 
->>>>>>> 5f2ca2affd78a1fab7bbdba3df954fc225a1bd62
-        </div>
+    </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         <div class="row">

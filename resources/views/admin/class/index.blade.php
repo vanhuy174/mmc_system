@@ -2,7 +2,7 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý lớp</h2>
+            <h2>Quản lý Lớp</h2>
             <span><a href="{{route('home')}}">Home</a> > Quản lý lớp</span>
         </div>
     </div>
