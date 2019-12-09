@@ -11,7 +11,7 @@ use Yajra\Oci8\Eloquent\OracleEloquent as Eloquent;
 use App\Exports\mmc_StudentExport;
 use App\Imports\mmc_StudentImport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class mmc_ControllerStudent extends Controller
 {
@@ -94,7 +94,7 @@ class mmc_ControllerStudent extends Controller
         if( mmc_Student::create($data)){
             unset($data['_token']);
             unset($data['_method']);
-            return redirect('homeStudent')->with('status', 'Thêm sinh viên thành công!');
+            return redirect('admin/homeStudent')->with('status', 'Thêm sinh viên thành công!');
         }
         return back()->withInput();
     }
@@ -184,7 +184,7 @@ class mmc_ControllerStudent extends Controller
             if($Student->update($data)){
                 unset($data['_token']);
                 unset($data['_method']);
-                return redirect('homeStudent')->with('status', 'Sửa sinh viên thành công!');
+                return redirect('admin/homeStudent')->with('status', 'Sửa sinh viên thành công!');
             }
 
     }
@@ -242,10 +242,51 @@ class mmc_ControllerStudent extends Controller
         return back()->with('status', 'Import thành công!');;
     }
 
-
+    /**
+        Hàm setdate dùng để lấy mã lớp của các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
+    */
     public static function getclassId($id)
     {
         return mmc_class::where('mmc_classname', '=', "$id")->value('mmc_classid');
+    }
+    
+    /**
+        Hàm getclassname dùng để lấy tên các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
+    */
+    public static function getclassname()
+    {
+        return mmc_class::get()->pluck('mmc_classname');
+    }
+
+    /**
+        Hàm setdate dùng để xử lý dữ liệu ngày tháng. để phục vụ cho việc thêm sinh viên từ file excel.
+    */
+    public static function setdate($date)
+    {
+        if(is_string($date)){
+            $time = strtotime($date);
+            $newtime = date('Y-m-d',$time);
+            return $newtime;
+        }else{
+            return Date::excelToDateTimeObject($date);
+        }
+    }
+
+    /**
+        Hàm setgender dùng để xử lý dữ liệu giới tính. để phục vụ cho việc thêm sinh viên từ file excel.
+    */
+    public static function setgender($gender)
+    {
+        if(strcasecmp($gender, 'nam') == 0){
+            return 0;
+        }elseif(strcasecmp($gender, 'nam') != 0){
+            return 1;
+        }elseif($gender == 0 || $gender == 1){
+            return $gender;
+        }else{
+            return 0;
+        }
+        
     }
 
     /**

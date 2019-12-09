@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Validators\Failure;
 use App\Http\Controllers\Admin\mmc_ControllerStudent;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Illuminate\Validation\Rule;
+
 
 
 class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, SkipsOnFailure
@@ -30,8 +32,8 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
             'mmc_studentid'     => $row['ma_sinh_vien'],
             'mmc_classid'    => mmc_ControllerStudent::getclassId($row['ten_lop']),
             'mmc_fullname'    => $row['ho_va_ten'],
-            'mmc_dateofbirth'    => Date::excelToDateTimeObject($row['ngay_sinh']),
-            'mmc_gender'    => $row['gioi_tinh'],
+            'mmc_dateofbirth'    => mmc_ControllerStudent::setdate($row['ngay_sinh']),
+            'mmc_gender'    => mmc_ControllerStudent::setgender($row['gioi_tinh']),
             'mmc_email'    => $row['email'],
             'mmc_phone'    => $row['so_dien_thoai'],
             'mmc_address'    => $row['ho_khau_thuong_tru'],
@@ -62,14 +64,14 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
 
     public function headingRow(): int
     {
-        return 1;
+        return 3;
     }
 
     public function rules(): array
     {
         return [
             'ma_sinh_vien' => ['required','unique:mmc_students,mmc_studentid'],
-            'ten_lop' => 'required',
+            'ten_lop' => ['required',Rule::in(mmc_ControllerStudent::getclassname())],
             'ho_va_ten' => 'required',
             'ngay_sinh' => 'required',
             'gioi_tinh' => 'required',
@@ -107,6 +109,7 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
 
             'so_dien_thoai.numeric' => 'Số điện thoại không hợp lệ',
             'so_cmnd.numeric' => 'Số CMND không hợp lệ',
+            'ten_lop.in'=>'Lớp không tồn tại',
         ];
     }
     public function failure()
