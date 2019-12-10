@@ -9,6 +9,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\mmc_employee;
 use App\mmc_calendar;
 use App\mmc_subjectclass;
+use App\mmc_subject;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Carbon\Carbon;
 use DateTime;
@@ -17,13 +18,12 @@ use DateTime;
 class calendarController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     chuển đến giao viện thêm lịch
      */
     public function index()
     {
-        return view('admin.calendar.index' );
+        $data= mmc_subjectclass::get();
+        return view('admin.calendar.index',['data'=>$data] );
     }
 
     /**
@@ -37,32 +37,32 @@ class calendarController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+        hàm để thêm lịch giảng dạy cho giảng viên bằng file excel
+
      */
     public function store(Request $request)
     {
         $reader = new Xls();
         $reader->setReadDataOnly(true);
         $objPHPExcel = $reader->load(request()->file('file'));
-        set_time_limit(300);
         $nameteacher = null;
         $date = Carbon::now();
-        $obj = [];
-        $j=0;
-        foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){
+        $obj = []; //khởi tạo mảng obj để chứa các dữ liệu lịch sau khi xử lý xong.
+        $errors = []; //khởi tạo mảng error để chứa các lỗi gặp phải
+        $j=0; $k=0;  //$j chỉ số của mảng obj, $k là chỉ số của mảng error.
+        foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel 
             $sheet = $worksheet->toArray();
             for ($i = 0; $i < count($sheet); $i++) {
                 if($sheet[$i][1] == 'Họ và tên giảng viên :'){
                     $name= $sheet[$i][2];
                     if(! $teacherid= mmc_employee::where('mmc_name','=', $name)->value('mmc_employeeid')){
-                        $teacherid= 'noid';
+                        $errors[$k]='Dòng '.$i.' lỗi: Giảng viên chưa có trong hệ thống!';
+                        $k++;
+                        break;
                     }
                 }
                 if(substr($sheet[$i][1],  0, 7) == 'TUẦN:'){
-                    $m1=explode("(",$sheet[$i][1]);
+                    $m1=explode("(",$sheet[$i][1]); //dùng để cắt chuối thành nhiều phần tại vị trí có dấu '('
                     $m2=explode(" ",$m1[1]);
                     $m3=explode("/",$m2[0]);
                     $d=$m3[0];
@@ -73,23 +73,34 @@ class calendarController extends Controller
                 if(is_int($sheet[$i][0])){
                     $m1=explode("(",$sheet[$i][1]);
                     $m2=explode(")",$m1[1]);
-                    $thuhoc= $sheet[$i][3]-2;
+                    $m3=explode(".TH",$m2[0]);
+                    $thuhoc= $sheet[$i][3]-2; //đặt giá trị ngày tháng cho từng thứ học
                     $ngayhoc=$date->addDays($thuhoc);
-                    $date=Carbon::create($y,$m,$d);//set lai gia tri cho ngay sau khi da tang gia tri
-                    
+                    $date=Carbon::create($y,$m,$d);//set lai gia tri cho ngay tháng năm sau khi da dat gia tri ngay tahng cho từng thứ học.
+                    $tenhocphan= explode("-",$m1[0]);
+
+                    if(! $mahocphan= mmc_subject::where('mmc_subjectname', '=', $tenhocphan[0])->value('mmc_subjectid')){
+                        $errors[$k]='Dòng '.$i.' lỗi: Học phần chưa có trong hệ thống!';
+                        $k++;
+                        continue;
+                    }
                     $obj[$j] = [
                         'magiangvien' => $teacherid,
-                        'malophocphan' => $m2[0].'-'.$teacherid,
-                        'tenlophocphan' => $sheet[$i][1],
-                        'mahocphan' => "HP1",
+                        'malophocphan' => $m3[0].'-'.$teacherid,
+                        'tenlophocphan' => $m1[0],
+                        'mahocphan' => $mahocphan,
                         'ngayhoc' => $ngayhoc,
                         'phonghoc' => $sheet[$i][5],
                         'tiethoc' => $sheet[$i][4],
                     ];
                     $j++;
                 }
+                if( $i % 500 == 0 ){ 
+                    set_time_limit(200);
+                }
             }
         }
+        // Vòng lặp để lưu dữ liệu trong mảng obj vào trong csdl
         for ($i=0; $i < count($obj); $i++) {
             $get= mmc_subjectclass::where('mmc_subjectclassname', '=', $obj[$i]['tenlophocphan'])->get();
             if(count($get)==0){
@@ -108,7 +119,11 @@ class calendarController extends Controller
 
             $calendars->save();
         }
-        return back()->with('status', 'Thêm lịch thành công!');
+        if($j==0){
+            return back()->with('status', 'Thêm lịch thành công!');
+        }else{
+            return back()->withErrors($errors);
+        }
     }
 
     /**

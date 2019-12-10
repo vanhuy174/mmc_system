@@ -31,13 +31,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> tvduong
-=======
->>>>>>> 5f2ca2affd78a1fab7bbdba3df954fc225a1bd62
     </div>
 @endsection
 

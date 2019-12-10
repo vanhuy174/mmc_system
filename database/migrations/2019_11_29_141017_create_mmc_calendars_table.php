@@ -14,7 +14,7 @@ class CreateMmcCalendarsTable extends Migration
     public function up()
     {
         Schema::create('mmc_calendars', function (Blueprint $table) {
-             $table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->string('mmc_subjectclassid')->index(); //mã lớp học phần 
             $table->date('mmc_schedule');   //ngày học
             $table->string('mmc_class');   //tiết học học

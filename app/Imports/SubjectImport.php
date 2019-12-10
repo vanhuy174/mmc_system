@@ -36,13 +36,11 @@ class SubjectImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFail
     public function rules(): array
     {
         return [
-
         ];
     }
     public function customValidationMessages()
     {
         return [
-
         ];
     }
     public function failures()

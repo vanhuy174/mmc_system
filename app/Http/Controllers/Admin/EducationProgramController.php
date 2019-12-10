@@ -50,7 +50,7 @@ class EducationProgramController extends Controller
      */
     public function store(Request $request)
     {
-        if( mmc_education::where('mmc_majorid','=','$request->mmc_majorid')->where('mmc_course','=','$request->mmc_course')->get()==null)
+        if( mmc_education::where('mmc_majorid','=','$request->mmc_majorid')->where('mmc_course','=','$request->mmc_course')->value('id')==null)
         {
             $sum = 0;
             for ($i = 0; $i < count($request->gddc); $i++) {

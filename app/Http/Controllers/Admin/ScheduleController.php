@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\mmc_time;
 use Auth;
+use App\mmc_time;
 use App\mmc_calendar;
 use App\mmc_subjectclass;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 
 class ScheduleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+         lấy dữ liệu ban đầu cho chức năng xem lịch học và thời gian biểu
      */
     public function index()
     {
@@ -35,8 +35,22 @@ class ScheduleController extends Controller
                 $k++;
             }
         }
-        // dd($calendar);
-        return view('admin.schedule.index',compact('calendar'));
+        $time= mmc_time::get();
+
+        /** kiểm tra ngay hiện tại đang dùng lịch mùa đông hay mùa hè
+        Lich mùa hè bắt đầu từ: 15/04, Lịch mùa đông bắt đầu từ: 15/10 */
+        $year = date("Y");
+        $key_date1 = $year."-04-15";
+        $key_date2 = $year."-10-15";
+        $today = date("Y-m-d");
+        if ( strtotime($today) >= strtotime($key_date2) || strtotime($today) < strtotime($key_date1) ) {
+            $key_season=1;
+        }
+        else {
+            $key_season=2;
+        }
+
+        return view('admin.schedule.index',compact('calendar' , 'time', 'key_season'));
     }
 
     /**
@@ -50,14 +64,18 @@ class ScheduleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+        lưu lại thời gian ra vào lớp sau khi đã sửa
      */
     public function store(Request $request)
     {
-        //
+        for ($i=0; $i < count(collect($request)->get('id')); $i++) {
+            $time = mmc_time::Find($request->get('id')[$i]);
+            $time->id = $request->get('id')[$i];
+            $time->time_in = $request->get('time_in')[$i];
+            $time->time_out = $request->get('time_out')[$i];
+            $time->save();
+        }  
+        return back();
     }
 
     /**
@@ -107,7 +125,7 @@ class ScheduleController extends Controller
     public static function getstar($id)
     {
 
-         return mmc_time::where('class_time', '=', "$id")->value('time_in');
+         return mmc_time::where('class_time', '=', "5")->value('time_in');
     }
     public static function getend($id)
     {

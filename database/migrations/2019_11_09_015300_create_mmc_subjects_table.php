@@ -17,10 +17,9 @@ class CreateMmcSubjectsTable extends Migration
             $table->bigIncrements('id');
             $table->string('mmc_subjectid')->unique();
             $table->string('mmc_subjectname');
+            $table->text('mmc_description')->nullable();
             $table->integer('mmc_theory');
             $table->integer('mmc_practice');
-            $table->text('mmc_description')->nullable();
-
             $table->timestamps();
         });
     }

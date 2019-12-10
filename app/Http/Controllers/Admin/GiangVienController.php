@@ -361,5 +361,9 @@ class GiangVienController extends Controller
         return mmc_employee::count();
     }
 
+    public static function getname($id)
+    {
+        return mmc_employee::where('mmc_employeeid', '=', $id)->value('mmc_name');
+    }
 
 }

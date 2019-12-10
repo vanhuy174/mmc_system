@@ -13,25 +13,86 @@
     </div>
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInDown">
-            <div class="col-lg-3">
+            <div class="col-lg-3" >
                 <div class="ibox ">
-                    <div class="ibox-content">
+                    <div class="ibox-content time_class">
                         <h3>Thời gian ra vào lớp</h3>
-                        <h4 id="clock"></h4>
-                        <p>Tiết 1 :</p>
-                        <p>Tiết 2 </p>
-                        <p>Tiết 3 </p>
-                        <p>Tiết 4 </p>
-                        <p>Tiết 5</p>
-                        <p>Tiết 6 </p>
-                        <p>Tiết 7 </p>
-                        <p>Tiết 8 </p>
-                        <p>Tiết 9 </p>
-                        <p>Tiết 10 </p>
-                        <p>Tiết 11 </p>
-                        <p>Tiết 12 </p>
-                        <p>Tiết 13 </p>
-                        <p>Tiết 14 </p>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td><?php if(Auth::user()->mmc_level==1) echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edittime">Sửa thời gian</button>'; ?></td>
+                                    <td><h4 id="clock" style="margin-left: 10px;" ></h4></td>
+                                </tr>
+                            </table>
+                            <div class="modal" id="edittime">
+                              <div class="modal-dialog">
+                                <div class="modal-content" style="width: 102%;">
+                                <form action="{{route('edittime')}}" method="post">
+                                {{ csrf_field() }}
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Sửa thời gian ra vào lớp</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                    <table border="1" style="float: left;">
+                                        <tr>
+                                            <th rowspan="2">Tiết: </th>
+                                            <th colspan="2">Mùa hè(Bắt đầu từ 15/4)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Giờ vào</th>
+                                            <th>Giờ ra</th>
+                                        </tr>
+                                        <?php $tiet=1;?>
+                                        @foreach($time as $timeone)
+                                        @if($timeone->season == 2)
+                                        <tr>
+                                            <td>Tiết {{$tiet++}}: </td>
+                                            <td style="display:none;"><input type="text" name="id[]" value="{{$timeone->id}}" hidden=""></td>
+                                            <td><input type="time" name="time_in[]" value="{{$timeone->time_in}}"></td>
+                                            <td><input type="time" name="time_out[]" value="{{$timeone->time_out}}"></td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                    </table>
+                                    <table border="1">
+                                        <tr>
+                                            <th colspan="2">mùa đông(Bắt đầu từ 15/10)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Giờ vào</th>
+                                            <th>Giờ ra</th>
+                                        </tr>
+                                        @foreach($time as $timeone)
+                                        @if($timeone->season == 1)  
+                                        <tr>
+                                            <td style="display:none;"><input type="text" name="id[]" value="{{$timeone->id}}" hidden=""></td>
+                                            <td><input type="time" name="time_in[]" value="{{$timeone->time_in}}"></td>
+                                            <td><input type="time" name="time_out[]" value="{{$timeone->time_out}}"></td>
+                                        </tr>
+                                        @endif
+                                        @endforeach
+                                    </table>
+                                  </div>
+
+                                  <!-- Modal footer -->
+                                  <div class="modal-footer">
+                                    <button type="submit" name="luu" class="btn btn-primary">Lưu</button>
+                                  </div>
+                                </form>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <?php $tiet=1;?>
+                        @foreach($time as $onetime)
+                        @if($onetime->season == $key_season)
+                        <p>Tiết {{$tiet++}} : <?php if($tiet<=10) echo "&nbsp"; ?> <b>{{$onetime->time_in}}</b> - <b>{{$onetime->time_out}}</b></p>
+                        @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -47,6 +108,26 @@
             </div>
         </div>
     </div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Lịch</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <b>Thời gian : </b> <span id="tg"> </span><br>
+                <b>Dạy : </b> <span id="mh"> </span><br>
+                <b>Phòng học : </b> <span id="ph"> </span><br>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('scripts')
     <script src="js/plugins/fullcalendar/moment.min.js"></script>
@@ -110,6 +191,7 @@
                                 $d= (int)$m3[2];
                                 $m3=explode(",",$calendar[$i]['tiethoc']);
                                 $tiethoc=explode(",",$calendar[$i]['tiethoc']);
+
                                 $start=explode(":",App\Http\Controllers\Admin\ScheduleController::getstar($tiethoc[0]));
                                 $end=explode(":",App\Http\Controllers\Admin\ScheduleController::getend($tiethoc[count($tiethoc)-1]));
                             @endphp
@@ -155,22 +237,4 @@
     });
     </script>
 @endsection
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Lịch</h4>
-        </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <b>Thời gian : </b> <span id="tg"> </span><br>
-                <b>Dạy : </b> <span id="mh"> </span><br>
-                <b>Phòng học : </b> <span id="ph"> </span><br>
-            </div>
-        </div>
-    </div>
-</div>
 

@@ -18,7 +18,7 @@
 	@if($errors->any())
 	<div class="alert alert-danger alert-dismissible">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
-        <ul>
+        <ul style="overflow-y: scroll; max-height: 250px;">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
@@ -55,17 +55,28 @@
 								</div>
 							</div>
 						</div>
-						{{-- <form action="{{route('homeStudent')}}" method="get" role="form">
-							<div class="input-group mb-3 center-block width-40 float-right">
-								<input type="text" class="form-control" placeholder="Nhập họ tên, mã sinh viên, ngành hoặc email" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off" name="search" value="{{ old('search') }}">
-								<div class="input-group-append">
-									<button class="btn btn-primary margin-bottom">Tìm kiếm</button>
-								</div>
-							</div>
-						</form> --}}
+						<div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Tên giảng viên</th>
+                                    <th>Bộ môn</th>
+                                    <th>Số tín chỉ</th>
+                                    <th>Số tiết</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($data as $item)
+                                    <tr>
+                                        <td>{{$item->mmc_employeeid}}</td>
+                                        <td>{{$item->mmc_subjectid}}</td>
+                                        <td>{{$item->mmc_subjectid}}</td>
+                                        <td>{{$item->mmc_subjectid}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 					</div>
-
-					
 				</div>
 			</div>
 		</div>
