@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
+
 class ScheduleController extends Controller
 {
     /**
@@ -22,7 +23,7 @@ class ScheduleController extends Controller
         $subjectclass= mmc_subjectclass::where('mmc_employeeid', '=', $key)->get();
         $calendar =[];
         $k=0;
-        for ($i=0; $i < count($subjectclass); $i++) { 
+        for ($i=0; $i < count($subjectclass); $i++) {
             $data= mmc_calendar::where('mmc_subjectclassid', '=', $subjectclass[$i]->mmc_subjectclassid)->get();
             for ($j=0; $j < count($data); $j++) {
                 $calendar[$k]=[
@@ -120,5 +121,14 @@ class ScheduleController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public static function getstar($id)
+    {
+
+         return mmc_time::where('class_time', '=', "5")->value('time_in');
+    }
+    public static function getend($id)
+    {
+        return mmc_time::where('class_time', '=', "$id")->value('time_out');
     }
 }

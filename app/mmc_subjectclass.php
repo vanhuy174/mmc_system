@@ -12,4 +12,6 @@ class mmc_subjectclass extends Model
         'mmc_subjectclassid', 'mmc_subjectclassname', 'mmc_employeeid',
         'mmc_subjectid',
     ];
+
+    
 }

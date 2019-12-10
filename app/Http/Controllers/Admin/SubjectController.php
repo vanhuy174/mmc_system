@@ -48,20 +48,23 @@ class SubjectController extends Controller
     {
         $this->validate($request,[
             'mmc_subjectname'=>'required|unique:mmc_subjects,mmc_subjectname',
-            'mmc_tinchi'=>'required|numeric|max:5|min:1'
+            'mmc_subjectid'=>'required|unique:mmc_subjects,mmc_subjectid',
+            'mmc_theory'=>'required|numeric|min:1',
         ],[
-            'mmc_subjectname.required'=>'Tên môn học không được bỏ trống',
-            'mmc_subjectname.unique'=>'Tên môn học đã tồn tại',
-            'mmc_tinchi.required'=>'Số tín chỉ không được bỏ trống',
-            'mmc_tinchi.max'=>'Số tín chỉ phải nhỏ hơn 5',
-            'mmc_tinchi.min'=>'Số tín chỉ phải lớn hơn 1',
-
+            'mmc_subjectname.required'=>'Tên học phần không được bỏ trống',
+            'mmc_subjectname.unique'=>'Tên học phần đã tồn tại',
+            'mmc_subjectid.required'=>'Mã học phần không được bỏ trống',
+            'mmc_subjectid.unique'=>'Mã học phần đã tồn tại',
+            'mmc_theory.min'=>'Số tín lý thuyết phải lớn hơn 1'
         ]);
+
         $subject=new mmc_subject();
-        $subject->mmc_subjectid="mmc-".Str::slug($request->mmc_subjectname);
-        $subject->mmc_subjectname=$request->mmc_subjectname;
+        $tinchi=$request->mmc_practice+$request->mmc_theory;
+        $subject->mmc_subjectid=$request->mmc_subjectid;
+        $subject->mmc_subjectname=$request->mmc_subjectname."( ".$tinchi." TC )";
         $subject->mmc_description=$request->mmc_description;
-        $subject->mmc_tinchi=$request->mmc_tinchi;
+        $subject->mmc_theory=$request->mmc_theory;
+        $subject->mmc_practice=$request->mmc_practice;
         $subject->save();
         return redirect('admin/subject')->with('flash_message', 'Thêm mới thành công!');
     }
@@ -100,18 +103,15 @@ class SubjectController extends Controller
     {
         $this->validate($request,[
             'mmc_subjectname'=>'required|unique:mmc_subjects,mmc_subjectname,'.$id,
-            'mmc_tinchi'=>'required|numeric|max:5|min:1'
+            'mmc_subjectid'=>'required|unique:mmc_subjects,mmc_subjectid,'.$id,
         ],[
             'mmc_subjectname.required'=>'Tên môn học không được bỏ trống',
             'mmc_subjectname.unique'=>'Tên môn học đã tồn tại',
-            'mmc_tinchi.required'=>'Số tín chỉ không được bỏ trống',
-            'mmc_tinchi.max'=>'Số tín chỉ phải nhỏ hơn 5',
-            'mmc_tinchi.min'=>'Số tín chỉ phải lớn hơn 1',
-
+            'mmc_subjectid.required'=>'Mã học phần không được bỏ trống',
+            'mmc_subjectid.unique'=>'Mã học phần đã tồn tại',
         ]);
         $requestData = $request->all();
         $subject = mmc_subject::findOrFail($id);
-        $subject['mmc_subjectid']="mmc-".Str::slug($request->mmc_subjectname);
         $subject->update($requestData);
         return redirect('admin/subject')->with('flash_message', 'Sửa thành công!');
     }
@@ -149,5 +149,21 @@ class SubjectController extends Controller
             return back()->withErrors($errors);
         }
         return back()->with('flash_message', 'Import thành công!');
+    }
+    public static function gettinchi($id)
+    {
+        return mmc_subject::where('mmc_subjectid', '=', "$id")->value('mmc_practice')+mmc_subject::where('mmc_subjectid', '=', "$id")->value('mmc_theory');
+    }
+    public static function getname($id)
+    {
+        return mmc_subject::where('mmc_subjectid', '=', "$id")->value('mmc_subjectname');
+    }
+    public static function getpractice($id)
+    {
+        return mmc_subject::where('mmc_subjectid', '=', "$id")->value('mmc_practice');
+    }
+    public static function gettheory($id)
+    {
+        return mmc_subject::where('mmc_subjectid', '=', "$id")->value('mmc_theory');
     }
 }

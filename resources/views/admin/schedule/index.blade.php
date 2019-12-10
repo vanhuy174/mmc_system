@@ -8,6 +8,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-8">
             <h2>Lịch giảng dạy</h2>
+            <span><a href="{{route('home')}}">Home</a> > Lịch giảng dạy </span>
         </div>
     </div>
     <div class="wrapper wrapper-content">
@@ -94,47 +95,6 @@
                         @endforeach
                     </div>
                 </div>
-                {{-- <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>Draggable Events</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div id='external-events'>
-                            <p>Drag a event and drop into callendar.</p>
-                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>
-                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
-                            <div class='external-event navy-bg'>Send documents to John.</div>
-                            <div class='external-event navy-bg'>Phone to Sandra.</div>
-                            <div class='external-event navy-bg'>Chat with Michael.</div>
-                            <p class="m-t">
-                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
-                            </p>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-{{--                <div class="ibox ">--}}
-{{--                    <div class="ibox-title">--}}
-{{--                        <h5>Draggable Events</h5>--}}
-{{--                    </div>--}}
-{{--                    <div class="ibox-content">--}}
-{{--                        <div id='external-events'>--}}
-{{--                            <p>Drag a event and drop into callendar.</p>--}}
-{{--                            <div class='external-event navy-bg'>Go to shop and buy some products.</div>--}}
-{{--                            <div class='external-event navy-bg'>Check the new CI from Corporation.</div>--}}
-{{--                            <div class='external-event navy-bg'>Send documents to John.</div>--}}
-{{--                            <div class='external-event navy-bg'>Phone to Sandra.</div>--}}
-{{--                            <div class='external-event navy-bg'>Chat with Michael.</div>--}}
-{{--                            <p class="m-t">--}}
-{{--                                <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <button id="acceptOffer">12</button>--}}
-{{--                <button id="declineOffer">1234</button>--}}
-
             </div>
             <div class="col-lg-9">
                 <div class="ibox ">
@@ -148,6 +108,26 @@
             </div>
         </div>
     </div>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Lịch</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <b>Thời gian : </b> <span id="tg"> </span><br>
+                <b>Dạy : </b> <span id="mh"> </span><br>
+                <b>Phòng học : </b> <span id="ph"> </span><br>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('scripts')
     <script src="js/plugins/fullcalendar/moment.min.js"></script>
@@ -163,16 +143,6 @@
     <script>
 
         $(document).ready(function() {
-            {{--$("#acceptOffer").click(function () {--}}
-            {{--    alert('1111');--}}
-            {{--    $("#form").attr("action", "{{route('schedule.create')}}").submit();;--}}
-            {{--});--}}
-
-            {{--$("#declineOffer").click(function () {--}}
-            {{--    alert('2222');--}}
-            {{--    $("#form").attr("action", "{{route('schedule.show',['id'=>1])}}").submit();;--}}
-            {{--});--}}
-
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green'
@@ -202,11 +172,7 @@
 
             /* initialize the calendar
              -----------------------------------------------------------------*/
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-            console.log(date,d,y,m);
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
@@ -215,21 +181,24 @@
                 },
                 lang: 'vi',
                 events: [
-                    <?php for( $i=0; $i< count($calendar) ; $i++){?>
+                    @for( $i=0; $i< count($calendar) ; $i++)
                         {
-                            title: 'Tiết {{$calendar[$i]['tiethoc']}}{{$calendar[$i]['tenlophocphan']}}',
-                            <?php 
+                            title: 'Tiết {{$calendar[$i]['tiethoc']}}\n {{$calendar[$i]['tenlophocphan']}}\n {{$calendar[$i]['phonghoc']}}',
+                            @php
                                 $m3=explode("-",$calendar[$i]['ngayhoc']);
                                 $y= (int)$m3[0];
                                 $m= (int)$m3[1]-1;
                                 $d= (int)$m3[2];
-
                                 $m3=explode(",",$calendar[$i]['tiethoc']);
-                                
-                            ?>  
-                            start: new Date({{$y}},{{$m}},{{$d}})
+                                $tiethoc=explode(",",$calendar[$i]['tiethoc']);
+
+                                $start=explode(":",App\Http\Controllers\Admin\ScheduleController::getstar($tiethoc[0]));
+                                $end=explode(":",App\Http\Controllers\Admin\ScheduleController::getend($tiethoc[count($tiethoc)-1]));
+                            @endphp
+                            start: new Date({{$y}},{{$m}},{{$d}},{{$start[0]}},{{$start[1]}}),
+                            end: new Date({{$y}},{{$m}},{{$d}},{{$end[0]}},{{$end[1]}})
                         },
-                    <?php } ?> 
+                   @endfor
                 ]
             });
         });
@@ -255,7 +224,17 @@
     $(document).ready(function(){
     time();
     });
-
+    $(document).ready(function(){
+        $(document).on('click', '.click', function () {//load document
+            var s=$(this).children(".fc-time").text();
+            var t=$(this).children(".fc-title").text();
+            var p=t.substr(t.length-6, 6);
+            var m=t.substring(0,t.length-6);
+            $("#tg").text(s);
+            $("#mh").text(m);
+            $("#ph").text(p);
+        });
+    });
     </script>
 @endsection
 

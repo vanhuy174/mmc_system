@@ -9600,6 +9600,18 @@ body.md-skin {
 .b-color-red{
     color: red;
 }
+.margin-bottom-0
+{
+    margin-bottom: 0px !important;
+}
+.width-80
+ {
+     width: 80% !important;
+ }
+.width-60
+{
+    width: 60% !important;
+}
 .autocomplete {
     position: relative;
     display: inline-block;

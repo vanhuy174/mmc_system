@@ -3,7 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý môn học</h2>
-            <span><a href="{{route('home')}}">Home</a> > Quản lý môn học </span>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý học phần </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -15,19 +15,19 @@
             </div>
         @endif
         @if($errors->any())
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <ul style="list-style: none;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul style="overflow-y: scroll; max-height: 250px;">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header">Môn học</div>
+                    <div class="card-header">Học phần</div>
                     <div class="card-body">
                         <a href="{{route('subject.create')}}" class="btn btn-primary btn-sm" title="Thêm mới môn học">
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
@@ -50,8 +50,7 @@
                                 <thead>
                                 <tr>
                                     <th>Mã học phần</th>
-                                    <th>Tên môn học</th>
-                                    <th>Số tín chỉ</th>
+                                    <th>Tên học phần</th>
                                     <th>Số tín lý thuyết</th>
                                     <th>Số tín thực hành</th>
                                     <th>Mô Tả</th>
@@ -63,9 +62,8 @@
                                     <tr>
                                         <td>{{$item->mmc_subjectid}}</td>
                                         <td>{{$item->mmc_subjectname}}</td>
-                                        <td>{{$item->mmc_practice+$item->mmc_theory}}</td>
-                                         <td>{{$item->mmc_practice}}</td>
-                                          <td>{{$item->mmc_theory}}</td>
+                                        <td>{{$item->mmc_theory}}</td>
+                                        <td>{{$item->mmc_practice}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
 

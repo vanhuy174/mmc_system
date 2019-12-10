@@ -34,6 +34,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::resource('subject', 'Admin\SubjectController');
         Route::resource('class', 'Admin\ClassController');
         Route::resource('major', 'Admin\MajorController');
+        Route::resource('educationprogram', 'Admin\EducationProgramController');
         Route::resource('department', 'Admin\DepartmentController');
 
         //route sinh viên.

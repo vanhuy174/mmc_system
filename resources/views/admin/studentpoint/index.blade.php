@@ -13,7 +13,7 @@
     @if($errors->any())
     <div class="alert alert-danger alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <ul>
+        <ul style="overflow-y: scroll; max-height: 250px;">
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
@@ -133,12 +133,12 @@
                                             ?>
                                             {{$classname}}
                                         </td>
-                                        <td>{{$student->diligentpoint}}</td>
-                                        <td>{{$student->point1}}</td>
-                                        <td>{{$student->point2}}</td>
-                                        <td>{{$student->point3}}</td>
-                                        <td>{{$student->point4}}</td>
-                                        <td>{{$student->testscore}}</td>
+                                        <td>{{explode("-",$student->diligentpoint)[0]}}</td>
+                                        <td>{{explode("-",$student->point1)[0]}}</td>
+                                        <td>{{explode("-",$student->point2)[0]}}</td>
+                                        <td>{{explode("-",$student->point3)[0]}}</td>
+                                        <td>{{explode("-",$student->point4)[0]}}</td>
+                                        <td>{{explode("-",$student->testscore)[0]}}</td>
                                         <td>{{$student->mmc_note}}</td>
                                     </tr>
                                 @endforeach

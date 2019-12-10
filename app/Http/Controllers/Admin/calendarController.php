@@ -22,7 +22,8 @@ class calendarController extends Controller
      */
     public function index()
     {
-        return view('admin.calendar.index' );
+        $data= mmc_subjectclass::get();
+        return view('admin.calendar.index',['data'=>$data] );
     }
 
     /**
@@ -47,15 +48,17 @@ class calendarController extends Controller
         $nameteacher = null;
         $date = Carbon::now();
         $obj = []; //khởi tạo mảng obj để chứa các dữ liệu lịch sau khi xử lý xong.
-        $j=0;   //$j chỉ số của mảng obj
+        $errors = []; //khởi tạo mảng error để chứa các lỗi gặp phải
+        $j=0; $k=0;  //$j chỉ số của mảng obj, $k là chỉ số của mảng error.
         foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel 
             $sheet = $worksheet->toArray();
             for ($i = 0; $i < count($sheet); $i++) {
-                
                 if($sheet[$i][1] == 'Họ và tên giảng viên :'){
                     $name= $sheet[$i][2];
                     if(! $teacherid= mmc_employee::where('mmc_name','=', $name)->value('mmc_employeeid')){
-                        $teacherid= 'no_id';
+                        $errors[$k]='Dòng '.$i.' lỗi: Giảng viên chưa có trong hệ thống!';
+                        $k++;
+                        break;
                     }
                 }
                 if(substr($sheet[$i][1],  0, 7) == 'TUẦN:'){
@@ -76,8 +79,11 @@ class calendarController extends Controller
                     $date=Carbon::create($y,$m,$d);//set lai gia tri cho ngay tháng năm sau khi da dat gia tri ngay tahng cho từng thứ học.
                     $tenhocphan= explode("-",$m1[0]);
 
-                    $mahocphan= mmc_subject::where('mmc_subjectname', '=', $tenhocphan[0])->value('mmc_subjectid');
-                    dd($mahocphan);
+                    if(! $mahocphan= mmc_subject::where('mmc_subjectname', '=', $tenhocphan[0])->value('mmc_subjectid')){
+                        $errors[$k]='Dòng '.$i.' lỗi: Học phần chưa có trong hệ thống!';
+                        $k++;
+                        continue;
+                    }
                     $obj[$j] = [
                         'magiangvien' => $teacherid,
                         'malophocphan' => $m3[0].'-'.$teacherid,
@@ -113,7 +119,11 @@ class calendarController extends Controller
 
             $calendars->save();
         }
-        return back()->with('status', 'Thêm lịch thành công!');
+        if($j==0){
+            return back()->with('status', 'Thêm lịch thành công!');
+        }else{
+            return back()->withErrors($errors);
+        }
     }
 
     /**

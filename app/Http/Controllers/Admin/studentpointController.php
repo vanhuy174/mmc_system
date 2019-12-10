@@ -119,7 +119,6 @@ class studentpointController extends Controller
                     $temp=explode("(",$sheet[$i][1]);
                     $temp=explode(")",$temp[1]);
                     $subjectclassid= $temp[0].'-'.Auth::user()->mmc_employeeid;
-                    // dd($subjectclassid);
                     if(mmc_subjectclass::where('mmc_subjectclassid','=', $subjectclassid)->value('mmc_subjectclassname')== null){
                         return back()->with('status', 'Lớp học phần không tồn tại!');
                     }
@@ -128,7 +127,7 @@ class studentpointController extends Controller
                 $temp= substr($sheet[$i][1],  0, 12);
                 if($temp == 'Học phần'){//để lấy tên học phần.
                     $temp=explode(": ",$sheet[$i][1]);
-                    if(! $subjectid= mmc_subject::where('mmc_subjectname', '=', $temp[1])->value('mmc_subjectid')){
+                    if($subjectid= mmc_subject::where('mmc_subjectname', '=', $temp[1])->value('mmc_subjectid') != null){
                         return back()->with('status', 'Học phần không tồn tại!');
                     }
                 }
@@ -142,7 +141,7 @@ class studentpointController extends Controller
                         continue;
                     }
                     //Kiểm tra sinh viên đã tồn tại trong lớp học phần này chưa.
-                    if(mmc_studentpoint::where('mmc_studentid','=', $studentid)->where('mmc_subjectclassid','=', $subjectclassid)->value('mmc_subjectid')!=null){
+                    if(mmc_studentpoint::where('mmc_studentid','=', $studentid)->where('mmc_subjectclassid','=', $subjectclassid)->value('id')!=null){
                         $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên đã tồn tại trong lớp học phần này!';
                         $k++;
                         continue;
@@ -217,7 +216,11 @@ class studentpointController extends Controller
 
             $point->save();
         }
-        return back()->with('status', 'Thêm danh sách sinh viên thành công!');
+        if($j==0){
+            return back()->with('status', 'Thêm danh sách sinh viên thành công!');
+        }else{
+            return back()->withErrors($errors);
+        }   
     }
 
     /**
