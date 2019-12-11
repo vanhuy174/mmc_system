@@ -11,4 +11,9 @@ class mmc_studentpoint extends Model
         'mmc_studentid', 'mmc_subjectclassid', 'diligentpoint',
         'point1','point2','point3','point4','testscore','mmc_note',
     ];
+
+    public function student()
+	{
+	    return $this->belongsTo('App\mmc_student', 'mmc_studentid', 'mmc_studentid');
+	}
 }

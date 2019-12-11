@@ -61,18 +61,32 @@
                                 <tr>
                                     <th>Tên giảng viên</th>
                                     <th>Bộ môn</th>
+                                    <th>Lớp học phần</th>
                                     <th>Số tín chỉ</th>
                                     <th>Số tiết</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($data as $item)
-                                    <tr>
-                                        <td>{{$item->mmc_employeeid}}</td>
-                                        <td>{{$item->mmc_subjectid}}</td>
-                                        <td>{{$item->mmc_subjectid}}</td>
-                                        <td>{{$item->mmc_subjectid}}</td>
-                                    </tr>
+                                	 <tr>
+                                        <td>{{$item->mmc_name}}</td>
+                                        <td>{{$item->department->mmc_deptname}}</td>
+                                        <td>
+		                                	@foreach($item->subjectclass as $sjc)
+		                                        {{$sjc->mmc_subjectclassname}}</br>
+											@endforeach
+										</td>
+                                        <td>
+                                        	@foreach($item->subjectclass as $sjc)
+		                                        {{$sjc->subject->mmc_theory + $sjc->subject->mmc_practice}}</br>
+											@endforeach
+                                        </td>
+                                        <td>
+                                        	@foreach($item->subjectclass as $sjc)
+		                                        {{tinhsotiet($sjc->subject->mmc_theory, $sjc->subject->mmc_practice)}}</br>
+											@endforeach
+                                        </td>
+									</tr>
                                     @endforeach
                                 </tbody>
                             </table>

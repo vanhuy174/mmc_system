@@ -83,8 +83,8 @@
 						@foreach($data as $row)
 						<tr>
 
-							<td>{{$row -> mmc_fullname}}</td>
-							<td>{{$row -> mmc_studentid}}</td>
+							<td>{{$row->mmc_fullname}}</td>
+							<td>{{$row->mmc_studentid}}</td>
 							<td>
 								@foreach($data_class as $classid)
 									@if($classid['mmc_classid'] == $row['mmc_classid'])
@@ -94,12 +94,12 @@
 							</td>
 							<td>{{date('d-m-Y', strtotime($row['mmc_dateofbirth']))}}</td>
 							<td>
-								@if($row -> mmc_gender == 0) Nam 
+								@if($row->mmc_gender == 0) Nam 
 								@else Nữ
 								@endif
 							</td>
-							<td>{{$row -> mmc_email}}</td>
-							<td>{{$row -> mmc_phone}}</td>
+							<td>{{$row->mmc_email}}</td>
+							<td>{{$row->mmc_phone}}</td>
 							<td>
 								<a href="{{route('showStudent',['id'=>$row['id']])}}" title="View User"><button class="btn btn-info btn-sm">Xem</button></a>
 								<a href="{{route('editStudent',['id'=>$row['id']])}}" title="Edit User"><button class="btn btn-primary btn-sm">Sửa</button></a>

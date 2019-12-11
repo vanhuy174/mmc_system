@@ -11,4 +11,9 @@ class mmc_subject extends Model
         'mmc_subjectid', 'mmc_subjectname', 'mmc_description',
         'mmc_theory','mmc_practice',
     ];
+
+    public function subjectclass()
+	{
+	    return $this->hasMany('App\mmc_subjectclass', 'mmc_subjectid');
+	}
 }

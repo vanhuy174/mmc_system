@@ -87,6 +87,7 @@ class ComposerStaticInit91617cc29bd44e4843891680b68ee651
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '017b24472353920ed42bb364f7653c43' => __DIR__ . '/..' . '/propaganistas/laravel-phone/src/helpers.php',
+        '3fa8d9b11c5452996bfd69410d61288a' => __DIR__ . '/../..' . '/app/Helpers/recipe.php',
     );
 
     public static $prefixLengthsPsr4 = array (

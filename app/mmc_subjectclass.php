@@ -12,6 +12,13 @@ class mmc_subjectclass extends Model
         'mmc_subjectclassid', 'mmc_subjectclassname', 'mmc_employeeid',
         'mmc_subjectid',
     ];
+    public function employee()
+	{
+	    return $this->belongsTo('App\mmc_employee', 'mmc_employeeid', 'mmc_employeeid');
+	}
 
-    
+	public function subject()
+	{
+	    return $this->belongsTo('App\mmc_subject', 'mmc_subjectid', 'mmc_subjectid');
+	}
 }

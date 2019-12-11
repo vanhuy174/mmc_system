@@ -52,22 +52,15 @@
                                 </thead>
                                 <tbody>
                                 <?php $i=1; ?>
-                                @foreach($pointstudent as $student)
+                                @foreach($pointstudent as $std)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$student->mmc_studentid}}</td>
-                                        <td>
-                                            {{App\mmc_Student::where('mmc_studentid', '=', $student->mmc_studentid)->value('mmc_fullname')}}
-                                        </td>
-                                        <td>
-                                            <?php $classid= App\mmc_Student::where('mmc_studentid', '=', $student->mmc_studentid)->value('mmc_classid');
-                                                $classname= App\mmc_class::where('mmc_classid', '=', $classid)->value('mmc_classname');
-                                            ?>
-                                            {{$classname}}
-                                        </td>
-                                        <td>{{$student->diligentpoint}}</td>
-                                        <td>{{$student->point1}}</td>
-                                        <td>{{$student->mmc_note}}</td>
+                                        <td>{{$std->mmc_studentid}}</td>
+                                        <td>{{$std->student->mmc_fullname}}</td>
+                                        <td>{{$std->student->class->mmc_classname}}</td>
+                                        <td>{{$std->diligentpoint}}</td>
+                                        <td>{{$std->point1}}</td>
+                                        <td>{{$std->mmc_note}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
