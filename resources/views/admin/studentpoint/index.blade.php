@@ -120,26 +120,19 @@
                                 </thead>
                                 <tbody>
                                 <?php $i=1; ?>
-                                @foreach($data as $student)
+                                @foreach($data as $std)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{$student->mmc_studentid}}</td>
-                                        <td>
-                                            {{App\mmc_Student::where('mmc_studentid', '=', $student->mmc_studentid)->value('mmc_fullname')}}
-                                        </td>
-                                        <td>
-                                            <?php $classid= App\mmc_Student::where('mmc_studentid', '=', $student->mmc_studentid)->value('mmc_classid');
-                                                $classname= App\mmc_class::where('mmc_classid', '=', $classid)->value('mmc_classname');
-                                            ?>
-                                            {{$classname}}
-                                        </td>
-                                        <td>{{explode("-",$student->diligentpoint)[0]}}</td>
-                                        <td>{{explode("-",$student->point1)[0]}}</td>
-                                        <td>{{explode("-",$student->point2)[0]}}</td>
-                                        <td>{{explode("-",$student->point3)[0]}}</td>
-                                        <td>{{explode("-",$student->point4)[0]}}</td>
-                                        <td>{{explode("-",$student->testscore)[0]}}</td>
-                                        <td>{{$student->mmc_note}}</td>
+                                        <td>{{$std->mmc_studentid}}</td>
+                                        <td>{{$std->student->mmc_fullname}}</td>
+                                        <td>{{$std->student->class->mmc_classname}}</td>
+                                        <td>{{explode("-",$std->diligentpoint)[0]}}</td>
+                                        <td>{{explode("-",$std->point1)[0]}}</td>
+                                        <td>{{explode("-",$std->point2)[0]}}</td>
+                                        <td>{{explode("-",$std->point3)[0]}}</td>
+                                        <td>{{explode("-",$std->point4)[0]}}</td>
+                                        <td>{{explode("-",$std->testscore)[0]}}</td>
+                                        <td>{{$std->mmc_note}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

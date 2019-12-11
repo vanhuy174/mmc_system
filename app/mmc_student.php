@@ -39,4 +39,8 @@ class mmc_student extends Model
                             'mmc_motheremail',
                             'mmc_motherjob',
     						];
+
+    public function class(){
+        return $this->belongsTo('App\mmc_class', 'mmc_classid', 'mmc_classid');
+    }
 }

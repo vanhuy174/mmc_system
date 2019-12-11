@@ -15,7 +15,7 @@ class mmc_employee extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'mmc_name', 'email', 'password','mmc_employeeid',
+        'mmc_name', 'email', 'password','mmc_employeeid', 
     ];
 
     /**
@@ -38,5 +38,16 @@ class mmc_employee extends Authenticatable
 
     /** lấy thông tin bảng giảng viên */
     protected $table = "mmc_employees";
+
     public $timestamps = false;
+
+    public function subjectclass()
+    {
+        return $this->hasMany('App\mmc_subjectclass', 'mmc_employeeid', 'mmc_employeeid');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('App\mmc_department', 'mmc_deptid', 'mmc_deptid');
+    }
 }

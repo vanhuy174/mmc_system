@@ -86,4 +86,5 @@ return array(
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
     'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
     '017b24472353920ed42bb364f7653c43' => $vendorDir . '/propaganistas/laravel-phone/src/helpers.php',
+    '3fa8d9b11c5452996bfd69410d61288a' => $baseDir . '/app/Helpers/recipe.php',
 );

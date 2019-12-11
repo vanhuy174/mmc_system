@@ -9,6 +9,7 @@ use App\mmc_studentpoint;
 use App\mmc_subjectclass;
 use App\mmc_subject;
 use App\mmc_student;
+use App\mmc_class;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 class studentpointController extends Controller
@@ -20,7 +21,7 @@ class studentpointController extends Controller
      */
     public function index()
     {
-        $data= mmc_studentpoint::get();
+        $data= mmc_studentpoint::with('student.class')->get();
         return view('admin.point.index',['pointstudent'=>$data]);
     }
 
@@ -94,6 +95,7 @@ class studentpointController extends Controller
     {
         $subjectclass= mmc_subjectclass::find($request->id);
         $studentpoint= mmc_studentpoint::where('mmc_subjectclassid', '=', $subjectclass->mmc_subjectclassid)->get();
+        // dd($studentpoint->student->mmc_fullname);
         return view('admin.studentpoint.index',['data'=>$studentpoint, 'nameclass'=>$subjectclass]);
     }
 

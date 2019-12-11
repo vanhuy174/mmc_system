@@ -22,8 +22,8 @@ class calendarController extends Controller
      */
     public function index()
     {
-        $data= mmc_subjectclass::get();
-        return view('admin.calendar.index',['data'=>$data] );
+        $data= mmc_employee::with('subjectclass.subject')->get();
+        return view('admin.calendar.index',['data'=>$data]);
     }
 
     /**
@@ -169,5 +169,10 @@ class calendarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public static function getsubject($id)
+    {
+       return mmc_subject::where('mmc_subjectid', '=', $id)->get();
     }
 }
