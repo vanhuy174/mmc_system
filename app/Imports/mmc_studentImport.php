@@ -42,6 +42,7 @@ class mmc_studentImport implements ToModel, WithHeadingRow, WithValidation, Skip
             'mmc_reward'    => $row['khen_thuong'],
             'mmc_descipline'    => $row['ky_luat'],
             'mmc_personalid'    => $row['so_cmnd'],
+            'mmc_status'    => 'danghoc',
             'mmc_father'    => $row['ho_ten_bo'],
             'mmc_fathernationality'    => $row['quoc_tich_bo'],
             'mmc_fatherethnic'    => $row['dan_toc_bo'],

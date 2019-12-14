@@ -48,12 +48,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::post('/importStudent', 'Admin\mmc_ControllerStudent@import')->name('importStudent');
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
+        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
+        Route::post('/withclass', 'Admin\mmc_ControllerStudent@withclass')->name('withclass');
 
         //route lịch
         Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
         Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');
         Route::post('/edittime', 'Admin\ScheduleController@store')->name('edittime');
-
 
         //route giảng viên
         Route::group(['prefix' => '/giang-vien'], function () {

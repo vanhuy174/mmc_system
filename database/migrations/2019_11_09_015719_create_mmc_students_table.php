@@ -28,6 +28,7 @@ class CreateMmcStudentsTable extends Migration
             $table->string('mmc_reward')->nullable();
             $table->string('mmc_descipline')->nullable();
             $table->string('mmc_personalid')->nullable();
+            $table->string('mmc_status');
             $table->string('mmc_father')->nullable();
             $table->string('mmc_fathernationality')->nullable();
             $table->string('mmc_fatherethnic')->nullable();

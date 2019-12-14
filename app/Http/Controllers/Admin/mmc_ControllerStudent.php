@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\mmc_major;
 use Validator;
 use Illuminate\Http\Request;
 use App\mmc_Student;
@@ -16,39 +17,76 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 class mmc_ControllerStudent extends Controller
 {
     /**
-        Hàm Index để lấy dữ liệu trong bảng mmc_student ra cho view mmc_homeStudent.
-        $data_class để chữa thông tin của các lớp.
-        $perPage để xác định số lượng SV được hiển thị trong mỗi trang.
-        $data để chữa dữ liệu sinh viên đã truy vấn.
-        $keyword chữa nội dung người dùng tìm kiếm.
-        Nếu $keyword có giá trị thì thực hiện chức năng tìm kiếm, nếu không thì thực hiện truy vấn bình thường.
+     * Hàm Index để lấy dữ liệu trong bảng mmc_student ra cho view mmc_homeStudent.
+     * $data_class để chữa thông tin của các lớp.
+     * $perPage để xác định số lượng SV được hiển thị trong mỗi trang.
+     * $data để chữa dữ liệu sinh viên đã truy vấn.
+     * $keyword chữa nội dung người dùng tìm kiếm.
+     * Nếu $keyword có giá trị thì thực hiện chức năng tìm kiếm, nếu không thì thực hiện truy vấn bình thường.
      */
     public function index(Request $request)
     {
-        $data_class=mmc_class::get();
-
-        $perPage= 10;
-        $keyword= $request->search;
-        if(!empty($keyword)){
-             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_classid', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
-            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class"]));
+        $major= mmc_major::get();
+        if(isset($request->majorid)){
+            $majorid= $request->majorid;
         }else{
-            $data=mmc_Student::latest()->paginate($perPage);
-            return view('admin.Student.mmc_homeStudent',['data'=>$data , "data_class"=>$data_class]);
+            $majorid= $major[0]->mmc_majorid;
+        }
+        $class= mmc_class::where("mmc_major", "=", $majorid)->get();
+        if(isset($request->classid)){
+            $classid= $request->classid;
+        }else{
+            $classid= $class[0]->mmc_classid;
+        }
+        $perPage = 10;
+        $keyword = $request->search;
+        if (!empty($keyword)) {
+            $student = mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_classid', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent', compact("data", "class", "major", "majorid", "classid"));
+        } else {
+            $student = mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent', compact("student", "class", "major", "majorid", "classid"));
+        }
+    }
+
+    public function withclass(Request $request)
+    {
+        $major= mmc_major::get();
+        if(isset($request->majorid)){
+            $majorid= $request->majorid;
+        }else{
+            $majorid= $major[0]->mmc_majorid;
+        }
+        $class= mmc_class::where("mmc_major", "=", $majorid)->get();
+        if(isset($request->classid)){
+            $classid= $request->classid;
+        }else{
+            $classid= $class[0]->mmc_classid;
+        }
+        $perPage = 10;
+        $keyword = $request->search;
+        if (!empty($keyword)) {
+            $student = mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_classid', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            return back()->with("student", "class", "major", "majorid", "classid");
+        } else {
+            $student = mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            dd($student);
+            return back()->with("student", "class", "major", "majorid", "classid");
         }
     }
 
     /**
-        Hàm getclass dùng để lấy thông tin của các lớp trong csdl.
-        Hàm này phục vụ cho chức năng thêm sinh viên.
-    */
-    public function getclass(){
-    	$data=mmc_class::get();
-        return view('admin.Student.mmc_createStudent',['data'=>$data]);
+     * Hàm getclass dùng để lấy thông tin của các lớp trong csdl.
+     * Hàm này phục vụ cho chức năng thêm sinh viên.
+     */
+    public function getclass()
+    {
+        $data = mmc_class::get();
+        return view('admin.Student.mmc_createStudent', ['data' => $data]);
     }
 
     /**
-        Hàm Create dùng để thêm thông tin của 1 sinh viên vào trong csdl.
+     * Hàm Create dùng để thêm thông tin của 1 sinh viên vào trong csdl.
      */
     public function create(Request $request)
     {
@@ -90,8 +128,9 @@ class mmc_ControllerStudent extends Controller
                 'mmc_personalid.numeric' => 'Số CMND không hợp lệ',
             ]
         );
-        $data=$request->all();
-        if( mmc_Student::create($data)){
+        $data = $request->all();
+        $data['mmc_status']= 'danghoc';
+        if (mmc_Student::create($data)) {
             unset($data['_token']);
             unset($data['_method']);
             return redirect('admin/homeStudent')->with('status', 'Thêm sinh viên thành công!');
@@ -102,7 +141,7 @@ class mmc_ControllerStudent extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -112,48 +151,48 @@ class mmc_ControllerStudent extends Controller
     }
 
     /**
-        Hàm show dùng để lấy thông tin của 1 SV có id=$id để phục vụ cho chức năng xem thông tin chi tiết của sinh viên.
-        $data_class để chữa thông tin của các lớp.
-        $data để chữa dữ liệu sinh viên đã truy vấn.
+     * Hàm show dùng để lấy thông tin của 1 SV có id=$id để phục vụ cho chức năng xem thông tin chi tiết của sinh viên.
+     * $data_class để chữa thông tin của các lớp.
+     * $data để chữa dữ liệu sinh viên đã truy vấn.
      */
     public function show($id)
     {
-        $data_class=mmc_class::get();
-        $data= mmc_Student::find($id);
-        return view('admin.Student.mmc_detailStudent', ['data'=>$data , "data_class"=>$data_class]);
+        $data_class = mmc_class::get();
+        $data = mmc_Student::find($id);
+        return view('admin.Student.mmc_detailStudent', ['data' => $data, "data_class" => $data_class]);
     }
 
     /**
-        Hàm edit dùng để lấy thông tin của 1 SV có id=$id để phục vụ cho chức năng sửa thông tin sinh viên.
-        $data_class để chữa thông tin của các lớp.
-        $data để chữa dữ liệu sinh viên đã truy vấn.
+     * Hàm edit dùng để lấy thông tin của 1 SV có id=$id để phục vụ cho chức năng sửa thông tin sinh viên.
+     * $data_class để chữa thông tin của các lớp.
+     * $data để chữa dữ liệu sinh viên đã truy vấn.
      */
     public function edit($id)
     {
         //
-        $data_class=mmc_class::get();
-        $data= mmc_Student::find($id);
-        return view('admin.Student.mmc_editStudent', ['data'=>$data , "data_class"=>$data_class]);
+        $data_class = mmc_class::get();
+        $data = mmc_Student::find($id);
+        return view('admin.Student.mmc_editStudent', ['data' => $data, "data_class" => $data_class]);
     }
 
     /**
-        Hàm update dùng để lưu thông tin của sinh viên sau khi đã sửa vào trong csdl.
+     * Hàm update dùng để lưu thông tin của sinh viên sau khi đã sửa vào trong csdl.
      */
     public function update(Request $request, $id)
     {
         $request->validate(
             [
-                'mmc_studentid' => 'required|unique:mmc_students,mmc_studentid,'.$id,
+                'mmc_studentid' => 'required|unique:mmc_students,mmc_studentid,' . $id,
                 'mmc_classid' => 'required',
                 'mmc_fullname' => 'required',
                 'mmc_dateofbirth' => 'required',
                 'mmc_gender' => 'required',
-                'mmc_email' => 'required|email|unique:mmc_students,mmc_email,'.$id,
-                'mmc_phone' => 'required|numeric|unique:mmc_students,mmc_phone,'.$id,
+                'mmc_email' => 'required|email|unique:mmc_students,mmc_email,' . $id,
+                'mmc_phone' => 'required|numeric|unique:mmc_students,mmc_phone,' . $id,
                 'mmc_address' => 'required',
                 'mmc_ethnic' => 'required',
                 'mmc_religion' => 'required',
-                'mmc_personalid' => 'required|numeric|unique:mmc_students,mmc_personalid,'.$id,
+                'mmc_personalid' => 'required|numeric|unique:mmc_students,mmc_personalid,' . $id,
             ],
             [
                 'mmc_studentid.required' => 'Mã sinh viên không được để trống',
@@ -179,18 +218,18 @@ class mmc_ControllerStudent extends Controller
                 'mmc_personalid.numeric' => 'Số CMND không hợp lệ',
             ]
         );
-            $Student= mmc_Student::find($id);
-            $data=$request->all();
-            if($Student->update($data)){
-                unset($data['_token']);
-                unset($data['_method']);
-                return redirect('admin/homeStudent')->with('status', 'Sửa sinh viên thành công!');
-            }
+        $Student = mmc_Student::find($id);
+        $data = $request->all();
+        if ($Student->update($data)) {
+            unset($data['_token']);
+            unset($data['_method']);
+            return redirect('admin/homeStudent')->with('status', 'Sửa sinh viên thành công!');
+        }
 
     }
 
     /**
-        Hàm destroy dùng để xoá một sinh viên có id = $id khỏi csdl.
+     * Hàm destroy dùng để xoá một sinh viên có id = $id khỏi csdl.
      */
     public function destroy($id)
     {
@@ -199,16 +238,16 @@ class mmc_ControllerStudent extends Controller
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function importExportView()
     {
-       return view('import');
+        return view('import');
     }
 
     /**
-        Hàm export dùng để xuất ra danh sách tất cả các sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
-    */
+     * Hàm export dùng để xuất ra danh sách tất cả các sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
+     */
     public function export()
     {
         return Excel::download(new mmc_StudentExport, 'Danh-sach-sinh-vien.xlsx');
@@ -216,8 +255,8 @@ class mmc_ControllerStudent extends Controller
     }
 
     /**
-        Hàm import dùng để thêm thông tin của những sinh viên có trong 1 file excel vào trong csdl sinh viên. (Cần có chuẩn file excel để hệ thống không bị lỗi khi thêm)
-    */
+     * Hàm import dùng để thêm thông tin của những sinh viên có trong 1 file excel vào trong csdl sinh viên. (Cần có chuẩn file excel để hệ thống không bị lỗi khi thêm)
+     */
     public function import()
     {
         $import = new mmc_StudentImport();
@@ -225,79 +264,91 @@ class mmc_ControllerStudent extends Controller
         $failures = $import->failures();
 
         //Dùng để kiểm tra có dữ liệu nào không hợp lệ hay không.
-        if (!empty($failures))
-        {
-            $errors=[];
-                foreach ($failures as $key=>$error)//Lấy được cả key và value
-                {   
-                    $arrerror="";
-                    foreach ($error->errors() as $item)
-                    {
-                        $arrerror.="Dòng ".$error->row()." lỗi ".$item;
-                    }
-                    $errors[]=$arrerror;
+        if (!empty($failures)) {
+            $errors = [];
+            foreach ($failures as $key => $error)//Lấy được cả key và value
+            {
+                $arrerror = "";
+                foreach ($error->errors() as $item) {
+                    $arrerror .= "Dòng " . $error->row() . " lỗi " . $item;
                 }
+                $errors[] = $arrerror;
+            }
             return back()->withErrors($errors);
         }
         return back()->with('status', 'Import thành công!');;
     }
 
     /**
-        Hàm setdate dùng để lấy mã lớp của các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
-    */
+     * Hàm setdate dùng để lấy mã lớp của các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
+     */
     public static function getclassId($id)
     {
         return mmc_class::where('mmc_classname', '=', "$id")->value('mmc_classid');
     }
-    
+
     /**
-        Hàm getclassname dùng để lấy tên các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
-    */
+     * Hàm getclassname dùng để lấy tên các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
+     */
     public static function getclassname()
     {
         return mmc_class::get()->pluck('mmc_classname');
     }
 
     /**
-        Hàm setdate dùng để xử lý dữ liệu ngày tháng. để phục vụ cho việc thêm sinh viên từ file excel.
-    */
+     * Hàm setdate dùng để xử lý dữ liệu ngày tháng. để phục vụ cho việc thêm sinh viên từ file excel.
+     */
     public static function setdate($date)
     {
-        if(is_string($date)){
+        if (is_string($date)) {
             $time = strtotime($date);
-            $newtime = date('Y-m-d',$time);
+            $newtime = date('Y-m-d', $time);
             return $newtime;
-        }else{
+        } else {
             return Date::excelToDateTimeObject($date);
         }
     }
 
     /**
-        Hàm setgender dùng để xử lý dữ liệu giới tính. để phục vụ cho việc thêm sinh viên từ file excel.
-    */
+     * Hàm setgender dùng để xử lý dữ liệu giới tính. để phục vụ cho việc thêm sinh viên từ file excel.
+     */
     public static function setgender($gender)
     {
-        if(strcasecmp($gender, 'nam') == 0){
+        if (strcasecmp($gender, 'nam') == 0) {
             return 0;
-        }elseif(strcasecmp($gender, 'nam') != 0){
+        } elseif (strcasecmp($gender, 'nam') != 0) {
             return 1;
-        }elseif($gender == 0 || $gender == 1){
+        } elseif ($gender == 0 || $gender == 1) {
             return $gender;
-        }else{
+        } else {
             return 0;
         }
-        
+
     }
 
     /**
-        Hàm downloadfileExcel để giúp người dùng tải xuống file excel mẫu. để phục vụ cho việc thêm sinh viên từ file excel.
-    */
-    public function downloadfileExcel(){
-        $filename= "mau-them-sinh-vien.xlsx";
+     * Hàm downloadfileExcel để giúp người dùng tải xuống file excel mẫu. để phục vụ cho việc thêm sinh viên từ file excel.
+     */
+    public function downloadfileExcel()
+    {
+        $filename = "mau-them-sinh-vien.xlsx";
         return response()->download(storage_path('file/' . $filename));
     }
+
     public static function count()
     {
         return mmc_Student::count();
+    }
+
+    public function statusstudent(Request $request)
+    {
+        if ($request->student != null) {
+            foreach ($request->student as $id) {
+                $data= mmc_Student::find($id);
+                $data->mmc_status= $request->action;
+                $data->update();
+            }
+        }
+        return back();
     }
 }

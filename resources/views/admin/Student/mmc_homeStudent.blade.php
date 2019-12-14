@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('linkstyle')
-	<link href="../../css/mmc_homestudent.css" rel="stylesheet">
+	<link href="css/mmc_homestudent.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -28,7 +28,22 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
-				<div class="card-header">Danh sách sinh viên</div>
+				<div class="card-header">
+                    <form action="{{route("withclass")}}" method="post">
+                        @csrf
+                        <select class="form-control width-25 float-left" name="majorid">
+                            @foreach($major as $key)
+                                <option <?php if($majorid == $key->mmc_majorid){ echo "selected";} ?> value="{{$key->mmc_majorid}}">{{$key->mmc_majorname}}</option>
+                            @endforeach
+                        </select>
+                        <select class="form-control width-25 float-left" name="classid">
+                            @foreach($class as $key)
+                                <option <?php if($classid == $key->mmc_classid){ echo "selected";} ?> value="{{$key->mmc_classid}}">{{$key->mmc_classname}}</option>
+                            @endforeach
+                        </select>
+                        <input type="submit" class="btn btn-primary" value="Xem">
+                    </form>
+                </div>
 				<div class="card-body">
 					<div class="padding-5">
 						<a class="btn btn-primary float-left" href="{{route('formcreateStudent')}}">Thêm mới</a>
@@ -67,39 +82,35 @@
 							</div>
 						</form>
 					</div>
-
+                    <form action="{{route('statusstudent')}}" method="post">
+                        @csrf
 					<table class="table table-hover">
 						<tr>
+                            <th><input type="checkbox" id="checkall" value=""></th>
 							<th>Họ tên</th>
 							<th>Mã sinh viên</th>
 							<th>Lớp</th>
-							<th>Ngày sinh</th>
-							<th>Giới tính</th>
 							<th>Email</th>
 							<th>Số điện thoại</th>
+                            <th>Trạng thái</th>
 							<th>Thao tác</th>
 						</tr>
-						@if(isset($data))
-						@foreach($data as $row)
+						@if(isset($student))
+						@foreach($student as $row)
 						<tr>
-
+                            <td><input type="checkbox" class="checkone" name="student[]" value="{{$row->id}}"></td>
 							<td>{{$row->mmc_fullname}}</td>
 							<td>{{$row->mmc_studentid}}</td>
 							<td>
-								@foreach($data_class as $classid)
+								@foreach($class as $classid)
 									@if($classid['mmc_classid'] == $row['mmc_classid'])
 										{{$classid['mmc_classname']}}
 									@endif
 								@endforeach
 							</td>
-							<td>{{date('d-m-Y', strtotime($row['mmc_dateofbirth']))}}</td>
-							<td>
-								@if($row->mmc_gender == 0) Nam 
-								@else Nữ
-								@endif
-							</td>
 							<td>{{$row->mmc_email}}</td>
 							<td>{{$row->mmc_phone}}</td>
+							<td>{{$row->mmc_status}}</td>
 							<td>
 								<a href="{{route('showStudent',['id'=>$row['id']])}}" title="View User"><button class="btn btn-info btn-sm">Xem</button></a>
 								<a href="{{route('editStudent',['id'=>$row['id']])}}" title="Edit User"><button class="btn btn-primary btn-sm">Sửa</button></a>
@@ -109,10 +120,26 @@
 						@endforeach
 						@endif
 					</table>
-					<div class="pagination justify-content-center"> {!! $data->appends(['search' => Request::get('search')])->render() !!} </div>
-				</div>
+					<div class="pagination justify-content-center"> {!! $student->appends(['search' => Request::get('search')])->render() !!} </div>
+                    <div>
+                        <select class="form-control width-15 float-left" name="action">
+                            <option value="danghoc">Đang học</option>
+                            <option value="totnghiep">Đã tốt ngiệp</option>
+                            <option value="baoluu">Bảo lưu điêm</option>
+                            <option value="dinhchihoc">Đình chỉ học</option>
+                            <option value="buocthoihoc">Buộc thôi học</option>
+                            <option value="xoa">Xoá</option>
+                        </select>
+                        <input type="submit" class="btn btn-primary" value="Thực hiện">
+                    </div>
+                    </form>
+                </div>
 			</div>
 		</div>
 	</div>
 </div>
 @endsection
+@section('scripts')
+    <script src="js/checkbox.js"></script>
+@endsection
+

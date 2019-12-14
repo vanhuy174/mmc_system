@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('linkstyle')
-<link href="../../css/mmc_createstudent.css" rel="stylesheet">
+<link href="css/mmc_createstudent.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -75,7 +75,7 @@
 										<label for="comment">Khen thưởng: </label>
 										<textarea  name="mmc_reward" class="form-control" rows="4">{{ old('mmc_reward') }}</textarea>
 									</div>
-									
+
 								</div>
 
 								<div class="col-md-6">
