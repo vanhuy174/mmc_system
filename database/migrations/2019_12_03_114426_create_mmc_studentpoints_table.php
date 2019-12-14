@@ -23,9 +23,9 @@ class CreateMmcStudentpointsTable extends Migration
             $table->text('point2')->nullable();   //điểm bài kiểm tra 2
             $table->text('point3')->nullable();   //điểm bài kiểm tra 3
             $table->text('point4')->nullable();   //điểm bài kiểm tra 4
-            $table->integer('mmc_key')->nullable();   //điểm bài kiểm tra 4
             $table->text('testscore')->nullable();   //điểm thi cuối kỳ
             $table->string('mmc_note')->nullable();     //ghi chú
+            $table->integer('mmc_key')->nullable();     //Lần học
             $table->timestamps();
 
             $table->foreign('mmc_studentid')
