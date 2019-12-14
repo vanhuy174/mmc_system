@@ -19,8 +19,9 @@ class CreateMmcPointdetailsTable extends Migration
             $table->string('mmc_studentid');
             $table->string('mmc_subjectid');
             $table->string('mmc_yearid');
-            $table->float('mmc_10grade');
-            $table->float('mmc_4grade');
+            $table->text('mmc_10grade');
+            $table->text('mmc_4grade');
+            $table->integer('key');
             $table->foreign('mmc_semesterid')
                 ->references('mmc_semesterid')
                 ->on('mmc_semesters')

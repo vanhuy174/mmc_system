@@ -131,6 +131,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('/studentpoint/{id}', 'Admin\studentpointController@getclass')->name('getstudentpoint');
     Route::post('/addinfor', 'Admin\studentpointController@infoStudent')->name('infoStudent');
     Route::post('/addpoint', 'Admin\studentpointController@pointstudent')->name('pointstudent');
+    Route::post('/addpointtest', 'Admin\studentpointController@pointtest')->name('pointtest');
+    Route::post('/ratio', 'Admin\studentpointController@editratio')->name('editratio');
 //     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
 //     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
 });

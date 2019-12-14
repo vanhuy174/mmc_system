@@ -40,6 +40,7 @@
                                     <form action="{{ route('infoStudent') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
+                                            <h4 class="color-red">Hãy chắc chẵn rằng đây là file excel chưa DANH SÁCH SINH VIÊN của lớp học phần này và bạn đã kiểm tra kỹ nó</h4>
                                             <input type="file" class="form-control" required="required" name="file">
                                         </div>
                                         <div class="modal-footer">
@@ -65,6 +66,7 @@
                                     <form action="{{ route('pointstudent') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
+                                            <h4 class="color-red">Hãy chắc chẵn rằng đây là file excel chứa điểm THƯỜNG XUYÊN của những sinh viên trong lớp học phần này và bạn đã kiểm tra kỹ nó</h4>
                                             <input type="file" class="form-control" required="required" name="file">
                                         </div>
                                         <div class="modal-footer">
@@ -87,9 +89,10 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="/" method="POST" enctype="multipart/form-data">
+                                    <form action="{{route('pointtest')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
+                                            <h4 class="color-red">Hãy chắc chẵn rằng đây là file excel chứa điểm THI của những sinh viên trong lớp học phần này và bạn đã kiểm tra kỹ nó</h4>
                                             <input type="file" class="form-control" required="required" name="file">
                                         </div>
                                         <div class="modal-footer">
@@ -99,8 +102,22 @@
                                 </div>
                             </div>
                         </div>
-                        <br/>
-                        <br/>
+                        @if(count($data) != 0)
+                        <div style=" float: right;">
+                            <form action="{{route('editratio')}}" method="post">
+                            @csrf
+                            <input type="text" name="subjectclassid" value="{{$data[0]->mmc_subjectclassid}}" hidden="true">
+                            <span>Tỉ lệ điểm</span>
+                            <select name="point_ratio" title="Tỉ lệ giữa điểm trên lớp và điểm thi">
+                              <option <?php if( $data[0]->point_ratio == 3) echo "selected"; ?> value="3">3 : 7</option>
+                              <option <?php if( $data[0]->point_ratio == 4) echo "selected"; ?> value="4">4 : 6</option>
+                              <option <?php if( $data[0]->point_ratio == 5) echo "selected"; ?> value="5">5 : 5</option>
+                            </select>
+                            <button type="submit">Sửa</button>
+                            </form>
+                        </div>
+                        @endif
+                    </div>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -115,30 +132,33 @@
                                     <th>Điểm 3</th>
                                     <th>Điểm 4</th>
                                     <th>Điểm thi</th>
+                                    <th>Điểm TB</th>
                                     <th>Ghi chú</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i=1; ?>
+                                @if(count($data) != 0)
                                 @foreach($data as $std)
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$std->mmc_studentid}}</td>
                                         <td>{{$std->student->mmc_fullname}}</td>
                                         <td>{{$std->student->class->mmc_classname}}</td>
-                                        <td>{{explode("-",$std->diligentpoint)[0]}}</td>
-                                        <td>{{explode("-",$std->point1)[0]}}</td>
-                                        <td>{{explode("-",$std->point2)[0]}}</td>
-                                        <td>{{explode("-",$std->point3)[0]}}</td>
-                                        <td>{{explode("-",$std->point4)[0]}}</td>
-                                        <td>{{explode("-",$std->testscore)[0]}}</td>
-                                        <td>{{$std->mmc_note}}</td>
+                                        <td>{{$diligentpoint=explode("-",$std->diligentpoint)[0]}}</td>
+                                        <td>{{$point1=explode("-",$std->point1)[0]}}</td>
+                                        <td>{{$point2=explode("-",$std->point2)[0]}}</td>
+                                        <td>{{$point3=explode("-",$std->point3)[0]}}</td>
+                                        <td>{{$point4=explode("-",$std->point4)[0]}}</td>
+                                        <td>{{$testscore=explode("-",$std->testscore)[0]}}</td>
+                                        <td>{{tinhdiemTB($std->subject->mmc_theory, $std->subject->mmc_practice, $data[0]->point_ratio, $diligentpoint, $point1, $point2, $point3, $point4, $testscore)}}</td>
+                                        <td>{{explode("-",$std->mmc_note)[0]}}</td>
                                     </tr>
                                 @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
