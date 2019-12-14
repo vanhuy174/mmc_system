@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Validator;
 use Illuminate\Http\Request;
-use App\mmc_Student;
+use App\mmc_student;
 use App\mmc_class;
-use Yajra\Oci8\Eloquent\OracleEloquent as Eloquent;
 use App\Exports\mmc_StudentExport;
 use App\Imports\mmc_StudentImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -229,7 +228,7 @@ class mmc_ControllerStudent extends Controller
         {
             $errors=[];
                 foreach ($failures as $key=>$error)//Lấy được cả key và value
-                {   
+                {
                     $arrerror="";
                     foreach ($error->errors() as $item)
                     {
@@ -249,7 +248,7 @@ class mmc_ControllerStudent extends Controller
     {
         return mmc_class::where('mmc_classname', '=', "$id")->value('mmc_classid');
     }
-    
+
     /**
         Hàm getclassname dùng để lấy tên các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
     */
@@ -286,7 +285,7 @@ class mmc_ControllerStudent extends Controller
         }else{
             return 0;
         }
-        
+
     }
 
     /**
@@ -298,6 +297,6 @@ class mmc_ControllerStudent extends Controller
     }
     public static function count()
     {
-        return mmc_Student::count();
+        return mmc_student::count();
     }
 }

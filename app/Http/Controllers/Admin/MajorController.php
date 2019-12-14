@@ -55,7 +55,7 @@ class MajorController extends Controller
             'mmc_majorname.unique'=>'Tên ngành đã tồn tại'
         ]);
         $major=new mmc_major();
-        $major->mmc_majorid="mmc-".Str::slug($request->mmc_majorname);
+        $major->mmc_majorid=$request->mmc_majorid;
         $major->mmc_deptid=$request->mmc_deptid;
         $major->mmc_majorname=$request->mmc_majorname;
         $major->mmc_description=$request->mmc_description;

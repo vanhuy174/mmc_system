@@ -111,6 +111,7 @@ return array(
     'Carbon\\Exceptions\\BadUnitException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/BadUnitException.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
     'Carbon\\Exceptions\\NotAPeriodException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/NotAPeriodException.php',
+    'Carbon\\Exceptions\\ParseErrorException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/ParseErrorException.php',
     'Carbon\\Factory' => $vendorDir . '/nesbot/carbon/src/Carbon/Factory.php',
     'Carbon\\FactoryImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/FactoryImmutable.php',
     'Carbon\\Language' => $vendorDir . '/nesbot/carbon/src/Carbon/Language.php',

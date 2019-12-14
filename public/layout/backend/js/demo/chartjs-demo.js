@@ -1,128 +1,47 @@
 $(function () {
 
     var lineData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["2012", "2013", "2014", "2015", "2016", "2017", "2018"],
         datasets: [
 
             {
-                label: "Data 1",
-                backgroundColor: 'rgba(26,179,148,0.5)',
+                label: "Số sinh viên 1",
+                backgroundColor: 'rgba(26,179,148,0.3)',
                 borderColor: "rgba(26,179,148,0.7)",
-                pointBackgroundColor: "rgba(26,179,148,1)",
                 pointBorderColor: "#fff",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: [500, 400, 450, 489, 478, 578, 687]
             },{
-                label: "Data 2",
-                backgroundColor: 'rgba(220, 220, 220, 0.5)',
+                label: "Số sinh viên 2",
+                backgroundColor: 'rgb(255,140,0,0.3)',
+                borderColor: "rgb(255,140,0,0.7)",
                 pointBorderColor: "#fff",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: [650, 590, 680, 681, 560, 552, 440]
+            },{
+                label: "Số sinh viên 3",
+                backgroundColor: 'rgb(124,252,0,0.3)',
+                borderColor: "rgb(124,252,0,0.7)",
+                pointBorderColor: "#fff",
+                data: [675, 549, 480, 581, 546, 515, 440]
             }
         ]
     };
-
     var lineOptions = {
         responsive: true
     };
-
-
     var ctx = document.getElementById("lineChart").getContext("2d");
     new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
 
-    var barData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "Data 1",
-                backgroundColor: 'rgba(220, 220, 220, 0.5)',
-                pointBorderColor: "#fff",
-                data: [65, 59, 80, 81, 56, 55, 40]
-            },
-            {
-                label: "Data 2",
-                backgroundColor: 'rgba(26,179,148,0.5)',
-                borderColor: "rgba(26,179,148,0.7)",
-                pointBackgroundColor: "rgba(26,179,148,1)",
-                pointBorderColor: "#fff",
-                data: [28, 48, 40, 19, 86, 27, 90]
-            }
-        ]
-    };
-
-    var barOptions = {
-        responsive: true
-    };
-
-
-    var ctx2 = document.getElementById("barChart").getContext("2d");
-    new Chart(ctx2, {type: 'bar', data: barData, options:barOptions});
-
-    var polarData = {
-        datasets: [{
-            data: [
-                300,140,200
-            ],
-            backgroundColor: [
-                "#a3e1d4", "#dedede", "#b5b8cf"
-            ],
-            label: [
-                "My Radar chart"
-            ]
-        }],
-        labels: [
-            "App","Software","Laptop"
-        ]
-    };
-
-    var polarOptions = {
-        segmentStrokeWidth: 2,
-        responsive: true
-
-    };
-
-    var ctx3 = document.getElementById("polarChart").getContext("2d");
-    new Chart(ctx3, {type: 'polarArea', data: polarData, options:polarOptions});
-
     var doughnutData = {
-        labels: ["App","Software","Laptop" ],
+        labels: ["Xuất sắc","Giỏi","Khá","Trung bình","Yếu" ],
         datasets: [{
-            data: [300,50,100],
-            backgroundColor: ["#a3e1d4","#dedede","#b5b8cf"]
+            data: [10,20,30,30,10],
+            backgroundColor: ["#E18500","#0B48E1","#00E1B2","#a3e1d4","#FF0100"]
         }]
     } ;
-
-
     var doughnutOptions = {
         responsive: true
     };
-
-
     var ctx4 = document.getElementById("doughnutChart").getContext("2d");
     new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
-
-
-    var radarData = {
-        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-        datasets: [
-            {
-                label: "My First dataset",
-                backgroundColor: "rgba(220,220,220,0.2)",
-                borderColor: "rgba(220,220,220,1)",
-                data: [65, 59, 90, 81, 56, 55, 40]
-            },
-            {
-                label: "My Second dataset",
-                backgroundColor: "rgba(26,179,148,0.2)",
-                borderColor: "rgba(26,179,148,1)",
-                data: [28, 48, 40, 19, 96, 27, 100]
-            }
-        ]
-    };
-
-    var radarOptions = {
-        responsive: true
-    };
-
-    var ctx5 = document.getElementById("radarChart").getContext("2d");
-    new Chart(ctx5, {type: 'radar', data: radarData, options:radarOptions});
 
 });

@@ -38,34 +38,19 @@
                             <table class="table">
                                 <thead>
                                 <tr>
+                                    <th>Mã Ngành</th>
                                     <th>Tên Ngành</th>
                                     <th>Bộ Môn</th>
                                     <th>Mô Tả</th>
-                                    <th>Chức năng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($major as $item)
                                 <tr>
+                                    <td>{{$item->mmc_majorid}}</td>
                                     <td>{{$item->mmc_majorname}}</td>
                                     <td>{{App\Http\Controllers\Admin\MajorController::getDepartment($item->mmc_deptid)}}</td>
                                     <td>{{$item->mmc_description}}</td>
-                                    <td>
-
-                                        <a href="{{ url('/admin/major/'.$item->id.'/edit') }}" title="Sửa ngành"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                        {!! Form::open([
-                                            'method' => 'DELETE',
-                                            'url' => ['/admin/major',$item->id ],
-                                            'style' => 'display:inline'
-                                        ]) !!}
-                                        {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
-                                                'type' => 'submit',
-                                                'class' => 'btn btn-danger btn-sm',
-                                                'title' => 'Xóa ngành',
-                                                'onclick'=>'return confirm("Xác nhận xóa?")'
-                                        )) !!}
-                                        {!! Form::close() !!}
-                                    </td>
                                 </tr>
                                     @endforeach
                                 </tbody>

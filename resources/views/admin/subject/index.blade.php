@@ -54,7 +54,6 @@
                                     <th>Số tín lý thuyết</th>
                                     <th>Số tín thực hành</th>
                                     <th>Mô Tả</th>
-                                    <th>Chức năng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,22 +64,6 @@
                                         <td>{{$item->mmc_theory}}</td>
                                         <td>{{$item->mmc_practice}}</td>
                                         <td>{{$item->mmc_description}}</td>
-                                        <td>
-
-                                            <a href="{{ url('/admin/subject/'.$item->id.'/edit') }}" title="Sửa môn học"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                            {!! Form::open([
-                                                'method' => 'DELETE',
-                                                'url' => ['/admin/subject',$item->id ],
-                                                'style' => 'display:inline'
-                                            ]) !!}
-                                            {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
-                                                    'type' => 'submit',
-                                                    'class' => 'btn btn-danger btn-sm',
-                                                    'title' => 'Xóa môn học',
-                                                    'onclick'=>'return confirm("Xóa nhận xóa?")'
-                                            )) !!}
-                                            {!! Form::close() !!}
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

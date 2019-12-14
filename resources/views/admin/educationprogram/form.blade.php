@@ -18,7 +18,8 @@
 </div>
 <div class="row">
 <div class="col-lg-6">
-    <h4 class="b-color-red">Khối kiến thức giáo dục đại cương</h4>
+    <h4 class="b-color-red"  style="text-align: center">Khối kiến thức giáo dục đại cương</h4>
+    <hr >
         <div id="divgddc">
             <div class="input-group mb-3 input-group-sm">
                 {!! Form::select('gddc[]', $subject,null,['class' => 'select-custom width-80']) !!}
@@ -32,8 +33,9 @@
         <span id="btngddctc" class="btn btn-success" style="float: right">+</span><br>
 </div>
 <div class="col-lg-6">
-    <h4 class="b-color-red">Khối kiến thức cơ sở ngành</h4>
-        <div id="divcsn">
+    <h4 class="b-color-red"  style="text-align: center">Khối kiến thức cơ sở ngành</h4>
+    <hr>
+    <div id="divcsn">
             <div class="input-group mb-3 input-group-sm" >
                 {!! Form::select('csn[]', $subject,null,['class' => 'select-custom width-80']) !!}
                 {!! Form::number('csnky[]', 1, ['class' => 'form-control','title'=>'Kỳ']) !!}
@@ -46,7 +48,8 @@
         <span id="btncsntc" class="btn btn-success" style="float: right">+</span><br>
 </div>
 <div class="col-lg-6">
-    <h4 class="b-color-red">Khối kiến thức chuyên ngành</h4>
+    <h4 class="b-color-red"  style="text-align: center">Khối kiến thức chuyên ngành</h4>
+    <hr>
         <div id="divcn">
             <div class="input-group mb-3 input-group-sm">
                 {!! Form::select('cn[]', $subject,null,['class' => 'select-custom width-80']) !!}
@@ -60,7 +63,8 @@
         <span id="btncntc" class="btn btn-success" style="float: right">+</span>
 </div>
 <div class="col-lg-6">
-    <h4 class="b-color-red">Thực tập khóa luận tốt nghiệp</h4>
+    <h4 class="b-color-red" style="text-align: center">Thực tập khóa luận tốt nghiệp</h4>
+    <hr>
     <div id="divtn">
         <div class="input-group mb-3 input-group-sm" >
             {!! Form::select('tn[]', $subject,null,['class' => 'select-custom width-80']) !!}
@@ -222,7 +226,7 @@
             );
             div.append(
                 $("<input>",
-                    { type:'number',
+                    { type:'text',
                         readonly:true,
                         class:'form-control',
                         name:'gddcnhom[]',
@@ -294,7 +298,7 @@
             );
             div.append(
                 $("<input>",
-                    { type:'number',
+                    { type:'text',
                         readonly:true,
                         class:'form-control',
                         name:'csnnhom[]',
@@ -366,7 +370,7 @@
             );
             div.append(
                 $("<input>",
-                    { type:'number',
+                    { type:'text',
                         readonly:true,
                         class:'form-control',
                         name:'cnnhom[]',
@@ -438,7 +442,7 @@
             );
             div.append(
                 $("<input>",
-                    { type:'number',
+                    { type:'text',
                         readonly:true,
                         class:'form-control',
                         name:'tnnhom[]',

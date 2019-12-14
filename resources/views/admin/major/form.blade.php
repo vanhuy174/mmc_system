@@ -1,4 +1,8 @@
 <div class="form-group">
+    {!! Form::label('name', 'Mã ngành: ', ['class' => 'control-label']) !!}
+    {!! Form::text('mmc_majorid', null, ['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
     {!! Form::label('name', 'Tên ngành: ', ['class' => 'control-label']) !!}
     {!! Form::text('mmc_majorname', null, ['class' => 'form-control']) !!}
 </div>

@@ -100,7 +100,6 @@ class DepartmentController extends Controller
         ]);
         $requestData = $request->all();
         $department = mmc_department::findOrFail($id);
-        $department['mmc_deptid']="mmc-".Str::slug($request->mmc_deptname);
         $department->update($requestData);
         return redirect('admin/department')->with('flash_message', 'Sửa thành công!');
     }

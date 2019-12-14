@@ -14,12 +14,12 @@ class CreateMmcEmployeesTable extends Migration
     public function up()
     {
         Schema::create('mmc_employees', function (Blueprint $table) {
-            
+
             $table->bigIncrements('id');
 
             $table->string('mmc_name'); //Họ và tên
             $table->string('mmc_employeeid')->unique(); //Mã giảng viên
-            $table->string('mmc_deptid')->nullable();   //Mã bộ môn
+            $table->string('mmc_deptid')->nullable();  //Mã bộ môn
             $table->string('mmc_avatar')->nullable(); //Ảnh đại diện
             $table->date('mmc_dateofbirth')->nullable(); //Ngày tháng và năm sinh
             $table->tinyInteger('mmc_gender')->nullable(); //Giới tính
@@ -71,6 +71,11 @@ class CreateMmcEmployeesTable extends Migration
             $table->float('mmc_weight')->nullable(); //Cân nặng
             $table->string('mmc_level')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+
+            $table->foreign('mmc_deptid')
+                ->references('mmc_deptid')->on('mmc_departments')
+                ->onDelete('cascade');
+
             $table->rememberToken();
             $table->timestamps();
         });
