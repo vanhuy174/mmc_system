@@ -28,19 +28,6 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Danh sách lớp</div>
-                    <div class="card-body">
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/subject', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="submit" style="margin-bottom: 0px;">
-                                    <i class="fa fa-search" ></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
-                        <br/>
-                        <br/>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>

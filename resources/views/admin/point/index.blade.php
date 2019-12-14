@@ -25,18 +25,6 @@
                 <div class="card">
                     <div class="card-header">Danh sách điển sinh viên</div>
                     <div class="card-body">
-                        {!! Form::open(['method' => 'GET', 'url' => '/admin/subject', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="submit" style="margin-bottom: 0px;">
-                                    <i class="fa fa-search" ></i>
-                                </button>
-                            </span>
-                        </div>
-                        {!! Form::close() !!}
-                        <br/>
-                        <br/>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -58,8 +46,56 @@
                                         <td>{{$std->mmc_studentid}}</td>
                                         <td>{{$std->student->mmc_fullname}}</td>
                                         <td>{{$std->student->class->mmc_classname}}</td>
-                                        <td>{{$std->diligentpoint}}</td>
-                                        <td>{{$std->point1}}</td>
+                                        <td>
+                                            <?php
+                                            $count=0;
+                                            $item = explode("-",$std->mmc_4grade);
+                                                foreach ($item as $hs4){
+                                                    $hs4= (int)($hs4);
+                                                    if($count == 0){
+                                                        if($hs4 == 0){
+                                                            echo "F ";
+                                                        }elseif($hs4 == 1 ){
+                                                            echo "D ";
+                                                        }elseif($hs4 == 2){
+                                                            echo "C ";
+                                                        }elseif($hs4 == 3){
+                                                             echo "B ";
+                                                        }else{
+                                                              echo "A ";
+                                                         }
+                                                    }else{
+                                                        if($hs4 == 0){
+                                                            echo "| F";
+                                                        }elseif($hs4 == 1 ){
+                                                            echo "| D";
+                                                        }elseif($hs4 == 2){
+                                                            echo "| C";
+                                                        }elseif($hs4 == 3){
+                                                             echo "| B";
+                                                        }else{
+                                                              echo "| A";
+                                                        }
+                                                    }
+                                                    $count++;
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $count=0;
+                                            $item = explode("-",$std->mmc_10grade);
+                                            foreach ($item as $hs10){
+                                                $hs10= (float)($hs10);
+                                                if($count == 0){
+                                                    echo $hs10;
+                                                }else{
+                                                    echo " | ".$hs10;
+                                                }
+                                                $count++;
+                                            }
+                                            ?>
+                                        </td>
                                         <td>{{$std->mmc_note}}</td>
                                     </tr>
                                 @endforeach
