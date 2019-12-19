@@ -22,6 +22,7 @@ class mmc_student extends Model
                             'mmc_reward',
                             'mmc_descipline',
                             'mmc_personalid',
+                            'mmc_status',
                             'mmc_father',
                             'mmc_fathernationality',
                             'mmc_fatherethnic',

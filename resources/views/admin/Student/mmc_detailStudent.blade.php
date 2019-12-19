@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('linkstyle')
-<link href="../../css/mmc_detailstudent.css" rel="stylesheet">
+<link href="css/mmc_detailstudent.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -87,9 +87,9 @@
 											<span>Kỷ luật: &nbsp;&nbsp;{{$data['mmc_descipline']}}</span>
 										</div>
 									</div>
-								</div>	
+								</div>
 							</div>
-							
+
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
@@ -144,7 +144,7 @@
 										<div class="input-group mb-3 input-group-sm">
 											<span>Email: &nbsp;&nbsp;{{$data['mmc_motheremail']}}</span>
 										</div>
-										
+
 									</div>
 									<div class="col-md-6">
 										<div class="input-group mb-3 input-group-sm">

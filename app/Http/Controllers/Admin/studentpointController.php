@@ -354,7 +354,6 @@ class studentpointController extends Controller
                 $point->key = $point->key+1;
                 $point->update();
             }else{
-                dd($tongket);
                 $newpoint= new mmc_pointdetails;
                 $newpoint->mmc_studentid = $point->mmc_studentid;
                 $newpoint->mmc_subjectid = $subject[0]->mmc_subjectid;

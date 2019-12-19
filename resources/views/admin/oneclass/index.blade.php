@@ -53,6 +53,7 @@
                                     <th>SĐT</th>
                                     <th>Điểm hệ 4</th>
                                     <th>Điểm hệ 10</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,8 +63,9 @@
                                         <td>{{$item->mmc_fullname}}</td>
                                         <td>{{$item->mmc_email}}</td>
                                         <td>{{$item->mmc_phone}}</td>
-                                        <td>2.5</td>
-                                        <td>6.75</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                  @endforeach
                                 </tbody>

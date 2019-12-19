@@ -16,3 +16,9 @@
 .card .card-body .margin-bottom{
 	margin-bottom: 0px;
 }
+.width-20{
+    width: 20% !important;
+}
+.width-200{
+    width: 200px !important;
+}

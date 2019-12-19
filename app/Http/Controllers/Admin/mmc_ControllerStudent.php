@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\mmc_department;
+use App\mmc_major;
 use Validator;
 use Illuminate\Http\Request;
-use App\mmc_Student;
+use App\mmc_student;
 use App\mmc_class;
 use Yajra\Oci8\Eloquent\OracleEloquent as Eloquent;
 use App\Exports\mmc_StudentExport;
@@ -25,17 +27,34 @@ class mmc_ControllerStudent extends Controller
      */
     public function index(Request $request)
     {
+        $data_major= mmc_major::get();
         $data_class=mmc_class::get();
-
         $perPage= 10;
         $keyword= $request->search;
+        $classid= $request->malop;
+        $majorid= $request->manghanh;
+        if(!empty($classid)){
+            $data= mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid"]));
+        }
         if(!empty($keyword)){
-             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_classid', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
-            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class"]));
+             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major"]));
         }else{
             $data=mmc_Student::latest()->paginate($perPage);
-            return view('admin.Student.mmc_homeStudent',['data'=>$data , "data_class"=>$data_class]);
+            return view('admin.Student.mmc_homeStudent',['data'=>$data , "data_class"=>$data_class, "data_major"=>$data_major]);
         }
+    }
+
+    /**
+     * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
+     * @param Request $request
+     */
+    public function ajaxmajor(Request $request){
+        $data= mmc_class::where('mmc_major', '=', $request->id)->get();
+            foreach ($data as $key){
+                echo "<option value='".$key->mmc_classid."'>".$key->mmc_classname."</option>";
+            }
     }
 
     /**
@@ -45,6 +64,22 @@ class mmc_ControllerStudent extends Controller
     public function getclass(){
     	$data=mmc_class::get();
         return view('admin.Student.mmc_createStudent',['data'=>$data]);
+    }
+
+    /**
+    Hàm getclass dùng để lấy thông tin của các lớp trong csdl.
+    Hàm này phục vụ cho chức năng thêm sinh viên.
+     */
+    public function setstatus(Request $request){
+        if(isset($request->check) && count($request->check) > 0){
+            foreach ($request->check as $key){
+                $student= mmc_student::find($key);
+                $student->mmc_status = $request->status;
+                $student->save();
+            }
+            return back();
+        }
+        return back();
     }
 
     /**
@@ -91,6 +126,7 @@ class mmc_ControllerStudent extends Controller
             ]
         );
         $data=$request->all();
+        $data['mmc_status'] = "danghoc";
         if( mmc_Student::create($data)){
             unset($data['_token']);
             unset($data['_method']);
@@ -229,7 +265,7 @@ class mmc_ControllerStudent extends Controller
         {
             $errors=[];
                 foreach ($failures as $key=>$error)//Lấy được cả key và value
-                {   
+                {
                     $arrerror="";
                     foreach ($error->errors() as $item)
                     {
@@ -249,7 +285,7 @@ class mmc_ControllerStudent extends Controller
     {
         return mmc_class::where('mmc_classname', '=', "$id")->value('mmc_classid');
     }
-    
+
     /**
         Hàm getclassname dùng để lấy tên các lớp có trong csdl. để phục vụ cho việc thêm sinh viên từ file excel.
     */
@@ -286,7 +322,7 @@ class mmc_ControllerStudent extends Controller
         }else{
             return 0;
         }
-        
+
     }
 
     /**

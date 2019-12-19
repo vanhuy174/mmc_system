@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit91617cc29bd44e4843891680b68ee651
+class ComposerStaticInit6c5222981add6908606fa1069040d194
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -660,6 +660,7 @@ class ComposerStaticInit91617cc29bd44e4843891680b68ee651
         'Carbon\\Exceptions\\BadUnitException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/BadUnitException.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
         'Carbon\\Exceptions\\NotAPeriodException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/NotAPeriodException.php',
+        'Carbon\\Exceptions\\ParseErrorException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/ParseErrorException.php',
         'Carbon\\Factory' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Factory.php',
         'Carbon\\FactoryImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/FactoryImmutable.php',
         'Carbon\\Language' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Language.php',
@@ -1540,9 +1541,16 @@ class ComposerStaticInit91617cc29bd44e4843891680b68ee651
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
         'Highlight\\Autoloader' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Autoloader.php',
+        'Highlight\\HighlightResult' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/HighlightResult.php',
         'Highlight\\Highlighter' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Highlighter.php',
         'Highlight\\JsonRef' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/JsonRef.php',
         'Highlight\\Language' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Language.php',
+        'Highlight\\Mode' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Mode.php',
+        'Highlight\\ModeDeprecations' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/ModeDeprecations.php',
+        'Highlight\\RegEx' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/RegEx.php',
+        'Highlight\\RegExMatch' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/RegExMatch.php',
+        'Highlight\\RegExUtils' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/RegExUtils.php',
+        'Highlight\\Terminators' => __DIR__ . '/..' . '/scrivo/highlight.php/Highlight/Terminators.php',
         'Illuminate\\Auth\\Access\\AuthorizationException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/AuthorizationException.php',
         'Illuminate\\Auth\\Access\\Gate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/Gate.php',
         'Illuminate\\Auth\\Access\\HandlesAuthorization' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Access/HandlesAuthorization.php',
@@ -5127,10 +5135,10 @@ class ComposerStaticInit91617cc29bd44e4843891680b68ee651
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit91617cc29bd44e4843891680b68ee651::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit91617cc29bd44e4843891680b68ee651::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit91617cc29bd44e4843891680b68ee651::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit91617cc29bd44e4843891680b68ee651::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6c5222981add6908606fa1069040d194::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6c5222981add6908606fa1069040d194::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6c5222981add6908606fa1069040d194::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6c5222981add6908606fa1069040d194::$classMap;
 
         }, null, ClassLoader::class);
     }
