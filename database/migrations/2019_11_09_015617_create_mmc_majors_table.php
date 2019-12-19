@@ -17,6 +17,9 @@ class CreateMmcMajorsTable extends Migration
             $table->bigIncrements('id');
             $table->string('mmc_deptid')->nullable();
             $table->string('mmc_majorid')->unique();
+            $table->string('r');
+            $table->string('g');
+            $table->string('b');
             $table->string('mmc_majorname');
             $table->string('mmc_description')->nullable();
             $table->timestamps();
