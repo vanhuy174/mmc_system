@@ -37,24 +37,20 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="education">
                                 <thead>
                                 <tr>
                                     <th>Ngành</th>
                                     <th>Khóa bắt đầu thực hiện</th>
                                     <th>Tổng số tín chỉ</th>
-                                    <th>Chức năng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $__currentLoopData = $education; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                    <td><?php echo e(\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_majorid)); ?></td>
-                                    <td><?php echo e($item->mmc_course); ?></td>
-                                    <td><?php echo e($item->mmc_total); ?></td>
-                                    <td>
-                                        <a href="<?php echo e(route('educationprogram.show',$item->id)); ?>" title="Xem"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                    </td>
+                                        <td><a href="<?php echo e(route('educationprogram.show',$item->id)); ?>" style="color: gray"><?php echo e(\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_majorid)); ?></a></td>
+                                        <td><a href="<?php echo e(route('educationprogram.show',$item->id)); ?>" style="color: gray"><?php echo e($item->mmc_course); ?></a></td>
+                                        <td><?php echo e($item->mmc_total); ?></td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
@@ -66,6 +62,7 @@
         </div>
     </div>
 <?php $__env->stopSection(); ?>
+
 
 
 <?php echo $__env->make('layouts.backend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/mmc/MMC-system/resources/views/admin/educationprogram/index.blade.php ENDPATH**/ ?>

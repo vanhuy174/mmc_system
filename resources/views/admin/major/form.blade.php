@@ -24,5 +24,9 @@
     {!! Form::text('mmc_description', null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
+    {!! Form::label('color', 'Chọn màu : ', ['class' => 'control-label']) !!}
+    {{ Form::input('color', 'car_color', null, array('class' => 'input-big')) }}
+</div>
+<div class="form-group">
     {!! Form::submit($formMode === 'edit' ? 'Sửa' : 'Thêm mới', ['class' => 'btn btn-primary']) !!}
 </div>

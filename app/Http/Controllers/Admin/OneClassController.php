@@ -27,6 +27,7 @@ class OneClassController extends Controller
 
         if($idlop!=null)
         {
+
             $lop=mmc_class::where('mmc_headteacher', '=', "$idgv")->first();
             if (!empty($keyword)) {
                 $student = mmc_student::where('mmc_classid', '=', "$idlop")->where(function ($query) use ($keyword) {
@@ -34,7 +35,6 @@ class OneClassController extends Controller
                         ->orwhere('mmc_fullname', 'LIKE',"%$keyword%");
                 })->get();
             } else {
-                // $student = mmc_student::where('mmc_classid', '=', "$idlop")->latest()->paginate($perPage);
                 $student = mmc_student::where('mmc_classid', '=', "$idlop")->get();
             }
             return view('admin.oneclass.index',compact('student','lop'));

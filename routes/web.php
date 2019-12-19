@@ -33,9 +33,13 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('class/export/', 'Admin\ClassController@export');
         Route::resource('subject', 'Admin\SubjectController');
         Route::resource('class', 'Admin\ClassController');
-        Route::resource('major', 'Admin\MajorController');
+        Route::resource('major', 'Admin\MajorController')->only([
+            'index', 'create' , 'store'
+        ]);
         Route::resource('educationprogram', 'Admin\EducationProgramController');
-        Route::resource('department', 'Admin\DepartmentController');
+        Route::resource('department', 'Admin\DepartmentController')->only([
+            'index', 'create' , 'store'
+        ]);;
 
         //route sinh viên.
         Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
@@ -135,5 +139,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('/ratio', 'Admin\studentpointController@editratio')->name('editratio');
 //     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
 //     Route::get('/subjectclass', 'Admin\studentpointController@infoStudent')->name('infoStudent');
+    Route::post('ajax/education', 'Admin\AjaxController@getEducation')->name('ajax');
+    Route::post('ajax/getmajor', 'Admin\AjaxController@getMajor')->name('ajaxgetmajor');
+    Route::post('ajax/geteducation', 'Admin\AjaxController@getCTDT')->name('ajaxgeteducation');
+    Route::post('ajax/getclass', 'Admin\AjaxController@getClass')->name('ajaxgetclass');
 });
 

@@ -48,9 +48,18 @@ class MajorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $rgb=substr($request->car_color,1,6);
+        $split = str_split($rgb, 2);
+        $r = hexdec($split[0]);
+        $g = hexdec($split[1]);
+        $b = hexdec($split[2]);
         $this->validate($request,[
+            'mmc_majorid'=>'required|unique:mmc_majors',
             'mmc_majorname'=>'required|unique:mmc_majors',
         ],[
+            'mmc_majorid.required'=>'Mã ngành hông được bỏ trống',
+            'mmc_majorid.unique'=>'Mã ngành đã tồn tại',
             'mmc_majorname.required'=>'Tên ngành hông được bỏ trống',
             'mmc_majorname.unique'=>'Tên ngành đã tồn tại'
         ]);
@@ -59,6 +68,9 @@ class MajorController extends Controller
         $major->mmc_deptid=$request->mmc_deptid;
         $major->mmc_majorname=$request->mmc_majorname;
         $major->mmc_description=$request->mmc_description;
+        $major->r=$r;
+        $major->g=$g;
+        $major->b=$b;
         $major->save();
         return redirect('admin/major');
     }
@@ -129,4 +141,8 @@ class MajorController extends Controller
             return "";
         }
     }
+    public static function  getmajor(){
+        return mmc_major::select('mmc_majorname','r','g','b')->get();
+    }
+
 }

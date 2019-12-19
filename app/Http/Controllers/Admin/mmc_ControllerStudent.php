@@ -7,7 +7,7 @@ use Validator;
 use Illuminate\Http\Request;
 use App\mmc_student;
 use App\mmc_class;
-use App\Exports\mmc_StudentExport;
+use App\Exports\mmc_studentExport;
 use App\Imports\mmc_StudentImport;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -90,6 +90,8 @@ class mmc_ControllerStudent extends Controller
             ]
         );
         $data=$request->all();
+
+        $data['mmc_course']=substr($request->mmc_studentid,3,2)-1;
         if( mmc_Student::create($data)){
             unset($data['_token']);
             unset($data['_method']);
@@ -210,7 +212,7 @@ class mmc_ControllerStudent extends Controller
     */
     public function export()
     {
-        return Excel::download(new mmc_StudentExport, 'Danh-sach-sinh-vien.xlsx');
+        return Excel::download(new mmc_studentExport, 'Danh-sach-sinh-vien.xlsx');
         return back();
     }
 

@@ -50,7 +50,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="class">
                                 <thead>
                                 <tr>
                                     <th>Tên lớp</th>
@@ -64,9 +64,9 @@
                                 <tbody>
                                 @foreach($class as $item)
                                     <tr>
-                                        <td>{{$item->mmc_classname}}</td>
+                                        <td data-toggle="modal" data-target="#infoclass" style="cursor:pointer">{{$item->mmc_classname}}</td>
                                         <td>{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_major)}}</td>
-                                        <td>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</td>
+                                        <td><a href="{{route('get-thong-tin-giang-vien',\App\Http\Controllers\Admin\ClassController::getidemployee($item->mmc_headteacher))}}" style='color:gray;'>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</a></td>
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>
@@ -116,5 +116,41 @@
                 </div>
             </div>
     </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#class").on("click", "td:nth-child(1)", function() {
+                selectVal = $(this).text();
+                $.ajax({
+                    method: "POST",
+                    url: "{{route('ajaxgetclass')}}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "name": selectVal},
+                    success : function ( data ) {
+
+                        $('#mmc_education').html(data);
+                    }
+                })
+            });
+        });
+    </script>
+@endsection
+<div class="modal fade" id="infoclass" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông tin lớp</h4>
+            </div>
+            <div class="modal-body" id="mmc_education">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 

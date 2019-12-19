@@ -22,25 +22,53 @@
                         <br/>
                         <br/>
                         <h1 style="text-align: center;"><b>Thông tin cơ bản</b></h1>
-                        <div class="table-responsive container" style="width: 50%;">
-                            <table class="table">
-                                <tr>
-                                    <th>Tên lớp:</th>
-                                    <td style="text-align: center">{{$lop->mmc_classname}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Số sinh viên:</th>
-                                    <td style="text-align: center">{{$lop->mmc_numstudent}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Lớp trưởng:</th>
-                                    <td style="text-align: center">{{$lop->mmc_monitor}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Bí thư:</th>
-                                    <td style="text-align: center">{{$lop->mmc_secretary}}</td>
-                                </tr>
-                            </table>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="table-responsive container" >
+                                    <table class="table">
+                                        <tr>
+                                            <th style="border-top: none;">Tên lớp:</th>
+                                            <td style="text-align: center;border-top: none;" >{{$lop->mmc_classname}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số sinh viên:</th>
+                                            <td style="text-align: center">{{$lop->mmc_numstudent}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lớp trưởng:</th>
+                                            <td style="text-align: center">{{$lop->mmc_monitor}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bí thư:</th>
+                                            <td style="text-align: center">{{$lop->mmc_secretary}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <table class="table">
+                                    <tr>
+                                        <th style="border-top: none;">Xuất sắc :</th>
+                                        <td style="text-align: center; border-top: none;">10</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Giỏi :</th>
+                                        <td style="text-align: center">5</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Khá  :</th>
+                                        <td style="text-align: center">4</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Trung Bình :</th>
+                                        <td style="text-align: center">3</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kém :</th>
+                                        <td style="text-align: center">2</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                         <h1 style="text-align: center;"><b>Bảng sinh viên lớp</b></h1>
                         <div class="table-responsive">

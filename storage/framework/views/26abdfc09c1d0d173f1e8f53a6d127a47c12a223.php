@@ -31,6 +31,12 @@
 
 </div>
 <div class="form-group">
+    <?php echo Form::label('color', 'Chọn màu : ', ['class' => 'control-label']); ?>
+
+    <?php echo e(Form::input('color', 'car_color', null, array('class' => 'input-big'))); ?>
+
+</div>
+<div class="form-group">
     <?php echo Form::submit($formMode === 'edit' ? 'Sửa' : 'Thêm mới', ['class' => 'btn btn-primary']); ?>
 
 </div>

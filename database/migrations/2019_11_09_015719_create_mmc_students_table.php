@@ -44,6 +44,7 @@ class CreateMmcStudentsTable extends Migration
             $table->string('mmc_motherphone')->nullable();
             $table->string('mmc_motheremail')->nullable();
             $table->string('mmc_motherjob')->nullable();
+            $table->string('mmc_course')->nullable();
             $table->foreign('mmc_classid')
                 ->references('mmc_classid')
                 ->on('mmc_classes')

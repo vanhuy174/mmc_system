@@ -35,24 +35,20 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="education">
                                 <thead>
                                 <tr>
                                     <th>Ngành</th>
                                     <th>Khóa bắt đầu thực hiện</th>
                                     <th>Tổng số tín chỉ</th>
-                                    <th>Chức năng</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($education as $item)
                                     <tr>
-                                    <td>{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_majorid)}}</td>
-                                    <td>{{$item->mmc_course}}</td>
-                                    <td>{{$item->mmc_total}}</td>
-                                    <td>
-                                        <a href="{{route('educationprogram.show',$item->id)}}" title="Xem"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                    </td>
+                                        <td><a href="{{route('educationprogram.show',$item->id)}}" style="color: gray">{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_majorid)}}</a></td>
+                                        <td><a href="{{route('educationprogram.show',$item->id)}}" style="color: gray">{{$item->mmc_course}}</a></td>
+                                        <td>{{$item->mmc_total}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -64,4 +60,5 @@
         </div>
     </div>
 @endsection
+
 

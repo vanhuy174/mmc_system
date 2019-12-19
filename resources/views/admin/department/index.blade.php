@@ -37,7 +37,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="department">
                                 <thead>
                                 <tr>
                                     <th>Tên bộ môn</th>
@@ -47,7 +47,7 @@
                                 <tbody>
                                 @foreach($department as $item)
                                     <tr>
-                                        <td>{{$item->mmc_deptname}}</td>
+                                        <td data-toggle="modal" data-target="#myModal"  style="cursor:pointer">{{$item->mmc_deptname}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                     </tr>
                                 @endforeach
@@ -58,6 +58,42 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#department").on("click", "td:nth-child(1)", function() {
+              selectVal = $(this).text();
+                $.ajax({
+                    method: "POST",
+                    url: "{{route('ajaxgetmajor')}}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "name": selectVal},
+                    success : function ( data ) {
+
+                        $('#mmc_major').html(data);
+                    }
+                })
+            });
+        });
+    </script>
+@endsection
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông tin bộ môn  </h4>
+                </div>
+                <div class="modal-body" id="mmc_major">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

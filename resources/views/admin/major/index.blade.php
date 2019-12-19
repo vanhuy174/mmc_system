@@ -35,7 +35,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="major">
                                 <thead>
                                 <tr>
                                     <th>Mã Ngành</th>
@@ -48,7 +48,7 @@
                                 @foreach($major as $item)
                                 <tr>
                                     <td>{{$item->mmc_majorid}}</td>
-                                    <td>{{$item->mmc_majorname}}</td>
+                                    <td data-toggle="modal" data-target="#myModal" style="cursor:pointer">{{$item->mmc_majorname}}</td>
                                     <td>{{App\Http\Controllers\Admin\MajorController::getDepartment($item->mmc_deptid)}}</td>
                                     <td>{{$item->mmc_description}}</td>
                                 </tr>
@@ -62,5 +62,41 @@
             </div>
         </div>
     </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#major").on("click", "td:nth-child(2)", function() {
+                selectVal = $(this).text();
+                $.ajax({
+                    method: "POST",
+                    url: "{{route('ajaxgeteducation')}}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "name": selectVal},
+                    success : function ( data ) {
+
+                        $('#mmc_education').html(data);
+                    }
+                })
+            });
+        });
+    </script>
+@endsection
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chương trình đào tạo thuộc ngành  </h4>
+            </div>
+            <div class="modal-body" id="mmc_education">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
 

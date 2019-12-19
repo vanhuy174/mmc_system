@@ -37,7 +37,7 @@
                         <br/>
                         <br/>
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="major">
                                 <thead>
                                 <tr>
                                     <th>Mã Ngành</th>
@@ -50,7 +50,7 @@
                                 <?php $__currentLoopData = $major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td><?php echo e($item->mmc_majorid); ?></td>
-                                    <td><?php echo e($item->mmc_majorname); ?></td>
+                                    <td data-toggle="modal" data-target="#myModal" style="cursor:pointer"><?php echo e($item->mmc_majorname); ?></td>
                                     <td><?php echo e(App\Http\Controllers\Admin\MajorController::getDepartment($item->mmc_deptid)); ?></td>
                                     <td><?php echo e($item->mmc_description); ?></td>
                                 </tr>
@@ -64,6 +64,42 @@
             </div>
         </div>
     </div>
+<?php $__env->startSection('scripts'); ?>
+    <script>
+        $(document).ready(function() {
+            $("#major").on("click", "td:nth-child(2)", function() {
+                selectVal = $(this).text();
+                $.ajax({
+                    method: "POST",
+                    url: "<?php echo e(route('ajaxgeteducation')); ?>",
+                    data: {
+                        "_token": "<?php echo e(csrf_token()); ?>",
+                        "name": selectVal},
+                    success : function ( data ) {
+
+                        $('#mmc_education').html(data);
+                    }
+                })
+            });
+        });
+    </script>
+<?php $__env->stopSection(); ?>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chương trình đào tạo thuộc ngành  </h4>
+            </div>
+            <div class="modal-body" id="mmc_education">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
 <?php $__env->stopSection(); ?>
 
 

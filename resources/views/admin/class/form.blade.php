@@ -11,7 +11,14 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Ngành: <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
-            {!! Form::select('mmc_major', $major, isset($class) ? $class->mmc_major : null, ['class' => 'form-control']) !!}
+            {!! Form::select('mmc_major', $major, isset($class) ? $class->mmc_major : null, ['class' => 'form-control','id'=>'mmc_major']) !!}
+        </div>
+        <div class="input-group mb-3 input-group-sm">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Chương trình đạo tạo <b class="b-color-red">&nbsp;&nbsp;*</b></span>
+            </div>
+            <select name="mmc_ctdt" id="mmc_ctdt" class="form-control">
+            </select>
         </div>
         <div class="input-group mb-3 input-group-sm">
             <div class="input-group-prepend">
@@ -88,4 +95,23 @@
 <div class="input-group mb-3 input-group-sm">
     {!! Form::submit($formMode === 'edit' ? 'Sửa' : 'Thêm mới', ['class' => 'btn btn-primary']) !!}
 </div>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#mmc_major').on('change', function () {
+                var selectVal = $(this).val();
+                $.ajax({
+                    method: "POST",
+                    url: "{{route('ajax')}}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": selectVal},
+                    success : function ( data ) {
+                        $('#mmc_ctdt').html(data);
+                    }
+                })
+            });
+        });
+    </script>
+@endsection
 

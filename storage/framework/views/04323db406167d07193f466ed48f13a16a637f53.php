@@ -201,10 +201,44 @@
                 }
             });
         });
+        $(function () {
 
+            var lineData = {
+                labels: ["K12", "K13", "K14", "K15", "K16", "K17", "K18"],
+                datasets: [
+                    <?php $__currentLoopData = \App\Http\Controllers\Admin\MajorController::getmajor(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    {
+                        label: "<?php echo e($item->mmc_majorname); ?>",
+                        backgroundColor: 'rgba(<?php echo e($item->r); ?>,<?php echo e($item->g); ?>,<?php echo e($item->b); ?>,0.3)',
+                        borderColor: "rgba(<?php echo e($item->r); ?>,<?php echo e($item->g); ?>,<?php echo e($item->b); ?>,0.7)",
+                        pointBorderColor: "#fff",
+                        data: [270, 250, 240, 289, 278, 278, 287]
+                    },
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                ]
+            };
+            var lineOptions = {
+                responsive: true
+            };
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
+
+            var doughnutData = {
+                labels: ["Xuất sắc","Giỏi","Khá","Trung bình","Yếu" ],
+                datasets: [{
+                    data: [10,20,30,30,10],
+                    backgroundColor: ["#E18500","#0B48E1","#00E1B2","#a3e1d4","#FF0100"]
+                }]
+            } ;
+            var doughnutOptions = {
+                responsive: true
+            };
+            var ctx4 = document.getElementById("doughnutChart").getContext("2d");
+            new Chart(ctx4, {type: 'doughnut', data: doughnutData, options:doughnutOptions});
+
+        });
     </script>
     <script src="js/plugins/chartJs/Chart.min.js"></script>
-    <script src="js/demo/chartjs-demo.js"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.backend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/mmc/MMC-system/resources/views/admin/index.blade.php ENDPATH**/ ?>

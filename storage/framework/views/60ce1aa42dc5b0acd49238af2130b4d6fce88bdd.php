@@ -81,7 +81,7 @@
 						<?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<tr>
 
-							<td><?php echo e($row->mmc_fullname); ?></td>
+                            <td><a href="<?php echo e(route('showStudent',['id'=>$row['id']])); ?>" style="color: gray"><?php echo e($row->mmc_fullname); ?></a></td>
 							<td><?php echo e($row->mmc_studentid); ?></td>
 							<td>
 								<?php $__currentLoopData = $data_class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $classid): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -93,16 +93,15 @@
 							</td>
 							<td><?php echo e(date('d-m-Y', strtotime($row['mmc_dateofbirth']))); ?></td>
 							<td>
-								<?php if($row->mmc_gender == 0): ?> Nam 
+								<?php if($row->mmc_gender == 0): ?> Nam
 								<?php else: ?> Nữ
 								<?php endif; ?>
 							</td>
 							<td><?php echo e($row->mmc_email); ?></td>
 							<td><?php echo e($row->mmc_phone); ?></td>
 							<td>
-								<a href="<?php echo e(route('showStudent',['id'=>$row['id']])); ?>" title="View User"><button class="btn btn-info btn-sm">Xem</button></a>
-								<a href="<?php echo e(route('editStudent',['id'=>$row['id']])); ?>" title="Edit User"><button class="btn btn-primary btn-sm">Sửa</button></a>
-								<a href="<?php echo e(route('destroyStudent',['id'=>$row['id']])); ?>" onclick="return confirm('Bạn có muốn xoá không!')"><button class="btn btn-danger btn-sm">Xoá</button></a>
+								<a href="<?php echo e(route('editStudent',['id'=>$row['id']])); ?>" title="Sửa"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+								<a href="<?php echo e(route('destroyStudent',['id'=>$row['id']])); ?>" onclick="return confirm('Bạn có muốn xoá không!')"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 							</td>
 						</tr>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -115,4 +114,5 @@
 	</div>
 </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.backend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/mmc/MMC-system/resources/views/admin/Student/mmc_homeStudent.blade.php ENDPATH**/ ?>

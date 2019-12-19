@@ -83,7 +83,7 @@
 						@foreach($data as $row)
 						<tr>
 
-							<td>{{$row->mmc_fullname}}</td>
+                            <td><a href="{{route('showStudent',['id'=>$row['id']])}}" style="color: gray">{{$row->mmc_fullname}}</a></td>
 							<td>{{$row->mmc_studentid}}</td>
 							<td>
 								@foreach($data_class as $classid)
@@ -94,16 +94,15 @@
 							</td>
 							<td>{{date('d-m-Y', strtotime($row['mmc_dateofbirth']))}}</td>
 							<td>
-								@if($row->mmc_gender == 0) Nam 
+								@if($row->mmc_gender == 0) Nam
 								@else Nữ
 								@endif
 							</td>
 							<td>{{$row->mmc_email}}</td>
 							<td>{{$row->mmc_phone}}</td>
 							<td>
-								<a href="{{route('showStudent',['id'=>$row['id']])}}" title="View User"><button class="btn btn-info btn-sm">Xem</button></a>
-								<a href="{{route('editStudent',['id'=>$row['id']])}}" title="Edit User"><button class="btn btn-primary btn-sm">Sửa</button></a>
-								<a href="{{route('destroyStudent',['id'=>$row['id']])}}" onclick="return confirm('Bạn có muốn xoá không!')"><button class="btn btn-danger btn-sm">Xoá</button></a>
+								<a href="{{route('editStudent',['id'=>$row['id']])}}" title="Sửa"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+								<a href="{{route('destroyStudent',['id'=>$row['id']])}}" onclick="return confirm('Bạn có muốn xoá không!')"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a>
 							</td>
 						</tr>
 						@endforeach

@@ -59,6 +59,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
             'mmc_classname'=>'required|unique:mmc_classes,mmc_classname',
         ],[
@@ -67,6 +68,7 @@ class ClassController extends Controller
         ]);
         $class=new mmc_class();
         $class->mmc_classid="mmc-".Str::slug($request->mmc_classname);
+        $class->mmc_ctdt=$request->mmc_ctdt;
         $class->mmc_classname=$request->mmc_classname;
         $class->mmc_major=$request->mmc_major;
         $class->mmc_headteacher=$request->mmc_headteacher;
@@ -186,5 +188,9 @@ class ClassController extends Controller
             return back()->withErrors($errors);
         }
         return back()->with('flash_message', 'Import thành công!');
+    }
+    public static function getidemployee($id)
+    {
+        return mmc_employee::where('mmc_employeeid','=',$id)->value('id');
     }
 }

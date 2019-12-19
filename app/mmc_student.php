@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class mmc_student extends Model
 {
     protected $table="mmc_students";
-    //protected $primaryKey = 'ma_sinh_vien';
     protected $fillable = [
                             'mmc_studentid',
+                             'mmc_course',
                             'mmc_classid',
                             'mmc_fullname',
                             'mmc_dateofbirth',
@@ -20,6 +20,7 @@ class mmc_student extends Model
                             'mmc_ethnic',
                             'mmc_religion',
                             'mmc_reward',
+                            'mmc_status',
                             'mmc_descipline',
                             'mmc_personalid',
                             'mmc_father',
@@ -38,6 +39,7 @@ class mmc_student extends Model
                             'mmc_motherphone',
                             'mmc_motheremail',
                             'mmc_motherjob',
+                            'mmc_course',
     						];
 
     public function class(){
