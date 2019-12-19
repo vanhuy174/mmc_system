@@ -145,6 +145,8 @@
 <!-- Full Calendar -->
 <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
+
+<!-- js for me -->
 @yield('scripts')
 <script>
     $(document).ready(function(){
