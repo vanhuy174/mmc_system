@@ -19,7 +19,7 @@
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số giảng viên</h3>
                         <h3 class="font-bold no-margins" style="padding-left: 15px">
-                            {{\App\Http\Controllers\GiangVienController::count()}}
+                            {{-- {{\App\Http\Controllers\GiangVienController::count()}} --}}
                         </h3>
                         <small></small>
                     </div>

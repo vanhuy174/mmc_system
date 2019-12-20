@@ -1,6 +1,7 @@
 $(document).ready(function(){
     // Get value on button click and show alert
     $("#inputGV").click(function(){
+
         //lấy url img
         var filename = $('#avatar').attr('src');
         $("#mmc_avatar1").attr('src',filename);
@@ -13,9 +14,15 @@ $(document).ready(function(){
         var mmc_employeeid = $("#mmc_employeeid").val();
         $("#mmc_employeeid1").text(mmc_employeeid);
         $("#mmc_employeeid11").text(mmc_employeeid);
-        //Mã bộ môn
-        var mmc_deptid = $("#mmc_deptid").val();
-        $("#mmc_deptid1").text(mmc_deptid);
+
+        //Tên bộ môn
+        var mmc_deptname = $("#mmc_deptid option:selected").text();
+        $("#mmc_deptname").text(mmc_deptname);
+        
+        //Chức vụ hiện tại
+        var mmc_position = $("#mmc_position option:selected").text();
+        $("#mmc_position1").text(mmc_position);
+
         //Ngày tháng và năm sinh
         var mmc_dateofbirth = $("#mmc_dateofbirth").val();
         $("#mmc_dateofbirth1").text(mmc_dateofbirth);
