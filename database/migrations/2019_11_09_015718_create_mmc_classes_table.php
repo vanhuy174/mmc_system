@@ -26,6 +26,7 @@ class CreateMmcClassesTable extends Migration
             $table->string('mmc_secretary')->nullable();
             $table->string('mmc_vicesecretary1')->nullable();
             $table->string('mmc_vicesecretary2')->nullable();
+            $table->string('mmc_ctdt');
             $table->text('mmc_description')->nullable();
             $table->foreign('mmc_major')
                 ->references('mmc_majorid')
