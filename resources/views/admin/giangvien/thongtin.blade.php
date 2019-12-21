@@ -3,13 +3,13 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Thông Tin Giảng Viên</h2>
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('danh-sach-giang-vien')}}">Quản Lý Giảng Viên</a> > <a href="{{route('get-thong-tin-giang-vien',$hien->id)}}">Thông Tin Giảng Viên</a></span>
+            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('giangvien.index')}}">Quản Lý Giảng Viên</a> > Thông Tin Giảng Viên</span>
         </div>
     </div>
     <div class="card-body">
-        {{-- <a href="{{route('danh-sach-giang-vien')}}" class="btn btn-success btn-sm" title="quay về">
+        <a href="{{route('giangvien.index')}}" class="btn btn-primary btn-sm" title="quay về">
             <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay Về
-        </a> --}}
+        </a>
         <a href="" class="btn btn-primary btn-sm float-right" title="Xuất File">
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
         </a>
@@ -42,6 +42,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-5">
+                            
                             <div class="w3-container my-4">
                                 <h4 class="w3-opacity"><b>- Họ Và Tên: </b>{{$hien->mmc_name}}</h4>
                             </div>
@@ -49,7 +50,10 @@
                                 <h4 class="w3-opacity"><b>- Mã giảng viên: </b>{{$hien->mmc_employeeid}}</h4>
                             </div>
                             <div class="w3-container my-4">
-                                <h4 class="w3-opacity"><b>- Mã bộ môn: </b>{{$hien->mmc_deptid}}</h4>
+                                <h4 class="w3-opacity"><b>- Tên bộ môn: </b>{{$hien->department->mmc_deptname}}</h4>
+                            </div>
+                            <div class="w3-container my-4">
+                                <h4 class="w3-opacity"><b>- Chức vụ hiện tại: </b> {{$hien->mmc_position}}</h4>
                             </div>
                             <div class="w3-container my-4">
                                 <h4 class="w3-opacity"><b>- Ngày tháng và năm sinh: </b>{{$hien->mmc_dateofbirth}}</h4>
@@ -135,9 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
-                                        <div class="w3-container my-4">
-                                            <h4 class="w3-opacity"><b>- Chức vụ hiện tại: </b> {{$hien->mmc_position}}</h4>
-                                        </div>
+                                        
                                         <div class="w3-container my-4">
                                             <h4 class="w3-opacity"><b>- Công việc chính được giao: </b>{{$hien->mmc_maintask}}</h4>
                                         </div>

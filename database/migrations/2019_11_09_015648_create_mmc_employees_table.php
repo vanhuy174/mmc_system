@@ -69,6 +69,8 @@ class CreateMmcEmployeesTable extends Migration
 
             $table->float('mmc_tall')->nullable(); //Chiều cao
             $table->float('mmc_weight')->nullable(); //Cân nặng
+
+            $table->softDeletes();
             $table->string('mmc_level')->nullable();
             $table->timestamp('email_verified_at')->nullable();
 

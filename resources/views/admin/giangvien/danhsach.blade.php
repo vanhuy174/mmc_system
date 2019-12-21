@@ -3,36 +3,35 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý Giảng Viên</h2>
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('danh-sach-giang-vien')}}">Quản Lý Giảng Viên</a></span>
+            <span><a href="{{route('home')}}">Home</a> > Quản Lý Giảng Viên</span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         @if (session('thongbao'))
             <div class="alert alert-success ">
-                <strong>Thành Công! </strong> {{session('thongbao')}}
+                {{session('thongbao')}}
             </div>
         @endif
 
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    {{-- <div class="card-header">Giảng Viên</div> --}}
+                    <div class="card-header">Giảng Viên</div>
                     <div class="card-body">
-                        <a href="{{route('get-them-giang-vien')}}" class="btn btn-primary btn-sm" title="Thêm bộ môn">
+                        <a href="{{route('giangvien.create')}}" class="btn btn-primary btn-sm" title="Thêm bộ môn">
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
                         </a>
+                        <a href="{{route('getXoa')}}" class="btn btn-primary btn-sm" title="Thêm bộ môn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i> Danh Sách Giảng Viên Đã Xóa
+                        </a>
 
-                        {!! Form::open([
-                            'method' => 'post', 
-                            'url' => '/admin/giang-vien/tim-kiem-thong-tin-giang-vien', 
-                            'class' => 'form-inline my-2 my-lg-0 float-right',
-                            'role' => 'search'
-                            ])  !!}
+                        {!! Form::open(['method' => 'GET', 'url' => '/admin/giangvien', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search'])  !!}
                         <div class="input-group">
-                            <input type="text" class="form-control " name="tukhoa" placeholder="Tìm kiếm...">
+                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-search"></i>
+
+                                <button class="btn btn-primary" type="submit" style=" margin-bottom: 0px;">
+                                    <i class="fa fa-search" ></i>
                                 </button>
                             </span>
                         </div>
@@ -51,19 +50,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($danhsach as $ds)
+                                @foreach($giangvien as $gv)
                                     <tr>
-                                        <td><a href="{{route('get-thong-tin-giang-vien',$ds->id)}}">{{$ds->mmc_name}}</a></td>
-                                        <td>{{$ds->mmc_employeeid}}</td>
-                                        <td>{{$ds->email}}</td>
-                                        <td>{{$ds->mmc_phone}}</td>
+                                        <td><a href="{{route('giangvien.show',$gv->id)}}">{{$gv->mmc_name}}</a></td>
+                                        <td>{{$gv->mmc_employeeid}}</td>
+                                        <td>{{$gv->email}}</td>
+                                        <td>{{$gv->mmc_phone}}</td>
                                         <td>
-                                            <a href="{{route('get-thong-tin-giang-vien',$ds->id)}}" title="Xem"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
-                                            <a href="{{route('get-sua-thong-tin-giang-vien',$ds->id)}}" title="Sửa Giảng Viên"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
-                                            {{-- <a href="{{route('get-xoa-giang-vien',$ds->id)}}" title="Xóa"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button></a> --}}
+                                            <a href="{{ url('/admin/giangvien/'.$gv->id.'/edit') }}" title="Sửa thông tin giảng viên"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
                                             {!! Form::open([
-                                                'method' => 'get',
-                                                'url' => ['/admin/giang-vien/xoa-giang-vien',$ds->id],
+                                                'method' => 'DELETE',
+                                                'url' => ['/admin/giangvien',$gv->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
@@ -78,7 +75,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {!! $danhsach->links() !!}
+                            <div class="pagination justify-content-center"> {!! $giangvien->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
                     </div>
                 </div>

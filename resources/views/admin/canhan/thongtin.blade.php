@@ -3,19 +3,23 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Thông Tin Cá Nhân</h2>
-            <span><a href="{{route('home')}}">Home</a> > <a href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông Tin Cá Nhân</a></span>
+            <span><a href="{{route('home')}}">Home</a> > Thông Tin Cá Nhân</span>
         </div>
     </div>
-    <div class="card-body">
-        <a href="{{route('get-sua-thong-tin-ca-nhan',Auth::user()->id)}}" class="btn btn-primary btn-sm" title="Sửa Thông Tin Cá Nhân">
+    <div class="card-body ">
+        <a href="{{route('home')}}" class="btn btn-primary btn-sm " title="quay về">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay Về
+        </a>
+
+        <a href="{{url('admin/canhan/'.Auth::user()->id.'/edit')}}" class="btn btn-primary btn-sm" title="Sửa Thông Tin Cá Nhân">
             <i class=" fa fa-user" aria-hidden="true"></i> Sửa Thông Tin Cá Nhân
         </a>
-        <a href="{{route('get-doi-pass',Auth::user()->id)}}" class="btn btn-primary btn-sm " title="Đổi PassWord">
+        <a href="{{route('getDoiPass',Auth::user()->id)}}" class="btn btn-primary btn-sm " title="Đổi PassWord">
             <i class="fa fa-lock" aria-hidden="true"></i> Đổi Mật Khẩu
         </a>
-        <a href="" class="btn btn-primary btn-sm float-right" title="Xuất File">
+        <a href="" class="btn btn-primary btn-sm " title="Xuất File">
             <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
-        </a>
+        </a>  
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
         <div class="row ">
@@ -31,7 +35,6 @@
                             <p class="font-weight-bold "><i class="glyphicon glyphicon-qrcode fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->mmc_employeeid}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->email}}</span></p>
                             <p class="font-weight-bold "><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i><span class=" ml-5">{{Auth::user()->mmc_phone}}</span></p>
-                            {{-- <p class="font-weight-bold "><i class="fa fa-calendar fa-fw w3-margin-right"></i><span class=" ml-5">{{Auth::user()->mmc_dateofbirth}}</span></p> --}}
                         </div>
                     </div>
                     <br>
@@ -52,7 +55,10 @@
                                 <h4 class="w3-opacity"><b>- Mã giảng viên: </b>{{Auth::user()->mmc_employeeid}}</h4>
                             </div>
                             <div class="w3-container my-4">
-                                <h4 class="w3-opacity"><b>- Mã bộ môn: </b>{{Auth::user()->mmc_deptid}}</h4>
+                                <h4 class="w3-opacity"><b>- Tên bộ môn: </b>{{Auth::user()->department->mmc_deptname}}</h4>
+                            </div>
+                            <div class="w3-container my-4">
+                                <h4 class="w3-opacity"><b>- Chức vụ hiện tại: </b> {{Auth::user()->mmc_position}}</h4>
                             </div>
                             <div class="w3-container my-4">
                                 <h4 class="w3-opacity"><b>- Ngày tháng và năm sinh: </b>{{Auth::user()->mmc_dateofbirth}}</h4>
@@ -138,9 +144,6 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
-                                        <div class="w3-container my-4">
-                                            <h4 class="w3-opacity"><b>- Chức vụ hiện tại: </b> {{Auth::user()->mmc_position}}</h4>
-                                        </div>
                                         <div class="w3-container my-4">
                                             <h4 class="w3-opacity"><b>- Công việc chính được giao: </b>{{Auth::user()->mmc_maintask}}</h4>
                                         </div>

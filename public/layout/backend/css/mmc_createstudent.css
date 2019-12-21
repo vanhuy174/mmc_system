@@ -1,6 +1,6 @@
 .tieude{
-	margin-top: 10px; 
-	border-bottom: 1px solid; 
+	margin-top: 10px;
+	border-bottom: 1px solid;
 	color: #FF9800;
 }
 .color-red{
@@ -8,4 +8,7 @@
 }
 .margin-left-10{
 	margin-left: 10px;
+}
+.width-input{
+    width: 115px !important;
 }

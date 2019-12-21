@@ -40,43 +40,50 @@
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Họ và tên: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Họ và tên: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="text" name="mmc_fullname" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off" value="{{$data['mmc_fullname']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Ngày tháng và năm sinh: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Ngày sinh: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="date" name="mmc_dateofbirth" class="form-control" data-format="dd/mm/yyyy" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off" value="{{$data['mmc_dateofbirth']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Dân tộc: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Dân tộc: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="text" name="mmc_ethnic" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off" value="{{$data['mmc_ethnic']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Tôn giáo: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Tôn giáo: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="text" name="mmc_religion" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_religion']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Số chứng minh nhân dân: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Số CMND: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="int" name="mmc_personalid" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_personalid']}}">
 									</div>
+                                    <div class="input-group mb-3 input-group-sm">
+										<div class="input-group-prepend">
+											<span class="input-group-text width-input">Khoá: <b class="color-red">&nbsp;&nbsp;*</b></span>
+										</div>
+										<input type="text" name="mmc_course" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_course']}}">
+									</div>
+
 									<div class="form-group">
 										<label for="comment">Khen thưởng: </label>
-										<textarea  name="mmc_reward" class="form-control" rows="4">{{$data['mmc_reward']}}</textarea>
+										<textarea  name="mmc_reward" class="form-control" rows="2">{{$data['mmc_reward']}}</textarea>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Lớp: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Lớp: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<select class="form-control" id="sel1" name="mmc_classid">
 											@foreach($data_class as $classid)
@@ -87,13 +94,13 @@
 
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Mã sinh viên: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Mã sinh viên: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="text" name="mmc_studentid" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_studentid']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Giới tính: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Giới tính: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<div class="form-check-inline" style="margin-left: 10px;">
 											<label class="form-check-label" for="radio1">
@@ -108,19 +115,19 @@
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Hộ khẩu thường trú: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Địa chỉ: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="text" name="mmc_address" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_address']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Số điện thoại: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">SĐT: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="int" name="mmc_phone" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_phone']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Email: <b class="color-red">&nbsp;&nbsp;*</b></span>
+											<span class="input-group-text width-input">Email: <b class="color-red">&nbsp;&nbsp;*</b></span>
 										</div>
 										<input type="email" name="mmc_email" class="form-control" required oninvalid="this.setCustomValidity('Không được để trống')" oninput="this.setCustomValidity('')" autocomplete="off"  value="{{$data['mmc_email']}}">
 									</div>
@@ -140,25 +147,25 @@
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Họ và tên: </span>
+											<span class="input-group-text width-input">Họ và tên: </span>
 										</div>
 										<input type="text" name="mmc_father" class="form-control" autocomplete="off"  value="{{$data['mmc_father']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Dân tộc: </span>
+											<span class="input-group-text width-input">Dân tộc: </span>
 										</div>
 										<input type="text" name="mmc_fatherethnic" class="form-control" autocomplete="off" value="{{$data['mmc_fatherethnic']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Số điện thoại: </span>
+											<span class="input-group-text width-input">SĐT: </span>
 										</div>
 										<input type="text" name="mmc_fatherphone" class="form-control" autocomplete="off" value="{{$data['mmc_fatherphone']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Email: </span>
+											<span class="input-group-text width-input">Email: </span>
 										</div>
 										<input type="email" name="mmc_fatheremail" class="form-control"  autocomplete="off" value="{{$data['mmc_fatheremail']}}">
 									</div>
@@ -166,25 +173,25 @@
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Quốc tịnh: </span>
+											<span class="input-group-text width-input">Quốc tịnh: </span>
 										</div>
 										<input type="text" name="mmc_fathernationality" class="form-control" autocomplete="off" value="{{$data['mmc_fathernationality']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Tôn giáo: </span>
+											<span class="input-group-text width-input">Tôn giáo: </span>
 										</div>
 										<input type="text" name="mmc_fatherreligion" class="form-control" autocomplete="off" value="{{$data['mmc_fatherreligion']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Nghề nghiệp: </span>
+											<span class="input-group-text width-input">Nghề nghiệp: </span>
 										</div>
 										<input type="text" name="mmc_fatherjob" class="form-control" autocomplete="off"  value="{{$data['mmc_fatherjob']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Hộ khẩu thường trú: </span>
+											<span class="input-group-text width-input">Địa chỉ: </span>
 										</div>
 										<input type="text" name="mmc_fatheraddress" class="form-control" autocomplete="off"  value="{{$data['mmc_fatheraddress']}}">
 									</div>
@@ -195,25 +202,25 @@
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Họ và tên: </span>
+											<span class="input-group-text width-input">Họ và tên: </span>
 										</div>
 										<input type="text" name="mmc_mother" class="form-control" autocomplete="off" value="{{$data['mmc_mother']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Dân tộc: </span>
+											<span class="input-group-text width-input">Dân tộc: </span>
 										</div>
 										<input type="text" name="mmc_motherethnic" class="form-control" autocomplete="off" value="{{$data['mmc_motherethnic']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Số điện thoại: </span>
+											<span class="input-group-text width-input">SĐT: </span>
 										</div>
 										<input type="text" name="mmc_motherphone" class="form-control"  autocomplete="off" value="{{$data['mmc_motherphone']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Email: </span>
+											<span class="input-group-text width-input">Email: </span>
 										</div>
 										<input type="email" name="mmc_motheremail" class="form-control"  autocomplete="off" value="{{$data['mmc_motheremail']}}">
 									</div>
@@ -221,25 +228,25 @@
 								<div class="col-md-6">
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Quốc tịnh: </span>
+											<span class="input-group-text width-input">Quốc tịnh: </span>
 										</div>
 										<input type="text" name="mmc_mothernationality" class="form-control"  autocomplete="off"  value="{{$data['mmc_mothernationality']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Tôn giáo: </span>
+											<span class="input-group-text width-input">Tôn giáo: </span>
 										</div>
 										<input type="text" name="mmc_motherreligion" class="form-control"  autocomplete="off" value="{{$data['mmc_motherreligion']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Nghề nghiệp: </span>
+											<span class="input-group-text width-input">Nghề nghiệp: </span>
 										</div>
 										<input type="text" name="mmc_motherjob" class="form-control"  autocomplete="off" value="{{$data['mmc_motherjob']}}">
 									</div>
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
-											<span class="input-group-text">Hộ khẩu thường trú: </span>
+											<span class="input-group-text width-input">Địa chỉ: </span>
 										</div>
 										<input type="text" name="mmc_motheraddress" class="form-control"  autocomplete="off" value="{{$data['mmc_motheraddress']}}">
 									</div>

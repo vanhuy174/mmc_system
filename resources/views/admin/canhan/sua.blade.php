@@ -5,7 +5,7 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
 		<h2>Sửa Thông Tin Giảng Viên</h2>
-		<span><a href="{{route('home')}}">Home</a> > <a href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Thông Tin Cá Nhân</a> > <a href="{{route('get-thong-tin-ca-nhan',Auth::user()->id)}}">Sửa Thông Tin Cá Nhân</a></span>
+		<span><a href="{{route('home')}}">Home</a> > <a href="{{route('canhan.show',Auth::user()->id)}}">Thông Tin Cá Nhân</a> > Sửa Thông Tin Cá Nhân</span>
 	</div>
 </div>
 {{-- <div class="row wrapper border-bottom white-bg page-heading">
@@ -13,26 +13,26 @@
         <h2>Sửa Thông Tin Giảng Viên</h2>
     </div>
 </div> --}}
-{{-- <div class="card-body">
-    <a href="{{route('danh-sach-giang-vien')}}" class="btn btn-success btn-sm" title="quay về">
+<div class="card-body">
+    <a href="{{route('canhan.show',Auth::user()->id)}}" class="btn btn-primary btn-sm" title="quay về">
         <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay Về
     </a>
-</div> --}}
+</div>
 <div class="wrapper wrapper-content  animated fadeInRight blog">
     					
-    <div class="row my-3">
+    <div class="row ">
         <div class="col-lg-12">
             @if (count($errors)>0)
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $err)
-                        <strong>Lỗi! </strong>{{$err}}<br>
+                        {{$err}}
                     @endforeach
                 </div> 
             @endif
 
             @if (session('thongbao'))
                 <div class="alert alert-success ">
-                    <strong>Thành Công! </strong> {{session('thongbao')}}
+                    {{session('thongbao')}}
                 </div>
             @endif
         </div>
@@ -40,8 +40,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
+                <div class="card-header">Sửa Thông Tin Giảng Viên</div>
 				<div class="container">
-                    <form action="{{route('post-sua-thong-tin-ca-nhan',Auth::user()->id)}}" method="post" enctype="multipart/form-data" role="form">
+                    <form action="{{route('canhan.update',Auth::user()->id)}}" method="post" enctype="multipart/form-data" role="form">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-lg-2 mt-5">
@@ -100,10 +102,24 @@
                                                 </div>
                                                 <div class="input-group mb-3 input-group-sm">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">Mã bộ môn: <b style="color:red;" >*</b></span>
+                                                        <span class="input-group-text">Tên bộ môn: <b style="color:red;" >*</b></span> 
                                                     </div>
                                                     <select class="form-control" id="sel1" name="mmc_deptid">
-                                                        <option value="{{Auth::user()->mmc_deptid}}">{{Auth::user()->mmc_deptid}}</option>
+                                                        @foreach ($bomon as $bm)
+                                                            <option value="{{$bm->mmc_deptid}}">{{$bm->mmc_deptname}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="input-group mb-3 input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Chức vụ hiện tại: <b style="color:red;" >*</b></span>
+                                                    </div>
+                                                    <select class="form-control" name="mmc_position" id="mmc_position" required>
+                                                        <option value="Trưởng Khoa" >Trưởng Khoa</option>
+                                                        <option value="Phó Khoa" >Phó Khoa</option>
+                                                        <option value="Trưởng Bộ Môn" >Trưởng Bộ Môn</option>
+                                                        <option value="Phó Bộ Môn" >Phó Bộ Môn</option>
+                                                        <option value="Giảng Viên" >Giảng Viên</option>
                                                     </select>
                                                 </div>
                                                 <div class="input-group mb-3 input-group-sm">
@@ -216,13 +232,6 @@
                                             </div>
         
                                             <div class="col-md-6">
-                                                <div class="input-group mb-3 input-group-sm">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Chức vụ hiện tại: </span>
-                                                    </div>
-                                                    
-                                                    <textarea class="form-control md-textarea" rows="2" name="mmc_position" minlength="3" autocomplete="off" value="{{Auth::user()->mmc_position}}">{{Auth::user()->mmc_position}}</textarea>
-                                                </div>
                                                 <div class="input-group mb-3 input-group-sm">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Công việc chính được giao: </span>
@@ -401,7 +410,7 @@
                         </div>
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-success float-right">Thêm Thông Tin Giảng Viên</button>
+                        <button type="submit" class="btn btn-primary float-right">Thêm Thông Tin Giảng Viên</button>
                     </form>
                 </div>
             </div>

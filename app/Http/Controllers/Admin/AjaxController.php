@@ -91,7 +91,7 @@ class AjaxController extends Controller
         $students=mmc_student::where('mmc_classid','=',$classid[0]->mmc_classid)->get();
         $i=1;
         $idgv=ClassController::getidemployee($classid[0]->mmc_headteacher);
-        $url=route('get-thong-tin-giang-vien',$idgv);
+        $url=route('giangvien.show',$idgv);
         echo "<h4 style='text-align: center'>".$request->name."</h4>";
         echo "Giáo viên chủ nhiệm : <a href='{$url}' style='color:gray;'>".ClassController::getemployee($classid[0]->mmc_headteacher)."</a><br>";
         echo "Số sinh viên : ".$this->getsumstudent($classid[0]->mmc_classid)."<br>";

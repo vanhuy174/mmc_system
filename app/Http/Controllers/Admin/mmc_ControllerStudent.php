@@ -124,6 +124,7 @@ class mmc_ControllerStudent extends Controller
                 'mmc_address' => 'required',
                 'mmc_ethnic' => 'required',
                 'mmc_religion' => 'required',
+                'mmc_course' => 'required',
                 'mmc_personalid' => 'required|unique:mmc_students|numeric',
             ],
             [
@@ -137,6 +138,7 @@ class mmc_ControllerStudent extends Controller
                 'mmc_address.required' => 'Đại chỉ không được để trống',
                 'mmc_ethnic.required' => 'Dân tộc không được để trống',
                 'mmc_religion.required' => 'Tôn giáo không được để trống',
+                'mmc_course.required' => 'Khóa học không được để trống',
                 'mmc_personalid.required' => 'Số CMND không được để trống',
 
                 'mmc_studentid.unique' => 'Mã sinh viên đã tồn tại',
@@ -214,6 +216,7 @@ class mmc_ControllerStudent extends Controller
                 'mmc_address' => 'required',
                 'mmc_ethnic' => 'required',
                 'mmc_religion' => 'required',
+                'mmc_course' => 'required',
                 'mmc_personalid' => 'required|numeric|unique:mmc_students,mmc_personalid,' . $id,
             ],
             [
@@ -227,6 +230,7 @@ class mmc_ControllerStudent extends Controller
                 'mmc_address.required' => 'Đại chỉ không được để trống',
                 'mmc_ethnic.required' => 'Dân tộc không được để trống',
                 'mmc_religion.required' => 'Tôn giáo không được để trống',
+                'mmc_course.required' => 'Khóa học không được để trống',
                 'mmc_personalid.required' => 'Số CMND không được để trống',
 
                 'mmc_studentid.unique' => 'Mã sinh viên đã tồn tại',

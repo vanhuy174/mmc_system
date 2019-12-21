@@ -22,6 +22,9 @@ class CreateMmcMajorsTable extends Migration
             $table->string('b');
             $table->string('mmc_majorname');
             $table->string('mmc_description')->nullable();
+            $table->string('r');
+            $table->string('g');
+            $table->string('b');
             $table->timestamps();
         });
     }
