@@ -23,6 +23,7 @@ class mmc_student extends Model
                             'mmc_status',
                             'mmc_descipline',
                             'mmc_personalid',
+                            'mmc_status',
                             'mmc_father',
                             'mmc_fathernationality',
                             'mmc_fatherethnic',
@@ -44,5 +45,8 @@ class mmc_student extends Model
 
     public function class(){
         return $this->belongsTo('App\mmc_class', 'mmc_classid', 'mmc_classid');
+    }
+    public function pointdetail(){
+        return $this->hasOne('App\mmc_pointdetails', 'mmc_studentid', 'mmc_studentid');
     }
 }

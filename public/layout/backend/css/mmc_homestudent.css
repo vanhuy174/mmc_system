@@ -1,0 +1,32 @@
+.padding-5{
+	padding: 5px;
+}
+.float-left{
+	float: left;
+}
+.card .card-body .margin-left-10{
+	margin-left: 10px;
+}
+.card .card-body .width-40{
+	width: 40%;
+}
+.card .card-body .float-right{
+	float: right;
+}
+.card .card-body .margin-bottom{
+	margin-bottom: 0px;
+}
+<<<<<<< HEAD:public/layout/backend/css/mmc_homestudent.css
+.width-20{
+    width: 20% !important;
+}
+.width-200{
+    width: 200px !important;
+=======
+.width-15{
+    width: 15% !important;
+}
+.width-25{
+    width: 25% !important;
+>>>>>>> ca394d0ecc9e0d7888c08cfe92ac2984e09038f9:public/layout/backend/css/mmc_homestudent.css
+}

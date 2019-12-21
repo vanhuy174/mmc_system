@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('linkstyle')
-<link href="../../css/mmc_detailstudent.css" rel="stylesheet">
+<link href="css/mmc_detailstudent.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -15,11 +15,17 @@
 	@if (session('status'))
 	<br> <div class="alert alert-info">{{session('status')}}</div>
 	@endif
+    <div class="row">
+        <div class="col-lg-12">
+        <a href="" class=" btn btn-primary btn-sm float-right " title="Xuất File">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
+        </a>
+        </div>
+    </div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">Thông tin sinh viên</div>
-				<a class="btn btn-primary width-100" href="">Xuất file pdf</a>
 				<div class="card-body">
 					<div class="container">
 						<div class="text-center">
@@ -87,9 +93,9 @@
 											<span>Kỷ luật: &nbsp;&nbsp;{{$data['mmc_descipline']}}</span>
 										</div>
 									</div>
-								</div>	
+								</div>
 							</div>
-							
+
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
@@ -144,7 +150,7 @@
 										<div class="input-group mb-3 input-group-sm">
 											<span>Email: &nbsp;&nbsp;{{$data['mmc_motheremail']}}</span>
 										</div>
-										
+
 									</div>
 									<div class="col-md-6">
 										<div class="input-group mb-3 input-group-sm">

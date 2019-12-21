@@ -7,7 +7,7 @@
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
-		<h2>Quản lý sinh viên</h2>
+		<h2>Quản lý lịch giảng dạy</h2>
 		<span><a href="{{route('home')}}">Trang chủ</a> > <a href="{{route('homeCalendar')}}">Quản lý lịch giảng dạy</a></span>
 	</div>
 </div>

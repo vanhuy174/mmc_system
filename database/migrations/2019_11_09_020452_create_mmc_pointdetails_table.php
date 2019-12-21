@@ -15,13 +15,13 @@ class CreateMmcPointdetailsTable extends Migration
     {
         Schema::create('mmc_pointdetails', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('mmc_semesterid');
+            $table->string('mmc_semesterid')->nullable();
             $table->string('mmc_studentid');
-            $table->string('mmc_subjectid');
-            $table->string('mmc_yearid');
+            $table->string('mmc_subjectid')->nullable();
+            $table->string('mmc_yearid')->nullable();
             $table->text('mmc_10grade');
             $table->text('mmc_4grade');
-            $table->integer('key');
+            $table->integer('key')->nullable();
             $table->foreign('mmc_semesterid')
                 ->references('mmc_semesterid')
                 ->on('mmc_semesters')

@@ -126,11 +126,11 @@
                                     <th>Mã sinh viên</th>
                                     <th>Tên sinh viên</th>
                                     <th>Lớp</th>
-                                    <th>Điểm CC</th>
-                                    <th>Điểm 1</th>
-                                    <th>Điểm 2</th>
-                                    <th>Điểm 3</th>
-                                    <th>Điểm 4</th>
+                                    <th>Chuyên cần</th>
+                                    <th>Kiểm tra 1</th>
+                                    <th>Kiểm tra 2</th>
+                                    <th>Kiểm tra 3</th>
+                                    <th>Kiểm tra 4</th>
                                     <th>Điểm thi</th>
                                     <th>Điểm TB</th>
                                     <th>Ghi chú</th>
@@ -143,7 +143,7 @@
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$std->mmc_studentid}}</td>
-                                        <td>{{$std->student->mmc_fullname}}</td>
+                                        <td><a href="{{route('showStudent',['id'=>$std->student->id])}}">{{$std->student->mmc_fullname}}</a></td>
                                         <td>{{$std->student->class->mmc_classname}}</td>
                                         <td>{{$diligentpoint=explode("-",$std->diligentpoint)[0]}}</td>
                                         <td>{{$point1=explode("-",$std->point1)[0]}}</td>

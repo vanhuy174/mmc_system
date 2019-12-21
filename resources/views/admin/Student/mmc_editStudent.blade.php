@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('linkstyle')
-<link href="../../css/mmc_createstudent.css" rel="stylesheet">
+<link href="css/mmc_createstudent.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -84,7 +84,7 @@
 											@endforeach
 										</select>
 									</div>
-									
+
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
 											<span class="input-group-text">Mã sinh viên: <b class="color-red">&nbsp;&nbsp;*</b></span>
@@ -129,7 +129,7 @@
 										<textarea  name="mmc_descipline" class="form-control" rows="2">{{$data['mmc_descipline']}}</textarea>
 									</div>
 								</div>
-								
+
 								<div class="col-md-12">
 									<h3 class="tieude">II. THÀNH PHẦN GIA ĐÌNH</h3>
 								</div>
