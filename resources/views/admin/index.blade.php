@@ -19,7 +19,7 @@
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số giảng viên</h3>
                         <h3 class="font-bold no-margins" style="padding-left: 15px">
-                            {{-- {{\App\Http\Controllers\GiangVienController::count()}} --}}
+                            {{$numberemploy}}
                         </h3>
                         <small></small>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số sinh viên</h3>
                         <h3 class="font-bold no-margins" style="padding-left: 15px">
-                            {{\App\Http\Controllers\Admin\mmc_ControllerStudent::count()}}
+                            {{$numberstudent}}
                         </h3>
                         <small></small>
                     </div>
@@ -47,7 +47,7 @@
                     <div class="p-m">
                         <h3 class="m-xs">Tổng số lớp học</h3>
                         <h3 class="font-bold no-margins" style="padding-left: 15px">
-                            {{\App\Http\Controllers\Admin\ClassController::count()}}
+                            {{$numberclass}}
                         </h3>
                         <small></small>
                     </div>
@@ -199,9 +199,11 @@
             });
         });
         $(function () {
-
+            var now=new Date();;
+            var year= now.getFullYear();
+            <?php $year=  date("y");?>
             var lineData = {
-                labels: ["K12", "K13", "K14", "K15", "K16", "K17", "K18"],
+                labels: [year-4 , year-3 , year-2 , year-1, year],
                 datasets: [
                     @foreach(\App\Http\Controllers\Admin\MajorController::getmajor() as $item)
                     {
@@ -209,7 +211,11 @@
                         backgroundColor: 'rgba({{$item->r}},{{$item->g}},{{$item->b}},0.3)',
                         borderColor: "rgba({{$item->r}},{{$item->g}},{{$item->b}},0.7)",
                         pointBorderColor: "#fff",
-                        data: [270, 250, 240, 289, 278, 278, 287]
+                        data: [{{\App\Http\Controllers\Admin\homeController::countstudent($year-4, $item->mmc_majorid)}},
+                                {{\App\Http\Controllers\Admin\homeController::countstudent($year-3, $item->mmc_majorid)}},
+                                {{ \App\Http\Controllers\Admin\homeController::countstudent($year-2, $item->mmc_majorid)}},
+                                {{\App\Http\Controllers\Admin\homeController::countstudent($year-1, $item->mmc_majorid)}},
+                                {{\App\Http\Controllers\Admin\homeController::countstudent($year, $item->mmc_majorid)}}]
                     },
                     @endforeach
                 ]
@@ -219,11 +225,11 @@
             };
             var ctx = document.getElementById("lineChart").getContext("2d");
             new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
-
+            var point_array = <?php echo json_encode($hocluc); ?>;
             var doughnutData = {
-                labels: ["Xuất sắc","Giỏi","Khá","Trung bình","Yếu" ],
+                labels: ["Yếu","Trung bình","Khá","Giỏi","Xuất sắc"],
                 datasets: [{
-                    data: [10,20,30,30,10],
+                    data: point_array,
                     backgroundColor: ["#E18500","#0B48E1","#00E1B2","#a3e1d4","#FF0100"]
                 }]
             } ;

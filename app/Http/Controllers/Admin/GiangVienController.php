@@ -21,10 +21,10 @@ class GiangVienController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {       
+    {
         $keyword = $request->get('search');
         $perPage = 5;
-        
+
         if (!empty($keyword)) {
             $giangvien = mmc_employee::where('mmc_name', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
         } else {
@@ -71,7 +71,7 @@ class GiangVienController extends Controller
         [
             'mmc_avatar.image'=>'vui lòng chọn đúng ảnh',
             'mmc_avatar.mimes'=>'file ảnh phải có định dạng jpeg,png,jpg,gif,svg',
-            'mmc_avatar.max'=>'kích thước ảnh phải nhỏ hơm 2 Mb',   
+            'mmc_avatar.max'=>'kích thước ảnh phải nhỏ hơm 2 Mb',
             'mmc_employeeid.unique'=>'Mã giảng viên đã tồn tại',
             'email.unique'=>'Email đã tồn tại',
             'email.ends_with'=>'email phải có định dạnh gmail.com hoặc ictu.edu.vn',
@@ -111,7 +111,7 @@ class GiangVienController extends Controller
             $them->mmc_phone = $phone; //Số điện thoại
 
             $them->email = $request->email; //Email
-            $them->password = Hash::make("1"); //Password 
+            $them->password = Hash::make("1"); //Password
             $them->mmc_religion = $request->mmc_religion; //Dân tộc
             $them->mmc_ethnic = $request->mmc_ethnic; //Tôn giáo
             $them->mmc_placeofbirth = $request->mmc_placeofbirth; //Nơi Sinh
@@ -130,7 +130,7 @@ class GiangVienController extends Controller
             $them->mmc_salaryother= $request->mmc_salaryother;//Phụ cấp khác
 
             $them->mmc_degree= $request->mmc_degree; //Trình độ chuyên môn cao nhất
-            $them->mmc_language= $request->mmc_language; //Ngoại ngữ 
+            $them->mmc_language= $request->mmc_language; //Ngoại ngữ
             $them->mmc_itlevel= $request->mmc_itlevel; //Tin học
             $them->mmc_politiclevel= $request->mmc_politiclevel; //Lý luận chính trị
             $them->mmc_managementlevel= $request->mmc_managementlevel; //Quản lý nhà nước
@@ -158,9 +158,9 @@ class GiangVienController extends Controller
      */
     public function show($id)
     {
-        
+
         $hien = mmc_employee::find($id);
-        
+
         return view('admin.giangvien.thongtin',compact('hien'));
     }
 
@@ -273,7 +273,7 @@ class GiangVienController extends Controller
     public function destroy($id)
     {
         $xoa = mmc_employee::findOrFail($id)->get();
-        
+
         mmc_employee::destroy($id);
         return redirect()->route('giangvien.index')->with('thongbao','xóa giảng viên thành công');
     }
@@ -285,56 +285,12 @@ class GiangVienController extends Controller
 
     public function xemthongtin($id){
         $hien = DB::table('mmc_employees')->where('id',$id)->get();
-        // dd($hien);
-        // $hien=  collect([
-        //     "id" => $data[0]->id,
-        //     "mmc_name" => $data[0]->mmc_name,
-        //     "mmc_employeeid" => $data[0]->mmc_employeeid,
-        //     "mmc_deptid" => $data[0]->mmc_deptid,
-        //     "mmc_avatar" => $data[0]->mmc_avatar,
-        //     "mmc_dateofbirth" => $data[0]->mmc_dateofbirth,
-        //     "mmc_gender" => $data[0]->mmc_gender,
-        //     "mmc_personalid" => $data[0]->mmc_personalid,
-        //     "mmc_dateofpid" => $data[0]->mmc_dateofpid,
-        //     "mmc_socialinsuranceid" => $data[0]->mmc_socialinsuranceid,
-        //     "mmc_phone" => $data[0]->mmc_phone,
-        //     "email" => $data[0]->email,
-        //     "password" => $data[0]->password,
-        //     "mmc_religion" => $data[0]->mmc_religion,
-        //     "mmc_ethnic" => $data[0]->mmc_ethnic,
-        //     "mmc_placeofbirth" => $data[0]->mmc_placeofbirth,
-        //     "mmc_hometown" => $data[0]->mmc_hometown,
-        //     "mmc_address" => $data[0]->mmc_address,
-        //     "mmc_dateofrecruit" => $data[0]->mmc_dateofrecruit,
-        //     "mmc_position" => $data[0]->mmc_position,
-        //     "mmc_maintask" => $data[0]->mmc_maintask,
-        //     "mmc_nameofjob" => $data[0]->mmc_nameofjob,
-        //     "mmc_codeofjob" => $data[0]->mmc_codeofjob,
-        //     "mmc_salarylevel" => $data[0]->mmc_salarylevel,
-        //     "mmc_salaryratio" => $data[0]->mmc_salaryratio,
-        //     "mmc_salaryposition" => $data[0]->mmc_salaryposition,
-        //     "mmc_salaryother" => $data[0]->mmc_salaryother,
-        //     "mmc_degree" => $data[0]->mmc_degree,
-        //     "mmc_language" => $data[0]->mmc_language,
-        //     "mmc_itlevel" => $data[0]->mmc_itlevel,
-        //     "mmc_politiclevel" => $data[0]->mmc_politiclevel,
-        //     "mmc_managementlevel" => $data[0]->mmc_managementlevel,
-        //     "mmc_partydate" => $data[0]->mmc_partydate,
-        //     "mmc_partydateprimary" => $data[0]->mmc_partydateprimary,
-        //     "mmc_reward" => $data[0]->mmc_reward,
-        //     "mmc_discipline" => $data[0]->mmc_discipline,
-        //     "mmc_heathlevel" => $data[0]->mmc_heathlevel,
-        //     "mmc_bloodgroup" => $data[0]->mmc_bloodgroup,
-        //     "mmc_tall" => $data[0]->mmc_tall,
-        //     "mmc_weight" => $data[0]->mmc_weight,
-        // ]);
-        //dd($hien);
         return view('admin.giangvien.thongtinxoa',compact('hien'));
     }
 
     public function phuchoi($id){
         $xoa = DB::table('mmc_employees')->where('id',$id)->select('deleted_at')->update(['deleted_at' => NULL]);
-        
+
         return redirect()->route('giangvien.index')->with('thongbao','giảng viên đã được phục hồi');
     }
 

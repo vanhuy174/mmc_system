@@ -24,9 +24,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     // Route::get('home', function () {
     //     return view('admin.index');
     // });
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('home');
+    Route::get('/', 'Admin\homeController@index')->name('home');
     Route::group(['middleware'=>'role'],function() {
         Route::post('subject/import/', 'Admin\SubjectController@import');
         Route::post('class/import/', 'Admin\ClassController@import');
@@ -45,13 +43,20 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
         Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');
         Route::post('/createstudent', 'Admin\mmc_ControllerStudent@create')->name('createStudent');
-        Route::get('/destroyStudent/{id}', 'Admin\mmc_ControllerStudent@destroy')->name('destroyStudent');
+        Route::get('/delete/{id}', 'Admin\mmc_ControllerStudent@destroy')->name('destroyStudent');
         Route::get('/showStudent/{id}', 'Admin\mmc_ControllerStudent@show')->name('showStudent');
         Route::get('/editStudent/{id}', 'Admin\mmc_ControllerStudent@edit')->name('editStudent');
         Route::post('/updateStudent/{id}', 'Admin\mmc_ControllerStudent@update')->name('updateStudent');
         Route::post('/importStudent', 'Admin\mmc_ControllerStudent@import')->name('importStudent');
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
+
+        Route::post('/ajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('ajaxmajor');
+        Route::post('setstatus', 'Admin\mmc_ControllerStudent@setstatus')->name('setstatus');
+
+//        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
+//        Route::post('/withclass', 'Admin\mmc_ControllerStudent@withclass')->name('withclass');
+
 
         //route lịch
         Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
@@ -65,14 +70,14 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
         //route giảng viên
         Route::resource('giangvien', 'Admin\GiangVienController');
-        
+
         //route cá nhân
         Route::resource('canhan', 'Admin\CaNhanController');
         // đổi mật khẩu
         Route::get('canhan/matkhau/{id}','Admin\CaNhanController@getDoiPass')->name('getDoiPass');
         Route::post('canhan/matkhau/{id}','Admin\CaNhanController@postDoiPass')->name('postDoiPass');
 
-        
+
     });
     Route::resource('schedule', 'Admin\ScheduleController');
     Route::resource('oneclass', 'Admin\OneClassController');

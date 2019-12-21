@@ -24,6 +24,9 @@ class CreateMmcStudentpointsTable extends Migration
             $table->text('point3')->nullable();   //điểm bài kiểm tra 3
             $table->text('point4')->nullable();   //điểm bài kiểm tra 4
             $table->text('testscore')->nullable();   //điểm thi cuối kỳ
+            $table->integer('point_ratio')->nullable();   //Tỉ lệ giữa điểm thường xuyên và điểm thi
+            $table->text('mmc_10grade')->nullable();   //Điểm hs 10
+            $table->text('mmc_4grade')->nullable();   //Điểm hs 4
             $table->string('mmc_note')->nullable();     //ghi chú
             $table->integer('mmc_key')->nullable();     //Lần học
             $table->timestamps();

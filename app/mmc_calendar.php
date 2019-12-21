@@ -12,3 +12,4 @@ class mmc_calendar extends Model
         'mmc_classroom',
     ];
 }
+

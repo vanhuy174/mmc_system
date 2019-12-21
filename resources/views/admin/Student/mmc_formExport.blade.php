@@ -5,8 +5,9 @@
     <tr>
         <th><b>STT</b></th>
         <th><b>Mã sinh viên</b></th>
-        <th><b>Tên lớp</b></th>
         <th><b>Họ và tên</b></th>
+        <th><b>Tên lớp</b></th>
+        <th><b>Khóa</b></th>
         <th><b>Ngày sinh</b></th>
         <th><b>Giới tính</b></th>
         <th><b>Email</b></th>
@@ -41,6 +42,7 @@
         <tr>
             <td>{{$i++}}</td>
             <td>{{ $data->mmc_studentid }}</td>
+            <td>{{ $data->mmc_fullname }}</td>
             <td>
                 @foreach($dataclass as $class)
                     @if($data->mmc_classid == $class->mmc_classid)
@@ -48,7 +50,7 @@
                     @endif
                 @endforeach
             </td>
-            <td>{{ $data->mmc_fullname }}</td>
+            <td>{{ $data->mmc_course }}</td>
             <td>{{ date('d-m-Y', strtotime($data->mmc_dateofbirth)) }}</td>
             <td>
                 @if($data->mmc_gender==1)
@@ -81,7 +83,7 @@
             <td>{{ $data->mmc_motherphone }}</td>
             <td>{{ $data->mmc_motheremail }}</td>
             <td>{{ $data->mmc_motherjob }}</td>
-            
+
         </tr>
     @endforeach
     </tbody>

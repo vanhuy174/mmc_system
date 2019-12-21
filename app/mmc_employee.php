@@ -28,7 +28,7 @@ class mmc_employee extends Authenticatable
         'mmc_dateofpid',
         'mmc_socialinsuranceid',
         'mmc_phone',
-        'email', 
+        'email',
         'password',
         'mmc_religion',
         'mmc_ethnic',
@@ -83,10 +83,6 @@ class mmc_employee extends Authenticatable
     protected $softDelete = true;
     public $timestamps = false;
 
-    // public function TenGV(){
-    //     return $this->hasMany('App\mmc_department','mmc_deptid','mmc_deptid');
-    // }
-    
     public function subjectclass()
     {
         return $this->hasMany('App\mmc_subjectclass', 'mmc_employeeid', 'mmc_employeeid');
