@@ -34,4 +34,67 @@ if (! function_exists('test')) {
     		return "";
     	}
     }
+    function tinhhocluc($point){
+        if($point < 2.0){
+            return 'yeu';
+        }elseif ($point >= 2.0 && $point < 2.5 ){
+            return 'tb';
+        }elseif ($point >= 2.5 && $point < 3.2 ){
+            return 'kha';
+        }elseif ($point >= 3.2 && $point < 3.6 ){
+            return 'gioi';
+        }else{
+            return 'xs';
+        }
+    }
+    function semester(){
+        $date= date("Y");
+        $i=0; $j=0; $semester= [];
+        while($i<10){
+            $semester[$i]= "".($date-$j)."_".(($date+1)-$j)."_2";
+            $semester[$i+1]= "".($date-$j)."_".(($date+1)-$j)."_1";
+            $i= $i + 2;
+            $j++;
+        }
+        return $semester;
+    }
+    function diemhockyhs4($mmc_studentid, $semester){
+        $tongtinchi= 0;
+        $diem= 0;
+        $point= \App\mmc_studentpoint::where('mmc_studentid', '=', $mmc_studentid)->get();
+        foreach ($point as $key){
+            if (count($key->subjectclass)>0)
+            if ($key->subjectclass[0]->mmc_semester == $semester){
+                $tinchi = ($key->subject->mmc_theory + $key->subject->mmc_practice);
+                $tongtinchi += $tinchi;
+                $diem += ($key->mmc_4grade * $tinchi);
+            }
+        }
+        if($tongtinchi != 0 && $diem !=0){
+            $hs4= number_format((float)($diem/$tongtinchi), 1, '.', '');
+        }else{
+            $hs4="";
+        }
+        return $hs4;
+    }
+    function diemhockyhs10($mmc_studentid, $semester){
+        $tongtinchi= 0;
+        $diem= 0;
+        $point= \App\mmc_studentpoint::where('mmc_studentid', '=', $mmc_studentid)->get();
+        foreach ($point as $key){
+            if (count($key->subjectclass)>0)
+            if ($key->subjectclass[0]->mmc_semester == $semester){
+                $tinchi = ($key->subject->mmc_theory + $key->subject->mmc_practice);
+                $tongtinchi += $tinchi;
+                $diem += ($key->mmc_10grade * $tinchi);
+            }
+        }
+        if($tongtinchi != 0 && $diem !=0){
+            $hs10= number_format((float)($diem/$tongtinchi), 1, '.', '');
+        }else{
+            $hs10="";
+        }
+        return $hs10;
+    }
+
 }

@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect('login');
+    return redirect()->route('login');
 });
 // Route::get('home', function () {
 //         return view('admin.index');
@@ -59,9 +59,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 
         //route lịch
-        Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
-        Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');
-        Route::post('/edittime', 'Admin\ScheduleController@store')->name('edittime');
+        Route::get('homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
+        Route::post('importCalendar', 'Admin\calendarController@store')->name('importCalendar');
+        Route::post('edittime', 'Admin\ScheduleController@store')->name('edittime');
 
         // danh sách giảng viên đã xóa
         Route::get('giangvien/xoagiangvien', 'Admin\GiangVienController@xoagv')->name('getXoa');
@@ -80,6 +80,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     });
     Route::resource('schedule', 'Admin\ScheduleController');
+    Route::post('updatecalendar','Admin\ScheduleController@updatecalendar')->name('updatecalendar');
     Route::resource('oneclass', 'Admin\OneClassController');
     Route::resource('subjectclass', 'Admin\subjectclassController');
 
