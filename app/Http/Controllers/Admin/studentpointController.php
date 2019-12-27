@@ -11,6 +11,8 @@ use App\mmc_subjectclass;
 use App\mmc_subject;
 use App\mmc_student;
 use App\mmc_class;
+use App\mmc_major;
+use libphonenumber\CountryCodeToRegionCodeMap;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
 class studentpointController extends Controller
@@ -20,10 +22,74 @@ class studentpointController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data= mmc_pointdetails::with('student.class')->get();
-        return view('admin.point.index',['pointstudent'=>$data]);
+        $data_major= mmc_major::get();
+        $data_class=mmc_class::get();
+        $perPage= 10;
+        $keyword= $request->search;
+        $classid= $request->malop;
+        $majorid= $request->manghanh;
+        $numberstudent= 0; $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
+        if(!empty($classid)){
+            $pointstudent= mmc_student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            $pointk= mmc_Student::where('mmc_classid', '=', $classid)->get();
+            foreach ($pointk as $key) {
+                $point = $key->pointdetail->mmc_4grade;
+                if ($point == null) {
+                    continue;
+                }
+                if ($point < 2.0) {
+                    $yeu++;
+                } elseif ($point >= 2.0 && $point < 2.5) {
+                    $tb++;
+                } elseif ($point >= 2.5 && $point < 3.2) {
+                    $kha++;
+                } elseif ($point >= 3.2 && $point < 3.6) {
+                    $gioi++;
+                } else {
+                    $xs++;
+                }
+                $numberstudent++;
+            }
+            if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
+            if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
+            if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
+            if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
+            if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+            $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid"]));
+        }
+        $pointstudent= mmc_student::latest()->paginate($perPage);
+        $pointdetail= mmc_pointdetails::get();
+        $numberstudent= count($pointdetail);
+        $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
+        if(count($pointstudent) > 0 && count($pointdetail) > 0){
+            foreach ($pointdetail as $item){
+                $point= $item->mmc_4grade;
+                if($point == null){
+                    continue;
+                }
+                if($point < 2.0){
+                    $yeu++;
+                }elseif ($point >= 2.0 && $point < 2.5 ){
+                    $tb++;
+                }elseif ($point >= 2.5 && $point < 3.2 ){
+                    $kha++;
+                }elseif ($point >= 3.2 && $point < 3.6 ){
+                    $gioi++;
+                }else{
+                    $xs++;
+                }
+            }
+            if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
+            if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
+            if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
+            if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
+            if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+        }
+        $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
+        return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid"]));
     }
 
     /**
@@ -137,7 +203,8 @@ class studentpointController extends Controller
                 if(is_int($sheet[$i][0])){
                     $studentid= $sheet[$i][1];
                     //Kiểm tra xem sinh viên có tôn tại trong hệ thống hay không.
-                    if(! mmc_student::where('mmc_studentid','=', $studentid)->get('mmc_fullname')){
+                    if(count(mmc_student::where('mmc_studentid','=', $studentid)->get('id'))==0){
+                        print_r(mmc_student::where('mmc_studentid','=', $studentid)->get('id'));
                         $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên không tồn tại!';
                         $k++;
                         continue;
@@ -223,8 +290,8 @@ class studentpointController extends Controller
         $reader = new Xls();
         $reader->setReadDataOnly(true);
         $objPHPExcel = $reader->load(request()->file('file'));
-        $obj = []; //khởi tạo mảng obj để chứa các dữ liệu lịch sau khi xử lý xong.
-        $j=0;   //$j chỉ số của mảng obj
+        $errors = []; //khởi tạo mảng error để chứa các lỗi gặp phải trong quá trình thêm.
+        $j=0; $k=0;  //$j chỉ số của mảng obj, $k là chỉ số của mảng eror.
         $sheet_number=0;   //đếm số sheet trong file.
         foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel
             $sheet_number++;
@@ -252,12 +319,14 @@ class studentpointController extends Controller
                     $studentid= $sheet[$i][1];
                     //Kiểm tra xem sinh viên có tôn tại trong hệ thống hay không.
                     if(! mmc_student::where('mmc_studentid','=', $studentid)->get('mmc_fullname')){
-                        return back()->with('status', 'Sinh viên không tồn tại!');
+                        $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên không tồn tại!';
+                        $k++;
                         continue;
                     }
                     //Kiểm tra sinh viên đã tồn tại trong lớp học phần này chưa.
                     if(! $id= mmc_studentpoint::where('mmc_studentid','=', $studentid)->where('mmc_subjectclassid','=', $subjectclassid)->value('id')){
-                        return back()->with('status', 'Sinh viên không tồn tại trong lớp học phần này!');
+                        $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên không tồn tại trong lớp học phần này!';
+                        $k++;
                         continue;
                     }
 
@@ -314,55 +383,11 @@ class studentpointController extends Controller
             }
 
         }
-        return back()->with('status', 'Thêm điểm thành công!');
-    }
-
-    public function updatepointdetail($id, $pointtest){
-        $point = mmc_studentpoint::find($id);
-        $subject = mmc_subject::where('mmc_subjectid',  '=', $point->mmc_subjectid)->get();
-        $tongket = tinhdiemTB($subject[0]->mmc_theory, $subject[0]->mmc_practice, $point->point_ratio, $point->diligentpoint, $point->point1, $point->point2, $point->point3, $point->point4, $pointtest);
-        $hs4= null;
-        if($tongket < 4.0){
-            $hs4= 0;
-        }else
-        if($tongket >= 4.0 && $tongket < 5.5){
-            $hs4= 1;
-        }else
-        if($tongket >= 5.5 && $tongket < 7.0){
-            $hs4= 2;
-        }else
-        if($tongket >= 7.0 && $tongket < 8.5){
-            $hs4= 3;
+        if($k==0){
+            return back()->with('status', 'Thêm điểm thành công!');
         }else{
-            $hs4= 4;
+            return back()->withErrors($errors);
         }
-        $pointdetail= mmc_pointdetails::where('mmc_studentid','=', $point->mmc_studentid)->where('mmc_subjectid','=', $subject[0]->mmc_subjectid)->get();
-            if(count($pointdetail) > 0){
-//                $point= mmc_pointdetails::find($pointdetail[0]->id);
-//                    $temp=explode("-",$point->mmc_10grade);
-//                    $temp[0]= $tongket;
-//                    $mmc_10grade = implode( "-", $temp);
-//                $point->mmc_10grade = $mmc_10grade;
-//                    $temp=explode("-",$point->mmc_4grade);
-//                    $temp[0]= $hs4;
-//                    $mmc_4grade = implode( "-", $temp);
-//                $point->mmc_4grade = $mmc_4grade;
-//                $point->update();
-                $point= mmc_pointdetails::find($pointdetail[0]->id);
-                $point->mmc_10grade = $tongket."-".$point->mmc_10grade;
-                $point->mmc_4grade = $hs4.'-'. $point->mmc_4grade;
-                $point->key = $point->key+1;
-                $point->update();
-            }else{
-                dd($tongket);
-                $newpoint= new mmc_pointdetails;
-                $newpoint->mmc_studentid = $point->mmc_studentid;
-                $newpoint->mmc_subjectid = $subject[0]->mmc_subjectid;
-                $newpoint->mmc_10grade = $tongket;
-                $newpoint->mmc_4grade = $hs4;
-                $newpoint->key = 1;
-                $newpoint->save();
-            }
     }
 
     public function pointtest(Request $request)
@@ -370,8 +395,8 @@ class studentpointController extends Controller
         $reader = new Xls();
         $reader->setReadDataOnly(true);
         $objPHPExcel = $reader->load(request()->file('file'));
-        $obj = []; //khởi tạo mảng obj để chứa các dữ liệu lịch sau khi xử lý xong.
-        $j=0;   //$j chỉ số của mảng obj
+        $errors = []; //khởi tạo mảng error để chứa các lỗi gặp phải trong quá trình thêm.
+        $j=0; $k=0;  //$j chỉ số của mảng obj, $k là chỉ số của mảng eror.
         $sheet_number=0;   //đếm số sheet trong file.
         foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel
             $sheet_number++;
@@ -399,12 +424,14 @@ class studentpointController extends Controller
                     $studentid= $sheet[$i][1];
                     //Kiểm tra xem sinh viên có tôn tại trong hệ thống hay không.
                     if(! mmc_student::where('mmc_studentid','=', $studentid)->get('mmc_fullname')){
-                        return back()->with('status', 'Sinh viên không tồn tại!');
+                        $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên không tồn tại!';
+                        $k++;
                         continue;
                     }
                     //Kiểm tra sinh viên đã tồn tại trong lớp học phần này chưa.
                     if(! $id= mmc_studentpoint::where('mmc_studentid','=', $studentid)->where('mmc_subjectclassid','=', $subjectclassid)->value('id')){
-                        return back()->with('status', 'Sinh viên không tồn tại trong lớp học phần này!');
+                        $errors[$k]='Dòng '.$sheet[$i][0].' lỗi: Sinh viên không tồn tại trong lớp học phần này!';
+                        $k++;
                         continue;
                     }
 
@@ -413,7 +440,7 @@ class studentpointController extends Controller
                         'pointtest'=> $sheet[$i][5],
                         'mmc_note'=> $sheet[$i][8],
                     ];
-                    $this->updatepointdetail($id, $sheet[$i][5]); // tính điếm và lưu diểm tổng kết vào bảng mmc_pointdetails
+//                    $this->updatepointdetail($id, $sheet[$i][5]); // tính điếm và lưu diểm tổng kết vào bảng mmc_pointdetails
                     $j++;
                 }
             }
@@ -422,20 +449,95 @@ class studentpointController extends Controller
         // Vòng lặp để lưu dữ liệu trong mảng obj vào trong csdl
         for ($i=0; $i < count($obj); $i++) {
             $point= mmc_studentpoint::find($obj[$i]['id']);
+            $hs10= $this->hs10($point->id, $obj[$i]['pointtest']);
             if($point->mmc_key < 2){
                 $point->testscore = $obj[$i]['pointtest'];
                 $point->mmc_note = $obj[$i]['mmc_note'];
+                $point->mmc_10grade = $hs10;
+                $point->mmc_4grade = $this->hs4($hs10);
                 $point->update();
+                $this->updatepointdetail($point->mmc_studentid);
             }else{
-//                    $temp=explode("-",$point->testscore);
-//                    $temp[0]= $obj[$i]['pointtest'];
-//                    $pointtestnew = implode( "-", $temp);
+                $point->mmc_10grade = $hs10.'-'.$point->mmc_10grade;
+                $point->mmc_4grade = $this->hs4($hs10).'-'.$point->mmc_4grade;
                 $point->testscore = $obj[$i]['pointtest'].'-'.$point->testscore;
                 $point->update();
+                $this->updatepointdetail($point->mmc_studentid);
             }
 
         }
-        return back()->with('status', 'Thêm điểm thi thành công!');
+        if($k==0){
+            return back()->with('status', 'Thêm điểm thi thành công!');
+        }else{
+            return back()->withErrors($errors);
+        }
+    }
+
+    public function hs10($id, $pointtest){
+        $point = mmc_studentpoint::find($id);
+        $subject = mmc_subject::where('mmc_subjectid',  '=', $point->mmc_subjectid)->get();
+        $tongket = tinhdiemTB($subject[0]->mmc_theory, $subject[0]->mmc_practice, $point->point_ratio, $point->diligentpoint, $point->point1, $point->point2, $point->point3, $point->point4, $pointtest);
+        return $tongket;
+    }
+
+    public function hs4($hs10){
+        $hs4= null;
+        if($hs10 < 4.0){
+            $hs4= 0;
+        }else
+            if($hs10 >= 4.0 && $hs10 < 5.5){
+                $hs4= 1;
+            }else
+                if($hs10 >= 5.5 && $hs10 < 7.0){
+                    $hs4= 2;
+                }else
+                    if($hs10 >= 7.0 && $hs10 < 8.5){
+                        $hs4= 3;
+                    }else{
+                        $hs4= 4;
+                    }
+        return $hs4;
+    }
+
+    public function updatepointdetail($studentid){
+        $student= mmc_studentpoint::where('mmc_studentid', '=', $studentid)->get();
+        $tongtinchi=0;
+        $tongdiem=0;
+        $tonghs4=0;
+        if(count($student)>0){
+            foreach ($student as $key){
+                $subject= mmc_subject::where('mmc_subjectid', '=', $key->mmc_subjectid)->get();
+                $tinchi= $subject[0]->mmc_theory + $subject[0]->mmc_practice;
+                $array=$temp=explode("-",$key->mmc_10grade);
+                $diem= 0;
+                foreach ($array as $a){
+                    $a= (float)$a;
+                    if($diem<$a){
+                        $diem= $a;
+                    }
+                }
+                $tongdiem += ($diem*$tinchi);
+                $tonghs4 += $this->hs4($diem)*$tinchi;
+                $tongtinchi += $tinchi;
+            }
+            $diemtb= $tongdiem/$tongtinchi;
+            $diemtb= number_format((float)$diemtb, 1, '.', '');
+            $hs4=$tonghs4/$tongtinchi;
+            $hs4= number_format((float)$hs4, 2, '.', '');
+            $pointdetail= mmc_pointdetails::where('mmc_studentid', '=', $studentid)->get();
+            if(count($pointdetail)==0){
+                $point= new mmc_pointdetails();
+                $point->mmc_studentid= $studentid;
+                $point->mmc_10grade= $diemtb;
+                $point->mmc_4grade= $hs4;
+                $point->save();
+            }else{
+                $point= mmc_pointdetails::find($pointdetail[0]->id);
+                $point->mmc_10grade= $studentid;
+                $point->mmc_4grade= $hs4;
+                $point->update();
+            }
+        }
     }
 
     public function editratio(Request $request){

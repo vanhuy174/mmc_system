@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\item;
 use App\mmc_class;
 use App\mmc_department;
 use App\mmc_education;
 use App\mmc_employee;
 use App\mmc_major;
 use App\mmc_student;
+use App\scienceemployee;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -20,6 +22,20 @@ class AjaxController extends Controller
         {
             echo "<option>".$item->mmc_course."</option>";
         }
+    }
+    public function getMission(Request $request)
+    {
+        $items=item::where('listitems_id','=',$request->id)->get();
+        foreach ($items as $item)
+        {
+            echo "<option value='".$item->id."'>".$item->mmc_mission."</option>";
+        }
+    }
+    public function getUpdate(Request $request)
+    {
+        $scienceemployee = scienceemployee::findOrFail($request->id);
+        $scienceemployee['mmc_status']=1;
+        $scienceemployee->update();
     }
     public function getMajor(Request $request)
     {
@@ -91,7 +107,7 @@ class AjaxController extends Controller
         $students=mmc_student::where('mmc_classid','=',$classid[0]->mmc_classid)->get();
         $i=1;
         $idgv=ClassController::getidemployee($classid[0]->mmc_headteacher);
-        $url=route('get-thong-tin-giang-vien',$idgv);
+        $url=route('giangvien.show',$idgv);
         echo "<h4 style='text-align: center'>".$request->name."</h4>";
         echo "Giáo viên chủ nhiệm : <a href='{$url}' style='color:gray;'>".ClassController::getemployee($classid[0]->mmc_headteacher)."</a><br>";
         echo "Số sinh viên : ".$this->getsumstudent($classid[0]->mmc_classid)."<br>";

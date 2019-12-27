@@ -64,9 +64,12 @@
                                 <tbody>
                                 @foreach($class as $item)
                                     <tr>
+
                                         <td data-toggle="modal" data-target="#infoclass" style="cursor:pointer">{{$item->mmc_classname}}</td>
                                         <td>{{\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_major)}}</td>
-                                        <td><a href="{{route('get-thong-tin-giang-vien',\App\Http\Controllers\Admin\ClassController::getidemployee($item->mmc_headteacher))}}" style='color:gray;'>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</a></td>
+                                        <td>@if(!is_null(\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)))
+                                                <a href="{{route('giangvien.show',\App\Http\Controllers\Admin\ClassController::getidemployee($item->mmc_headteacher))}}" style='color:gray;'>{{\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)}}</a>
+                                            @endif</td>
                                         <td>{{$item->mmc_numstudent}}</td>
                                         <td>{{$item->mmc_description}}</td>
                                         <td>

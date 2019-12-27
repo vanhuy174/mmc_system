@@ -50,7 +50,7 @@ class calendarController extends Controller
         $obj = []; //khởi tạo mảng obj để chứa các dữ liệu lịch sau khi xử lý xong.
         $errors = []; //khởi tạo mảng error để chứa các lỗi gặp phải
         $j=0; $k=0;  //$j chỉ số của mảng obj, $k là chỉ số của mảng error.
-        foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel 
+        foreach ($objPHPExcel->getWorksheetIterator() as $worksheet){ //vòng lặp để lấy giá trị trong từng sheet của file excel
             $sheet = $worksheet->toArray();
             for ($i = 0; $i < count($sheet); $i++) {
                 if($sheet[$i][1] == 'Họ và tên giảng viên :'){
@@ -95,7 +95,7 @@ class calendarController extends Controller
                     ];
                     $j++;
                 }
-                if( $i % 500 == 0 ){ 
+                if( $i % 500 == 0 ){
                     set_time_limit(200);
                 }
             }

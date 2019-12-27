@@ -18,6 +18,13 @@
                 <span class="input-group-text">Chương trình đạo tạo <b class="b-color-red">&nbsp;&nbsp;*</b></span>
             </div>
             <select name="mmc_ctdt" id="mmc_ctdt" class="form-control">
+                @foreach($education as $item)
+                    @if(isset($class) && $class->mmc_ctdt==$item->mmc_course)
+                        <option selected>{{$item->mmc_course}}</option>
+                    @else
+                        <option selected>{{$item->mmc_course}}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         <div class="input-group mb-3 input-group-sm">

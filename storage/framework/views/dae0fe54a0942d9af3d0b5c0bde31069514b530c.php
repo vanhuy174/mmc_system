@@ -180,6 +180,7 @@
                     right: 'month,agendaWeek,agendaDay'
                 },
                 lang: 'vi',
+                editable: true,
                 events: [
                     <?php for( $i=0; $i< count($calendar) ; $i++): ?>
                         {

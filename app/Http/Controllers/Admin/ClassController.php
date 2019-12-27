@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ClassImport;
 use App\mmc_class;
 use App\mmc_department;
+use App\mmc_education;
 use App\mmc_employee;
 use App\mmc_major;
 use Illuminate\Http\Request;
@@ -43,11 +44,12 @@ class ClassController extends Controller
      */
     public function create()
     {
-
+        $majorf = mmc_major::first();
+        $education= mmc_education::where('mmc_majorid','=',$majorf->mmc_majorid)->get();
         $employee=mmc_employee::select('mmc_employeeid','mmc_name','mmc_deptid')->get();
         $department = mmc_department::select('mmc_deptid','mmc_deptname')->get();
         $major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
-        return view('admin.class.create',compact('major','employee','department'));
+        return view('admin.class.create',compact('major','employee','department','education'));
 
     }
 
@@ -102,11 +104,13 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
+
         $employee=mmc_employee::select('mmc_employeeid','mmc_name','mmc_deptid')->get();
         $department = mmc_department::select('mmc_deptid','mmc_deptname')->get();
         $major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
         $class= mmc_class::findOrFail($id);
-        return view('admin.class.edit', compact('class','major','employee','department'));
+        $education= mmc_education::where('mmc_majorid','=',$class->mmc_major)->get();
+        return view('admin.class.edit', compact('class','major','employee','department','education'));
     }
 
     /**

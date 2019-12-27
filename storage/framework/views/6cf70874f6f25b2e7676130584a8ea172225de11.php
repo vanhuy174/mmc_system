@@ -1,5 +1,5 @@
 <?php $__env->startSection('linkstyle'); ?>
-<link href="../../css/mmc_detailstudent.css" rel="stylesheet">
+<link href="css/mmc_detailstudent.css" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -13,11 +13,17 @@
 	<?php if(session('status')): ?>
 	<br> <div class="alert alert-info"><?php echo e(session('status')); ?></div>
 	<?php endif; ?>
+    <div class="row">
+        <div class="col-lg-12">
+        <a href="" class=" btn btn-primary btn-sm float-right " title="Xuất File">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
+        </a>
+        </div>
+    </div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">Thông tin sinh viên</div>
-				<a class="btn btn-primary width-100" href="">Xuất file pdf</a>
 				<div class="card-body">
 					<div class="container">
 						<div class="text-center">
@@ -86,9 +92,9 @@
 											<span>Kỷ luật: &nbsp;&nbsp;<?php echo e($data['mmc_descipline']); ?></span>
 										</div>
 									</div>
-								</div>	
+								</div>
 							</div>
-							
+
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
@@ -143,7 +149,7 @@
 										<div class="input-group mb-3 input-group-sm">
 											<span>Email: &nbsp;&nbsp;<?php echo e($data['mmc_motheremail']); ?></span>
 										</div>
-										
+
 									</div>
 									<div class="col-md-6">
 										<div class="input-group mb-3 input-group-sm">
@@ -170,4 +176,5 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.backend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/mmc/MMC-system/resources/views/admin/Student/mmc_detailStudent.blade.php ENDPATH**/ ?>

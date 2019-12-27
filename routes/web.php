@@ -24,9 +24,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     // Route::get('home', function () {
     //     return view('admin.index');
     // });
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('home');
+    Route::get('/', 'Admin\homeController@index')->name('home');
     Route::group(['middleware'=>'role'],function() {
         Route::post('subject/import/', 'Admin\SubjectController@import');
         Route::post('class/import/', 'Admin\ClassController@import');
@@ -45,7 +43,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/homeStudent', 'Admin\mmc_ControllerStudent@index')->name('homeStudent');
         Route::get('/createstudent', 'Admin\mmc_ControllerStudent@getclass')->name('formcreateStudent');
         Route::post('/createstudent', 'Admin\mmc_ControllerStudent@create')->name('createStudent');
-        Route::get('/destroyStudent/{id}', 'Admin\mmc_ControllerStudent@destroy')->name('destroyStudent');
+        Route::get('/delete/{id}', 'Admin\mmc_ControllerStudent@destroy')->name('destroyStudent');
         Route::get('/showStudent/{id}', 'Admin\mmc_ControllerStudent@show')->name('showStudent');
         Route::get('/editStudent/{id}', 'Admin\mmc_ControllerStudent@edit')->name('editStudent');
         Route::post('/updateStudent/{id}', 'Admin\mmc_ControllerStudent@update')->name('updateStudent');
@@ -53,82 +51,39 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
+        Route::post('/ajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('ajaxmajor');
+        Route::post('setstatus', 'Admin\mmc_ControllerStudent@setstatus')->name('setstatus');
+
+//        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
+//        Route::post('/withclass', 'Admin\mmc_ControllerStudent@withclass')->name('withclass');
+
+
         //route lịch
         Route::get('/homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');
         Route::post('/importCalendar', 'Admin\calendarController@store')->name('importCalendar');
         Route::post('/edittime', 'Admin\ScheduleController@store')->name('edittime');
 
+        // danh sách giảng viên đã xóa
+        Route::get('giangvien/xoagiangvien', 'Admin\GiangVienController@xoagv')->name('getXoa');
+        Route::get('giangvien/xemthongtin/{id}', 'Admin\GiangVienController@xemthongtin')->name('getThongTin');
+        Route::get('giangvien/phuchoi/{id}', 'Admin\GiangVienController@phuchoi')->name('getPhucHoi');
 
         //route giảng viên
-        Route::group(['prefix' => '/giang-vien'], function () {
-            // danh sách giảng viên: /admin/giang-vien/danh-sach-giang-vien
-            Route::get('/danh-sach-giang-vien',[
-                'as'=>'danh-sach-giang-vien',
-                'uses'=>'GiangVienController@getDanhSachGV'
-            ]);
-            // thêm giảng viên: /admin/giang-vien/them-giang-vien
-            Route::get('/them-giang-vien',[
-                'as'=>'get-them-giang-vien',
-                'uses'=>'GiangVienController@getThemGV'
-            ]);
-            Route::post('/them-giang-vien',[
-                'as'=>'post-them-giang-vien',
-                'uses'=>'GiangVienController@postThemGV'
-            ]);
-            // sửa thông tin giảng viên: /admin/giang-vien/sua-thong-tin-giang-vien/{id}
-            Route::get('/sua-thong-tin-giang-vien/{id}',[
-                'as'=>'get-sua-thong-tin-giang-vien',
-                'uses'=>'GiangVienController@getSuaGV'
-            ]);
-            Route::post('/sua-thong-tin-giang-vien/{id}',[
-                'as'=>'post-sua-thong-tin-giang-vien',
-                'uses'=>'GiangVienController@postSuaGV'
-            ]);
-            // thông tin giảng viên: /admin/giang-vien/thong-tin-giang-vien/{id}
-            Route::get('/thong-tin-giang-vien/{id}',[
-                'as'=>'get-thong-tin-giang-vien',
-                'uses'=>'GiangVienController@getThongTinGV'
-            ]);
-            // tìm kiếm giảng viên: /admin/giang-vien/tim-kiem-thong-tin-giang-vien/{id}
-            Route::post('/tim-kiem-thong-tin-giang-vien',[
-                'as'=>'get-tim-kiem-giang-vien',
-                'uses'=>'GiangVienController@postTimKiemGV'
-            ]);
-            // xóa giảng viên: /admin/giang-vien/xoa-giang-vien/{id}
-            Route::get('/xoa-giang-vien/{id}',[
-                'as'=>'get-xoa-giang-vien',
-                'uses'=>'GiangVienController@getXoaGV'
-            ]);
+        Route::resource('giangvien', 'Admin\GiangVienController');
 
-            // cá nhân: /admin/giang-vien/thong-tin-ca-nhan
-            Route::get('/thong-tin-ca-nhan/{id}',[
-                'as'=>'get-thong-tin-ca-nhan',
-                'uses'=>'GiangVienController@getThongTinCN'
-            ]);
-            // sửa cá nhân: /admin/giang-vien/sua-thong-tin-ca-nhan
-            Route::get('/sua-thong-tin-ca-nhan/{id}',[
-                'as'=>'get-sua-thong-tin-ca-nhan',
-                'uses'=>'GiangVienController@getSuaCN'
-            ]);
-            Route::post('/sua-thong-tin-ca-nhan/{id}',[
-                'as'=>'post-sua-thong-tin-ca-nhan',
-                'uses'=>'GiangVienController@postSuaCN'
-            ]);
-            // đổi passwword: /admin/giang-vien/doi-password
-            Route::get('/doi-password/{id}',[
-                'as'=>'get-doi-pass',
-                'uses'=>'GiangVienController@getDoiPass'
-            ]);
-            Route::post('/doi-password/{id}',[
-                'as'=>'post-doi-pass',
-                'uses'=>'GiangVienController@postDoiPass'
-            ]);
-        });
+        //route cá nhân
+        Route::resource('canhan', 'Admin\CaNhanController');
+        // đổi mật khẩu
+        Route::get('canhan/matkhau/{id}','Admin\CaNhanController@getDoiPass')->name('getDoiPass');
+        Route::post('canhan/matkhau/{id}','Admin\CaNhanController@postDoiPass')->name('postDoiPass');
+
+
     });
     Route::resource('schedule', 'Admin\ScheduleController');
+    Route::resource('science', 'Admin\ScienceController');
     Route::resource('oneclass', 'Admin\OneClassController');
     Route::resource('subjectclass', 'Admin\subjectclassController');
-
+    Route::resource('scienceemployee', 'Admin\ScienceEmployeeController');
     //Route điểm sinh viên.
 
     Route::get('/studentpoint', 'Admin\studentpointController@index')->name('studentpoint');
@@ -143,5 +98,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('ajax/getmajor', 'Admin\AjaxController@getMajor')->name('ajaxgetmajor');
     Route::post('ajax/geteducation', 'Admin\AjaxController@getCTDT')->name('ajaxgeteducation');
     Route::post('ajax/getclass', 'Admin\AjaxController@getClass')->name('ajaxgetclass');
+    Route::post('ajax/getmission', 'Admin\AjaxController@getMission')->name('ajaxmission');
+    Route::post('ajax/getupdate', 'Admin\AjaxController@getUpdate')->name('ajaxupdate');
 });
 
