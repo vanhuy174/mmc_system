@@ -46,7 +46,18 @@
 									<form action="{{ route('importCalendar') }}" method="POST" enctype="multipart/form-data">
 										@csrf
 										<div class="modal-body">
-											<input type="file" class="form-control" required="required" name="file">
+                                            <div class="form-group">
+                                                <label class="color-red">Chọn học kỳ:</label>
+                                                <select class="form-control" name="semester">
+                                                    @foreach(semester() as $key)
+                                                        <option value="{{$key}}">{{$key}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Chọn file: </label>
+                                                <input type="file" class="form-control" required="required" name="file">
+                                            </div>
 										</div>
 										<div class="modal-footer">
 											<button type="submit" class="btn btn-primary">Thêm</button>

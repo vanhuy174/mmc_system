@@ -21,4 +21,8 @@ class mmc_studentpoint extends Model
 	{
 	    return $this->belongsTo('App\mmc_subject', 'mmc_subjectid', 'mmc_subjectid');
 	}
+    public function subjectclass()
+    {
+        return $this->hasMany('App\mmc_subjectclass', 'mmc_subjectclassid', 'mmc_subjectclassid');
+    }
 }

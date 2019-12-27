@@ -19,6 +19,7 @@ class CreateMmcSubjectclassesTable extends Migration
             $table->string('mmc_subjectclassname');   //tên lớp học phần.
             $table->string('mmc_employeeid')->index();   //mã giảng viên.
             $table->string('mmc_subjectid');    //mã học phần.
+            $table->string('mmc_semester');    //ky hoc.
             $table->timestamps();
         });
     }

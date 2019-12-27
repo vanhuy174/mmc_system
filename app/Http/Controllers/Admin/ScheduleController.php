@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\mmc_class;
 use Auth;
 use App\mmc_time;
 use App\mmc_calendar;
@@ -27,6 +28,7 @@ class ScheduleController extends Controller
             $data= mmc_calendar::where('mmc_subjectclassid', '=', $subjectclass[$i]->mmc_subjectclassid)->get();
             for ($j=0; $j < count($data); $j++) {
                 $calendar[$k]=[
+                    'id' => $data[$j]->id,
                     'tenlophocphan' => $subjectclass[$i]['mmc_subjectclassname'],
                     'ngayhoc' => $data[$j]->mmc_schedule,
                     'phonghoc' => $data[$j]->mmc_classroom,
@@ -74,7 +76,7 @@ class ScheduleController extends Controller
             $time->time_in = $request->get('time_in')[$i];
             $time->time_out = $request->get('time_out')[$i];
             $time->save();
-        }  
+        }
         return back();
     }
 
@@ -131,4 +133,28 @@ class ScheduleController extends Controller
     {
         return mmc_time::where('class_time', '=', "$id")->value('time_out');
     }
+    public function updatecalendar(Request $request)
+    {
+        if(!is_null($request->id) && !is_null($request->date) && !is_null($request->sotiet) && !is_null($request->phonghoc)){
+            $class= null;
+            $i= 0;
+            while($i< $request->sotiet){
+                if (is_null($class)){
+                    $class= $request->tiet;
+                }else{
+                    $class= $class.",".++$request->tiet;
+                }
+                $i++;
+            }
+            $data= mmc_calendar::find($request->id);
+            $data->mmc_schedule= $request->date;
+            $data->mmc_class= $class;
+            $data->mmc_classroom= $request->phonghoc;
+            $data->update();
+            return back();
+        }else{
+            return back();
+        }
+    }
+
 }
