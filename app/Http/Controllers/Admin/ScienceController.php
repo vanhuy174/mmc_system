@@ -44,11 +44,29 @@ class ScienceController extends Controller
     {
         if(isset($request->mmc_mission))
         {
+            $this->validate($request,[
+                'mmc_mission'=>'required|unique:listitems,mmc_mission',
+            ],[
+                'mmc_mission.required'=>'Không được bỏ trống',
+                'mmc_mission.unique'=>'Danh mục đã tồn tại'
+            ]);
             $listitem=new listitem();
             $listitem->mmc_mission=$request->mmc_mission;
             $listitem->save();
         }else
         {
+            $this->validate($request,[
+                'mmc_missions'=>'required|unique:items,mmc_mission',
+                'mmc_coefficient'=>'required|numeric',
+                'mmc_sogiochuan'=>'required|numeric',
+            ],[
+                'mmc_missions.required'=>'Không được bỏ trống',
+                'mmc_missions.unique'=>'Danh mục đã tồn tại',
+                'mmc_coefficient.required'=>'Hệ số không được bỏ trống',
+                'mmc_coefficient.numeric'=>'Hệ số phải nhập dữ liệu là số',
+                'mmc_sogiochuan.required'=>'Số giờ chuẩn không được bỏ trống',
+                'mmc_sogiochuan.numeric'=>'Số giờ chuẩn phải nhập dữ liệu là số'
+            ]);
             $item=new item();
             $item->listitems_id=$request->mmc_missionid;
             $item->mmc_mission=$request->mmc_missions;
@@ -56,7 +74,7 @@ class ScienceController extends Controller
             $item->mmc_sogiochuan=$request->mmc_sogiochuan;
             $item->save();
         }
-        return back();
+        return redirect('admin/science');
      }
 
     /**

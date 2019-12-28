@@ -56,7 +56,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
 //        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
 //        Route::post('/withclass', 'Admin\mmc_ControllerStudent@withclass')->name('withclass');
-
+        //export excel student point.
+        Route::get('/exportPointstudent', 'Admin\studentpointController@export')->name('exportPointstudent');
 
         //route lịch
         Route::get('homeCalendar', 'Admin\calendarController@index')->name('homeCalendar');

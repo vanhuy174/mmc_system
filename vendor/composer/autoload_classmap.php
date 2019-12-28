@@ -10,6 +10,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\ClassExport' => $baseDir . '/app/Exports/ClassExport.php',
     'App\\Exports\\mmc_studentExport' => $baseDir . '/app/Exports/mmc_studentExport.php',
+    'App\\Exports\\studentpointExport' => $baseDir . '/app/Exports/studentpointExport.php',
     'App\\Http\\Controllers\\Admin\\AjaxController' => $baseDir . '/app/Http/Controllers/Admin/AjaxController.php',
     'App\\Http\\Controllers\\Admin\\CaNhanController' => $baseDir . '/app/Http/Controllers/Admin/CaNhanController.php',
     'App\\Http\\Controllers\\Admin\\ClassController' => $baseDir . '/app/Http/Controllers/Admin/ClassController.php',

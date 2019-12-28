@@ -559,6 +559,7 @@ class ComposerStaticInitd83e4f022fdbe3619132693927742689
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\ClassExport' => __DIR__ . '/../..' . '/app/Exports/ClassExport.php',
         'App\\Exports\\mmc_studentExport' => __DIR__ . '/../..' . '/app/Exports/mmc_studentExport.php',
+        'App\\Exports\\studentpointExport' => __DIR__ . '/../..' . '/app/Exports/studentpointExport.php',
         'App\\Http\\Controllers\\Admin\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AjaxController.php',
         'App\\Http\\Controllers\\Admin\\CaNhanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CaNhanController.php',
         'App\\Http\\Controllers\\Admin\\ClassController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ClassController.php',

@@ -21,7 +21,7 @@
                 <div class="w3-third" style="margin-top: 110px; ">
                     <div class="w3-white w3-text-grey w3-card-4">
                         <div class="w3-display-container ">
-                            <img src="/IMG/{{$hien->mmc_avatar}}" alt="{{$hien->mmc_avatar}}" style="width:100%; height=100%" >
+                            <img src="/IMG/{{$hien->mmc_avatar}}" alt="{{$hien->mmc_avatar}}" style="width:100%; height: 100%" >
                         </div>
                         <div class="w3-container my-3">
                             <p class="font-weight-bold "><i class=" glyphicon glyphicon-user"></i> <span class=" ml-5">{{$hien->mmc_name}}</span> </p>
@@ -42,7 +42,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-5">
-                            
+
                             <div class="w3-container my-4">
                                 <h4 class="w3-opacity"><b>- Họ Và Tên: </b>{{$hien->mmc_name}}</h4>
                             </div>
@@ -101,7 +101,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <br>
                 <br>
@@ -126,10 +125,10 @@
                             <a class="nav-link" data-toggle="tab" href="#menu4">SỨC KHỎE</a>
                         </li>
                     </ul>
-                    
-                    
+
+
                     <div class="tab-content">
-                        
+
                         <div id="menu" class="container tab-pane active">
                             <div class="w3-twothird">
                                 <div class="row">
@@ -139,13 +138,13 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-7">
-                                        
+
                                         <div class="w3-container my-4">
                                             <h4 class="w3-opacity"><b>- Công việc chính được giao: </b>{{$hien->mmc_maintask}}</h4>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div id="menu1" class="container tab-pane fade">
@@ -175,7 +174,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                         </div>
                         <div id="menu2" class="container tab-pane fade">
@@ -202,7 +201,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div id="menu3" class="container tab-pane fade">
@@ -226,7 +225,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div id="menu4" class="container tab-pane fade">
@@ -250,7 +249,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
