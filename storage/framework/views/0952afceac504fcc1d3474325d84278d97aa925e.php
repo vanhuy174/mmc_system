@@ -44,7 +44,18 @@
 									<form action="<?php echo e(route('importCalendar')); ?>" method="POST" enctype="multipart/form-data">
 										<?php echo csrf_field(); ?>
 										<div class="modal-body">
-											<input type="file" class="form-control" required="required" name="file">
+                                            <div class="form-group">
+                                                <label class="color-red">Chọn học kỳ:</label>
+                                                <select class="form-control" name="semester">
+                                                    <?php $__currentLoopData = semester(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($key); ?>"><?php echo e($key); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Chọn file: </label>
+                                                <input type="file" class="form-control" required="required" name="file">
+                                            </div>
 										</div>
 										<div class="modal-footer">
 											<button type="submit" class="btn btn-primary">Thêm</button>

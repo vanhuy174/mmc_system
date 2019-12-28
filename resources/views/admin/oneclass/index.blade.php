@@ -2,8 +2,8 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý lớp giảng dạy</h2>
-            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp giảng dạy </span>
+            <h2>Quản lý lớp chủ nhiệm </h2>
+            <span><a href="{{route('home')}}">Home</a> > Quản lý lớp chủ nhiệm </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -50,6 +50,7 @@
                                     <?php
                                     $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
                                     foreach ($student as $item){
+                                        if(!is_null($item->pointdetail)){
                                             $point= $item->pointdetail->mmc_4grade;
                                             if($point < 2.0){
                                                 $yeu++;
@@ -63,6 +64,7 @@
                                                 $xs++;
                                             }
                                         }
+                                    }
                                     ?>
                                     <tr>
                                         <th style="border-top: none;">Xuất sắc :</th>

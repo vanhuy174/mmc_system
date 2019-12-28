@@ -94,11 +94,53 @@
 									</div>
 								</div>
 							</div>
+<<<<<<< HEAD
 
+=======
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="margin-top-10">II. NỘI NGOẠI TRÚ</h3>
+                                    </div>
+                                    <?php if(!is_null($data['mmc_dormitory'])): ?>
+                                        <div class="col-md-12">
+                                            <h3 class="margin-top-10">Nội trú</h3>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Dãy nhà: &nbsp;&nbsp;<?php echo e($data['mmc_dormitory']); ?></span>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <span>Số phòng: &nbsp;&nbsp;<?php echo e($data['mmc_room_dormitory']); ?></span>
+                                            </div>
+                                        </div>
+                                    <?php elseif(!is_null($data['mmc_landlord_name'])): ?>
+                                        <div class="col-md-12">
+                                            <h3 class="margin-top-10">Ngoại trú</h3>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Họ tên chủ trọ: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_name']); ?></span>
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Số điện thoại: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_phone']); ?></span>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <span>Địa chỉ: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_address']); ?></span>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
-										<h3 class="margin-top-10">II. THÀNH PHẦN GIA ĐÌNH</h3>
+										<h3 class="margin-top-10">III. THÀNH PHẦN GIA ĐÌNH</h3>
 									</div>
 									<div class="col-md-12">
 										<h3>1. Cha:</h3>

@@ -91,7 +91,10 @@
 											@endforeach
 										</select>
 									</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
 											<span class="input-group-text width-input">Mã sinh viên: <b class="color-red">&nbsp;&nbsp;*</b></span>
@@ -136,9 +139,53 @@
 										<textarea  name="mmc_descipline" class="form-control" rows="2">{{$data['mmc_descipline']}}</textarea>
 									</div>
 								</div>
+<<<<<<< HEAD
 
+=======
+                                    <div class="col-md-12">
+                                        <h3 class="tieude">II. NỘI NGOẠI TRÚ <span>(Chỉ điền thông tin cho 1 trong 2)</span></h3>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <h3>1. Nội trú</h3>
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text width-input">Dãy nhà: </span>
+                                            </div>
+                                            <input type="text" name="mmc_dormitory" class="form-control" placeholder="VD: A2" autocomplete="off" value="{{$data['mmc_dormitory']}}">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text width-input">Số phòng:</span>
+                                            </div>
+                                            <input type="text" name="mmc_room_dormitory" class="form-control" placeholder="VD: 102" autocomplete="off" value="{{$data['mmc_room_dormitory']}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <h3>2. Ngoại trú</h3>
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text width-input">Họ tên chủ trọ: </span>
+                                            </div>
+                                            <input type="text" name="mmc_landlord_name" class="form-control" placeholder="VD: Nhuyễn Thị Lan" autocomplete="off" value="{{$data['mmc_landlord_name']}}">
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text width-input">SĐT: </span>
+                                            </div>
+                                            <input type="text" name="mmc_landlord_phone" class="form-control" placeholder="VD: 0915332678" autocomplete="off" value="{{$data['mmc_landlord_phone']}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment">Địa chỉ : </label>
+                                            <textarea  name="mmc_landlord_address" class="form-control" rows="2" placeholder="VD: Phòng 11, Xóm cô Lan, Tổ 3, Phường Tân Thịnh, Xã Quyết Thắng, TP Thái Nguyên">{{$data['mmc_landlord_address']}}</textarea>
+                                        </div>
+                                    </div>
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 								<div class="col-md-12">
-									<h3 class="tieude">II. THÀNH PHẦN GIA ĐÌNH</h3>
+									<h3 class="tieude">III. THÀNH PHẦN GIA ĐÌNH</h3>
 								</div>
 								<div class="col-md-12">
 									<h3>1. Cha:</h3>

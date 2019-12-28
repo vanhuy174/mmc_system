@@ -121,7 +121,7 @@ class AjaxController extends Controller
                 echo "<tr>";
                 echo "<td  style='border-top: none;'>".$i."</td>";
                 echo "<td style='border-top: none;'><a href='{$urlsd}' style='color:gray;'>".$item->mmc_studentid."</a></td>";
-                echo "<td style='border-top: none;'>".$item->mmc_fullname."</td>";
+                echo "<td style='border-top: none;'><a href='{$urlsd}' style='color:gray;'>".$item->mmc_fullname."</a></td>";
                 echo "</tr>";
             }
             else
@@ -129,7 +129,7 @@ class AjaxController extends Controller
                 echo "<tr>";
                 echo "<td>".$i."</td>";
                 echo "<td><a href='{$urlsd}' style='color:gray;'>".$item->mmc_studentid."</a></td>";
-                echo "<td>".$item->mmc_fullname."</td>";
+                echo "<td><a href='{$urlsd}' style='color:gray;'>".$item->mmc_fullname."</a></td>";
                 echo "</tr>";
             }
             $i++;

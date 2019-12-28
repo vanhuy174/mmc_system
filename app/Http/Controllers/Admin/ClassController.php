@@ -148,7 +148,7 @@ class ClassController extends Controller
     }
     public static function getmajor($id)
     {
-            return $major = mmc_major::where('mmc_majorid', '=', "$id")->value('mmc_majorname');
+        return $major = mmc_major::where('mmc_majorid', '=', "$id")->value('mmc_majorname');
     }
     public static function getemployee($id)
     {
@@ -180,15 +180,15 @@ class ClassController extends Controller
         if (!empty($failures))
         {
             $errors=[];
-                foreach ($failures as $key=>$error)//Lấy được cả key và value
+            foreach ($failures as $key=>$error)//Lấy được cả key và value
+            {
+                $arrerror="";
+                foreach ($error->errors() as $item)
                 {
-                    $arrerror="";
-                    foreach ($error->errors() as $item)
-                    {
-                        $arrerror.="Dòng ".$error->row()." lỗi ".$item;
-                    }
-                    $errors[]=$arrerror;
+                    $arrerror.="Dòng ".$error->row()." lỗi ".$item;
                 }
+                $errors[]=$arrerror;
+            }
             return back()->withErrors($errors);
         }
         return back()->with('flash_message', 'Import thành công!');

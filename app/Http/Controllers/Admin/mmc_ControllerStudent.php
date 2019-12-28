@@ -13,6 +13,7 @@ use App\Exports\mmc_studentExport;
 use App\Imports\mmc_studentImport;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class mmc_ControllerStudent extends Controller
 {
@@ -32,14 +33,63 @@ class mmc_ControllerStudent extends Controller
         $keyword= $request->search;
         $classid= $request->malop;
         $majorid= $request->manghanh;
-        if(!empty($classid)){
-            $data= mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
-            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid"]));
-        }
         if(!empty($keyword)){
-             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
             return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major"]));
-        }else {
+        }else if(!empty($majorid) && empty($classid) && empty($status)){
+            $class= mmc_class::where('mmc_major', '=', $majorid)->get();
+            if(!is_null($class)){
+                $data= null;
+                foreach ($class as $key){
+                    $student= mmc_Student::where('mmc_classid', '=', $key->mmc_classid)->latest();
+                    if (is_null($data)){
+                        if (!is_null($student)) {
+                            $data = $student;
+                        }
+                    }else {
+                        if (!is_null($student)) {
+                            $data = $data->unionAll($student)->latest();
+                        }
+                    }
+                }
+                $data= $data->paginate($perPage);
+                return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+            }else{
+                $data= null;
+                return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+            }
+        }else if(!empty($majorid) && empty($classid) && !empty($status)){
+            $class= mmc_class::where('mmc_major', '=', $majorid)->get();
+            if(!is_null($class)){
+                $data= null;
+                foreach ($class as $key){
+                    $student= mmc_Student::where('mmc_classid', '=', $key->mmc_classid)->where('mmc_status', '=', $status)->latest();
+                    if (is_null($data)){
+                        if (!is_null($student)) {
+                            $data = $student;
+                        }
+                    }else {
+                        if (!is_null($student)) {
+                            $data = $data->unionAll($student)->latest();
+                        }
+                    }
+                }
+                $data= $data->paginate($perPage);
+                return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+            }else{
+                $data= null;
+                return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+            }
+        }else if(!empty($majorid) && !empty($classid) && empty($status)){
+            $data= mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+        }else if(!empty($majorid) && !empty($classid) && !empty($status)){
+            $data= mmc_Student::where('mmc_classid', '=', $classid)->where('mmc_status', '=', $status)->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+        }else if(empty($majorid) && empty($classid) && !empty($status)){
+            $data= mmc_Student::where('mmc_status', '=', $status)->latest()->paginate($perPage);
+            return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major", "classid", "majorid", "status"]));
+        }else{
             $data = mmc_Student::latest()->paginate($perPage);
             return view('admin.Student.mmc_homeStudent', ['data' => $data, "data_class" => $data_class, "data_major" => $data_major]);
         }
@@ -66,7 +116,6 @@ class mmc_ControllerStudent extends Controller
             return back()->with("student", "class", "major", "majorid", "classid");
         } else {
             $student = mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
-            dd($student);
             return back()->with("student", "class", "major", "majorid", "classid");
         }
     }
@@ -274,9 +323,10 @@ class mmc_ControllerStudent extends Controller
     /**
      * Hàm export dùng để xuất ra danh sách tất cả các sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
      */
-    public function export()
+
+    public function export(Request $request)
     {
-        return Excel::download(new mmc_studentExport, 'Danh-sach-sinh-vien.xlsx');
+        return Excel::download(new mmc_studentExport($request), 'Danh-sach-sinh-vien.xlsx');
         return back();
     }
 
@@ -374,5 +424,17 @@ class mmc_ControllerStudent extends Controller
             }
         }
         return back();
+    }
+
+    /**
+     * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
+     * @param Request $request
+     */
+    public function aajaxmajor(Request $request){
+        $data= mmc_class::where('mmc_major', '=', $request->id)->get();
+        echo "<option value=''>...</option>";
+        foreach ($data as $key){
+            echo "<option value='".$key->mmc_classid."'>".$key->mmc_classname."</option>";
+        }
     }
 }

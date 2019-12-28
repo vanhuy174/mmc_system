@@ -36,7 +36,7 @@ class OneClassController extends Controller
                         ->orwhere('mmc_fullname', 'LIKE',"%$keyword%");
                 })->get();
             } else {
-                $student = mmc_student::with('pointdetail')->where('mmc_classid', '=', "$idlop")->get();
+                $student = mmc_student::where('mmc_classid', '=', "$idlop")->get();
                 $member= count($student);
             }
             return view('admin.oneclass.index',compact('student','lop', 'member'));

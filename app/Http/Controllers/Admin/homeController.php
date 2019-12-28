@@ -24,29 +24,6 @@ class homeController extends Controller
         $student= mmc_student::get();
         $pointdetail= mmc_pointdetails::get();
         $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
-//        $khoa1=0; $khoa2=0; $khoa3=0; $khoa4=0; $khoa5=0;
-//        $date_now=  date("y");
-//        $date1= 'K'.($date_now-1);
-//        $date2= 'K'.($date_now-2);
-//        $date3= 'K'.($date_now-3);
-//        $date4= 'K'.($date_now-4);
-//        $date5= 'K'.($date_now-5);
-//        if(count($student) > 0 && count($pointdetail) > 0){
-//            foreach ($student as $item){
-//                if($item->mmc_crouse == $date1){
-//                    $khoa1++;
-//                }elseif ($item->mmc_crouse == $date2){
-//                    $khoa2++;
-//                }elseif ($item->mmc_crouse == $date3){
-//                    $khoa3++;
-//                }elseif ($item->mmc_crouse == $date4){
-//                    $khoa4++;
-//                }else{
-//                    $khoa5++;
-//                }
-//            }
-//        }
-
         if(count($student) > 0 && count($pointdetail) > 0){
             foreach ($student as $item){
                 if(isset($$item->pointdetail)){

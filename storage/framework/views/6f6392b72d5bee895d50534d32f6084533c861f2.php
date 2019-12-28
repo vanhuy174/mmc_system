@@ -33,8 +33,9 @@
                                                 <option value="<?php echo e($key->mmc_majorid); ?>" selected><?php echo e($key->mmc_majorname); ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="">...</option>
                                     <?php else: ?>
-                                        <option>...</option>
+                                        <option value="">...</option>
                                     <?php endif; ?>
                                     <?php $__currentLoopData = $data_major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($key->mmc_majorid); ?>"><?php echo e($key->mmc_majorname); ?></option>
@@ -50,19 +51,122 @@
                                                 <option value="<?php echo e($key->mmc_classid); ?>" selected><?php echo e($key->mmc_classname); ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="">...</option>
                                     <?php else: ?>
-                                        <option>...</option>
+                                        <option value="">...</option>
                                     <?php endif; ?>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group mb-1">
+                                <label for="aclass">&emsp;Học kỳ:&emsp;</label>
+                                <select class="form-control" name="hocky">
+                                    <option value="">...</option>
+                                    <?php $__currentLoopData = semester(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option <?php if(isset($hocky) && $hocky == $key) echo 'selected';?> value="<?php echo e($key); ?>"><?php echo e($key); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-1">
+                                <label for="aclass">&emsp;Học lực:&emsp;</label>
+                                <select class="form-control" name="status">
+                                    <option value="">...</option>
+                                    <option <?php if(isset($status) && $status == 'xs') echo 'selected';?> value="xs">Xuất sắc</option>
+                                    <option <?php if(isset($status) && $status == 'gioi') echo 'selected';?> value="gioi">Giỏi</option>
+                                    <option <?php if(isset($status) && $status == 'kha') echo 'selected';?> value="kha">Khá</option>
+                                    <option <?php if(isset($status) && $status == 'tb') echo 'selected';?> value="tb">Trung bình</option>
+                                    <option <?php if(isset($status) && $status == 'yeu') echo 'selected';?> value="yeu">Yếu</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-1">
                                 <button class="btn btn-primary" type="submit">Xem</button>
                             </div>
                         </form>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#xuatfilediem" style="float: right;">Xuất File</button>
+                        <!-- Modal xuất ra file excel-->
+                        <div class="modal fade" id="xuatfilediem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="exampleModalLabel">Xuất file Excel danh sách sinh viên.</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="<?php echo e(route('exportStudent')); ?>">
+                                        <div class="modal-body">
+                                            <div class="form-group mb-2">
+                                                <label for="amajor">Ngành:&emsp;</label>
+                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                    <?php if(isset($majorid)): ?>
+                                                        <option value="">...</option>
+                                                        <?php $__currentLoopData = $data_major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($majorid == $key->mmc_majorid): ?>
+                                                                <option value="<?php echo e($key->mmc_majorid); ?>" selected><?php echo e($key->mmc_majorname); ?></option>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="">...</option>
+                                                    <?php else: ?>
+                                                        <option value="">...</option>
+                                                    <?php endif; ?>
+                                                    <?php $__currentLoopData = $data_major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($key->mmc_majorid); ?>"><?php echo e($key->mmc_majorname); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="aclass">&emsp;Lớp:&emsp;</label>
+                                                <select class="form-control" id="modalclass" name="malop">
+                                                    <?php if(isset($classid)): ?>
+                                                        <?php $__currentLoopData = $data_class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($classid == $key->mmc_classid): ?>
+                                                                <option value="<?php echo e($key->mmc_classid); ?>" selected><?php echo e($key->mmc_classname); ?></option>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="">...</option>
+                                                    <?php else: ?>
+                                                        <option value="">...</option>
+                                                    <?php endif; ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="aclass">&emsp;Học kỳ:&emsp;</label>
+                                                <select class="form-control" name="hocky">
+                                                    <option value="">...</option>
+                                                    <?php $__currentLoopData = semester(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($key); ?>"><?php echo e($key); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-1">
+                                                <label for="aclass">&emsp;Học lực:&emsp;</label>
+                                                <select class="form-control" name="status">
+                                                    <option value="">...</option>
+                                                    <option <?php if(isset($status) && $status == 'xs') echo 'selected';?> value="xs">Xuất sắc</option>
+                                                    <option <?php if(isset($status) && $status == 'gioi') echo 'selected';?> value="gioi">Giỏi</option>
+                                                    <option <?php if(isset($status) && $status == 'kha') echo 'selected';?> value="kha">Khá</option>
+                                                    <option <?php if(isset($status) && $status == 'tb') echo 'selected';?> value="tb">Trung bình</option>
+                                                    <option <?php if(isset($status) && $status == 'yeu') echo 'selected';?> value="yeu">Yếu</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Xuất file</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row ibox-content">
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                </ul>
+                            </div>
                             <div class="col-md-6">
                                 <div class="ibox ">
                                     <div>
@@ -74,7 +178,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -87,12 +190,12 @@
                                     <th>Lớp</th>
                                     <th>Điểm hệ 4</th>
                                     <th>Điểm hệ 10</th>
-                                    <th>Ghi chú</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i=1; ?>
-                                <?php $__currentLoopData = $pointstudent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $std): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(!is_null($pointstudent) && !isset($hocky)): ?>
+                                    <?php $__currentLoopData = $pointstudent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $std): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($i++); ?></td>
                                         <td><?php echo e($std->mmc_studentid); ?></td>
@@ -100,12 +203,25 @@
                                         <td><?php echo e($std->class->mmc_classname); ?></td>
                                         <td><?php echo e($std->pointdetail->mmc_4grade); ?></td>
                                         <td><?php echo e($std->pointdetail->mmc_10grade); ?></td>
-                                        <td><?php echo e($std->mmc_note); ?></td>
                                     </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php elseif(!is_null($pointstudent) && isset($hocky)): ?>
+                                    <?php $__currentLoopData = $pointstudent; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $std): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                            <td><?php echo e($i++); ?></td>
+                                            <td><?php echo e($std->mmc_studentid); ?></td>
+                                            <td><?php echo e($std->mmc_fullname); ?></td>
+                                            <td><?php echo e($std->class->mmc_classname); ?></td>
+                                            <td><?php echo e(diemhockyhs4($std->mmc_studentid, $hocky)); ?></td>
+                                            <td><?php echo e(diemhockyhs10($std->mmc_studentid, $hocky)); ?></td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                                 </tbody>
                             </table>
-                            <div class="pagination justify-content-center"> <?php echo $pointstudent->appends(['manghanh' => Request::get('manghanh'), 'malop' => Request::get('malop')])->render(); ?> </div>
+                            <?php if(!is_null($pointstudent)): ?>
+                            <div class="pagination justify-content-center"> <?php echo $pointstudent->appends(['manghanh' => Request::get('manghanh'), 'malop' => Request::get('malop'), 'hocky' => Request::get('hocky'), 'status' => Request::get('status')])->render(); ?> </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -129,7 +245,6 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
     </div>
@@ -142,7 +257,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "<?php echo e(route('ajaxmajor')); ?>",
+                    url: "<?php echo e(route('aajaxmajor')); ?>",
                     data: {
                         "_token": "<?php echo e(csrf_token()); ?>",
                         "id": selectVal},

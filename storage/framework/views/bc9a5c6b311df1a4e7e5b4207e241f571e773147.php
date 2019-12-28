@@ -1,8 +1,8 @@
 <?php $__env->startSection('content'); ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý ngành</h2>
-            <span><a href="<?php echo e(route('home')); ?>">Home</a> > <a href="<?php echo e(route('major.index')); ?>">Quản lý ngành</a> > Thêm mới ngành </span>
+            <h2>Quản lý hoạt động nghiên cứu khoa học</h2>
+            <span><a href="<?php echo e(route('home')); ?>">Home</a> > <a href="<?php echo e(route('science.index')); ?>">Quản lý hoạt động nghiên cứu khoa học</a> > Thêm mới  </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-header">Thêm mới ngành</div>
                     <div class="card-body">
-                        <a href="<?php echo e(url('/admin/major')); ?>" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
+                        <a href="<?php echo e(url('/admin/science')); ?>" title="Back"><button class="btn btn-primary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại</button></a>
                         <?php if($errors->any()): ?>
                             <ul class="alert alert-danger" style="list-style: none">
                                 <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

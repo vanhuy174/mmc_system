@@ -109,6 +109,7 @@ class calendarController extends Controller
                 $subjectclass->mmc_subjectclassname= $obj[$i]['tenlophocphan'];
                 $subjectclass->mmc_employeeid= $obj[$i]['magiangvien'];
                 $subjectclass->mmc_subjectid= $obj[$i]['mahocphan'];
+                $subjectclass->mmc_semester= $request->semester;
                 $subjectclass->save();
             }
             $calendars= new mmc_calendar;

@@ -166,7 +166,6 @@ class CaNhanController extends Controller
         return view('admin.canhan.matkhau');
     }
     public function postDoiPass(Request $request,$id){
-
         $passMoi1 = $request->password_Moi1;
         $passMoi2 = $request->password_Moi2;
 

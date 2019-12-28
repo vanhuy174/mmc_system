@@ -12,6 +12,7 @@ use App\mmc_subject;
 use App\mmc_student;
 use App\mmc_class;
 use App\mmc_major;
+use DB;
 use libphonenumber\CountryCodeToRegionCodeMap;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
 
@@ -30,8 +31,60 @@ class studentpointController extends Controller
         $keyword= $request->search;
         $classid= $request->malop;
         $majorid= $request->manghanh;
+
         $numberstudent= 0; $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
-        if(!empty($classid)){
+        $hocky= $request->hocky;
+        $status= $request->status;
+        $numberstudent= 0; $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
+        if (!is_null($keyword)){
+            $pointstudent= mmc_student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
+            $hocluc=array(0, 0, 0, 0, 0);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        elseif(!empty($majorid) && empty($classid) && empty($hocky) && empty($status)) {
+            $pointstudent= null;
+            $class = mmc_class::Where('mmc_major', '=', $majorid)->get();
+            if (!is_null($class)) {
+                $data = null; $allpoint= null;
+                foreach ($class as $key) {
+                    $student = mmc_student::where('mmc_classid', '=', $key->mmc_classid)->latest();
+                    $point = mmc_student::where('mmc_classid', '=', $key->mmc_classid)->get();
+                    if (is_null($data)) {
+                        if (!is_null($student)) {
+                            $data = $student;
+                            $allpoint= $point;
+                        }
+                    } else {
+                        if (!is_null($student)) {
+                            $data = $data->unionAll($student)->latest();
+                            $allpoint = $allpoint->merge($point);
+                        }
+                    }
+                }
+                foreach ($allpoint as $key) {
+                    $point = $key->pointdetail->mmc_4grade;
+                    if ($point == null) {
+                        continue;
+                    }
+                    $tinh= tinhhocluc($point);
+                    if ($tinh == 'yeu') {$yeu++;
+                    } elseif ($tinh == 'tb') { $tb++;
+                    } elseif ($tinh == 'kha') { $kha++;
+                    } elseif ($tinh == 'gioi') { $gioi++;
+                    } else { $xs++; }
+                    $numberstudent++;
+                }
+                if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
+                if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
+                if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
+                if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
+                if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+                $hocluc = array($yeu, $tb, $kha, $gioi, $xs);
+                $pointstudent= $data->paginate($perPage);
+            }
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        elseif(!empty($majorid) && !empty($classid) && empty($hocky) && empty($status)){
             $pointstudent= mmc_student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
             $pointk= mmc_Student::where('mmc_classid', '=', $classid)->get();
             foreach ($pointk as $key) {
@@ -39,15 +92,15 @@ class studentpointController extends Controller
                 if ($point == null) {
                     continue;
                 }
-                if ($point < 2.0) {
+                if(tinhhocluc($point) == 'yeu'){
                     $yeu++;
-                } elseif ($point >= 2.0 && $point < 2.5) {
+                }elseif (tinhhocluc($point) == 'tb'){
                     $tb++;
-                } elseif ($point >= 2.5 && $point < 3.2) {
+                }elseif (tinhhocluc($point) == 'kha'){
                     $kha++;
-                } elseif ($point >= 3.2 && $point < 3.6) {
+                }elseif (tinhhocluc($point) == 'gioi'){
                     $gioi++;
-                } else {
+                }else{
                     $xs++;
                 }
                 $numberstudent++;
@@ -58,39 +111,191 @@ class studentpointController extends Controller
             if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
             if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
             $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
-            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid"]));
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
         }
-        $pointstudent= mmc_student::latest()->paginate($perPage);
-        $pointdetail= mmc_pointdetails::get();
-        $numberstudent= count($pointdetail);
-        $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
-        if(count($pointstudent) > 0 && count($pointdetail) > 0){
-            foreach ($pointdetail as $item){
-                $point= $item->mmc_4grade;
-                if($point == null){
-                    continue;
+        elseif(!empty($majorid) && empty($classid) && !empty($hocky) && empty($status)){
+            $pointstudent= null;
+            $class = mmc_class::Where('mmc_major', '=', $majorid)->get();
+            if (!is_null($class)) {
+                $data = null; $allpoint= null;
+                foreach ($class as $key) {
+                    $student = mmc_student::where('mmc_classid', '=', $key->mmc_classid)->latest();
+                    $point = mmc_student::where('mmc_classid', '=', $key->mmc_classid)->get();
+                    if (is_null($data)) {
+                        if (!is_null($student)) {
+                            $data = $student;
+                            $allpoint= $point;
+                        }
+                    } else {
+                        if (!is_null($student)) {
+                            $data = $data->unionAll($student)->latest();
+                            $allpoint = $allpoint->merge($point);
+                        }
+                    }
                 }
-                if($point < 2.0){
-                    $yeu++;
-                }elseif ($point >= 2.0 && $point < 2.5 ){
-                    $tb++;
-                }elseif ($point >= 2.5 && $point < 3.2 ){
-                    $kha++;
-                }elseif ($point >= 3.2 && $point < 3.6 ){
-                    $gioi++;
-                }else{
-                    $xs++;
+                foreach ($allpoint as $key) {
+                    $point = $key->pointdetail->mmc_4grade;
+                    if ($point == null) {
+                        continue;
+                    }
+                    $tinh= tinhhocluc($point);
+                    if ($tinh == 'yeu') {
+                        $yeu++;
+                    } elseif ($tinh == 'tb') {
+                        $tb++;
+                    } elseif ($tinh == 'kha') {
+                        $kha++;
+                    } elseif ($tinh == 'gioi') {
+                        $gioi++;
+                    } else {
+                        $xs++;
+                    }
+                    $numberstudent++;
                 }
+
+                $hocluc = array($yeu, $tb, $kha, $gioi, $xs);
+                $pointstudent= $data->paginate($perPage);
             }
             if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
             if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
             if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
             if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
             if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+            $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
         }
-        $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
-        return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid"]));
-    }
+        elseif(!empty($majorid) && empty($classid) && empty($hocky) && !empty($status)){
+            $pointstudent = null;
+            $class = mmc_class::Where('mmc_major', '=', $majorid)->get();
+            if (!is_null($class)) {
+                foreach ($class as $key) {
+                    $student = mmc_student::where('mmc_classid', '=', $key->mmc_classid)->get();
+                    if (!is_null($student)) {
+                        foreach ($student as $key) {
+                            $point = $key->pointdetail->mmc_4grade;
+                            if (tinhhocluc($point) === $status) {
+                                if (is_null($pointstudent)) {
+                                    $pointstudent = mmc_student::where('id', '=', $key->id)->latest();
+                                } else {
+                                    $pointstudent = $pointstudent->unionAll(mmc_student::where('id', '=', $key->id)->latest())->latest();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (!is_null($pointstudent)){
+                $pointstudent= $pointstudent->paginate($perPage);
+            }
+            $hocluc=array(0, 0, 0, 0, 0);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        elseif(!empty($majorid) && !empty($classid) && !empty($hocky) && empty($status)){
+            $pointstudent= mmc_student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
+            $pointk= mmc_Student::where('mmc_classid', '=', $classid)->get();
+            foreach ($pointk as $key) {
+                $point = $key->pointdetail->mmc_4grade;
+                if ($point == null) {
+                    continue;
+                }
+                if(tinhhocluc($point) == 'yeu'){
+                    $yeu++;
+                }elseif (tinhhocluc($point) == 'tb'){
+                    $tb++;
+                }elseif (tinhhocluc($point) == 'kha'){
+                    $kha++;
+                }elseif (tinhhocluc($point) == 'gioi'){
+                    $gioi++;
+                }else{
+                    $xs++;
+                }
+                $numberstudent++;
+            }
+            if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
+            if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
+            if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
+            if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
+            if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+            $hocluc=array($yeu, $tb, $kha, $gioi, $xs);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        elseif(!empty($majorid) && !empty($classid) && empty($hocky) && !empty($status)){
+            $pointstudent = null;
+            $student= mmc_student::where('mmc_classid', '=', $classid)->get();
+            if (!is_null($student)) {
+                $i = 0;
+                foreach ($student as $key) {
+                    $point = $key->pointdetail->mmc_4grade;
+                    if (tinhhocluc($point) === $status) {
+                        if (is_null($pointstudent)) {
+                            $pointstudent = mmc_student::where('id', '=', $key->id)->latest();
+                        } else {
+                            $pointstudent = $pointstudent->unionAll(mmc_student::where('id', '=', $key->id)->latest())->latest();
+                        }
+                    }
+                }
+            }
+            if (!is_null($pointstudent)){
+                $pointstudent= $pointstudent->paginate($perPage);
+            }
+            $hocluc=array(0, 0, 0, 0, 0);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        elseif(!empty($majorid) && !empty($classid) && !empty($hocky) && !empty($status)){
+            $pointstudent = null;
+            $student= mmc_student::where('mmc_classid', '=', $classid)->get();
+            if (!is_null($student)) {
+                $i = 0;
+                foreach ($student as $key) {
+                    $point = $key->pointdetail->mmc_4grade;
+                    if (tinhhocluc($point) === $status) {
+                        if (is_null($pointstudent)) {
+                            $pointstudent = mmc_student::where('id', '=', $key->id)->latest();
+                        } else {
+                            $pointstudent = $pointstudent->unionAll(mmc_student::where('id', '=', $key->id)->latest())->latest();
+                        }
+                    }
+                }
+            }
+            if (!is_null($pointstudent)){
+                $pointstudent= $pointstudent->paginate($perPage);
+            }
+            $hocluc=array(0, 0, 0, 0, 0);
+            return view('admin.point.index',compact(['pointstudent' , 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+        }
+        else{
+            $pointstudent = mmc_student::latest()->paginate($perPage);
+            $pointdetail = mmc_pointdetails::get();
+            $numberstudent = count($pointdetail);
+            $yeu = 0; $tb = 0; $kha = 0; $gioi = 0; $xs = 0;
+            if (count($pointstudent) > 0 && count($pointdetail) > 0) {
+                foreach ($pointdetail as $item) {
+                    $point = $item->mmc_4grade;
+                    if ($point == null) {
+                        continue;
+                    }
+                    if (tinhhocluc($point) == 'yeu') {
+                        $yeu++;
+                    } elseif (tinhhocluc($point) == 'tb') {
+                        $tb++;
+                    } elseif (tinhhocluc($point) == 'kha') {
+                        $kha++;
+                    } elseif (tinhhocluc($point) == 'gioi') {
+                        $gioi++;
+                    } else {
+                        $xs++;
+                    }
+                }
+                if($yeu == 0 ){ $yeu = 0; }else{ $yeu= (int)(($yeu*100)/$numberstudent);}
+                if($tb == 0 ){ $tb = 0; }else{ $tb= (int)(($tb*100)/$numberstudent);}
+                if($kha == 0 ){ $kha = 0; }else{ $kha= (int)(($kha*100)/$numberstudent);}
+                if($gioi == 0 ){ $gioi = 0; }else{ $gioi= (int)(($gioi*100)/$numberstudent);}
+                if($xs == 0 ){ $xs = 0; }else{ $xs= (int)(($xs*100)/$numberstudent);}
+            }
+            $hocluc = array($yeu, $tb, $kha, $gioi, $xs);
+            return view('admin.point.index', compact(['pointstudent', 'hocluc', "data_class", "data_major", "classid", "majorid", "hocky", "status"]));
+            }
+        }
 
     /**
      * Show the form for creating a new resource.

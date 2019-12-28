@@ -34,8 +34,9 @@
                                                 <option value="{{$key->mmc_majorid}}" selected>{{$key->mmc_majorname}}</option>
                                             @endif
                                         @endforeach
+                                        <option value="">...</option>
                                     @else
-                                        <option>...</option>
+                                        <option value="">...</option>
                                     @endif
                                     @foreach($data_major as $key)
                                         <option value="{{$key->mmc_majorid}}">{{$key->mmc_majorname}}</option>
@@ -51,19 +52,122 @@
                                                 <option value="{{$key->mmc_classid}}" selected>{{$key->mmc_classname}}</option>
                                             @endif
                                         @endforeach
+                                        <option value="">...</option>
                                     @else
-                                        <option>...</option>
+                                        <option value="">...</option>
                                     @endif
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group mb-1">
+                                <label for="aclass">&emsp;Học kỳ:&emsp;</label>
+                                <select class="form-control" name="hocky">
+                                    <option value="">...</option>
+                                    @foreach(semester() as $key)
+                                        <option <?php if(isset($hocky) && $hocky == $key) echo 'selected';?> value="{{$key}}">{{$key}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group mb-1">
+                                <label for="aclass">&emsp;Học lực:&emsp;</label>
+                                <select class="form-control" name="status">
+                                    <option value="">...</option>
+                                    <option <?php if(isset($status) && $status == 'xs') echo 'selected';?> value="xs">Xuất sắc</option>
+                                    <option <?php if(isset($status) && $status == 'gioi') echo 'selected';?> value="gioi">Giỏi</option>
+                                    <option <?php if(isset($status) && $status == 'kha') echo 'selected';?> value="kha">Khá</option>
+                                    <option <?php if(isset($status) && $status == 'tb') echo 'selected';?> value="tb">Trung bình</option>
+                                    <option <?php if(isset($status) && $status == 'yeu') echo 'selected';?> value="yeu">Yếu</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-1">
                                 <button class="btn btn-primary" type="submit">Xem</button>
                             </div>
                         </form>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#xuatfilediem" style="float: right;">Xuất File</button>
+                        <!-- Modal xuất ra file excel-->
+                        <div class="modal fade" id="xuatfilediem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="exampleModalLabel">Xuất file Excel danh sách sinh viên.</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="{{route('exportStudent')}}">
+                                        <div class="modal-body">
+                                            <div class="form-group mb-2">
+                                                <label for="amajor">Ngành:&emsp;</label>
+                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                    @if(isset($majorid))
+                                                        <option value="">...</option>
+                                                        @foreach($data_major as $key)
+                                                            @if($majorid == $key->mmc_majorid)
+                                                                <option value="{{$key->mmc_majorid}}" selected>{{$key->mmc_majorname}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                        <option value="">...</option>
+                                                    @else
+                                                        <option value="">...</option>
+                                                    @endif
+                                                    @foreach($data_major as $key)
+                                                        <option value="{{$key->mmc_majorid}}">{{$key->mmc_majorname}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="aclass">&emsp;Lớp:&emsp;</label>
+                                                <select class="form-control" id="modalclass" name="malop">
+                                                    @if(isset($classid))
+                                                        @foreach($data_class as $key)
+                                                            @if($classid == $key->mmc_classid)
+                                                                <option value="{{$key->mmc_classid}}" selected>{{$key->mmc_classname}}</option>
+                                                            @endif
+                                                        @endforeach
+                                                        <option value="">...</option>
+                                                    @else
+                                                        <option value="">...</option>
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="aclass">&emsp;Học kỳ:&emsp;</label>
+                                                <select class="form-control" name="hocky">
+                                                    <option value="">...</option>
+                                                    @foreach(semester() as $key)
+                                                        <option value="{{$key}}">{{$key}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-1">
+                                                <label for="aclass">&emsp;Học lực:&emsp;</label>
+                                                <select class="form-control" name="status">
+                                                    <option value="">...</option>
+                                                    <option <?php if(isset($status) && $status == 'xs') echo 'selected';?> value="xs">Xuất sắc</option>
+                                                    <option <?php if(isset($status) && $status == 'gioi') echo 'selected';?> value="gioi">Giỏi</option>
+                                                    <option <?php if(isset($status) && $status == 'kha') echo 'selected';?> value="kha">Khá</option>
+                                                    <option <?php if(isset($status) && $status == 'tb') echo 'selected';?> value="tb">Trung bình</option>
+                                                    <option <?php if(isset($status) && $status == 'yeu') echo 'selected';?> value="yeu">Yếu</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Xuất file</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row ibox-content">
-                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                    <li class="list-group-item">Tổng số sinh viên: </li>
+                                </ul>
+                            </div>
                             <div class="col-md-6">
                                 <div class="ibox ">
                                     <div>
@@ -75,7 +179,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -88,12 +191,12 @@
                                     <th>Lớp</th>
                                     <th>Điểm hệ 4</th>
                                     <th>Điểm hệ 10</th>
-                                    <th>Ghi chú</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php $i=1; ?>
-                                @foreach($pointstudent as $std)
+                                @if(!is_null($pointstudent) && !isset($hocky))
+                                    @foreach($pointstudent as $std)
                                     <tr>
                                         <td>{{$i++}}</td>
                                         <td>{{$std->mmc_studentid}}</td>
@@ -101,12 +204,25 @@
                                         <td>{{$std->class->mmc_classname}}</td>
                                         <td>{{$std->pointdetail->mmc_4grade}}</td>
                                         <td>{{$std->pointdetail->mmc_10grade}}</td>
-                                        <td>{{$std->mmc_note}}</td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
+                                @elseif(!is_null($pointstudent) && isset($hocky))
+                                    @foreach($pointstudent as $std)
+                                        <tr>
+                                            <td>{{$i++}}</td>
+                                            <td>{{$std->mmc_studentid}}</td>
+                                            <td>{{$std->mmc_fullname}}</td>
+                                            <td>{{$std->class->mmc_classname}}</td>
+                                            <td>{{diemhockyhs4($std->mmc_studentid, $hocky)}}</td>
+                                            <td>{{diemhockyhs10($std->mmc_studentid, $hocky)}}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
-                            <div class="pagination justify-content-center"> {!! $pointstudent->appends(['manghanh' => Request::get('manghanh'), 'malop' => Request::get('malop')])->render() !!} </div>
+                            @if(!is_null($pointstudent))
+                            <div class="pagination justify-content-center"> {!! $pointstudent->appends(['manghanh' => Request::get('manghanh'), 'malop' => Request::get('malop'), 'hocky' => Request::get('hocky'), 'status' => Request::get('status')])->render() !!} </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -130,7 +246,6 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
     </div>
@@ -143,7 +258,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('ajaxmajor') }}",
+                    url: "{{ route('aajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
