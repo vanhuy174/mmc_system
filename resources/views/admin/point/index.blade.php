@@ -27,7 +27,7 @@
                         <form class="form-inline" action="{{route('studentpoint')}}">
                             <div class="form-group mb-2">
                                 <label for="amajor">Ngành:&emsp;</label>
-                                <select class="form-control" id="amajor" name="manghanh">
+                                <select class="form-control amajor" name="manghanh">
                                     @if(isset($majorid))
                                         @foreach($data_major as $key)
                                             @if($majorid == $key->mmc_majorid)
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                <select class="form-control " id="aclass" name="malop" style="width: 200px;">
+                                <select class="form-control aclass" name="malop" style="width: 200px;">
                                     @if(isset($classid))
                                         @foreach($data_class as $key)
                                             @if($classid == $key->mmc_classid)
@@ -93,11 +93,12 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{route('exportStudent')}}">
+{{--                                    <form action="{{route('exportPointstudent')}}">--}}
+                                    <form action="">
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
-                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                <select class="form-control amajor" name="manghanh">
                                                     @if(isset($majorid))
                                                         <option value="">...</option>
                                                         @foreach($data_major as $key)
@@ -116,7 +117,7 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                                <select class="form-control" id="modalclass" name="malop">
+                                                <select class="form-control aclass" name="malop">
                                                     @if(isset($classid))
                                                         @foreach($data_class as $key)
                                                             @if($classid == $key->mmc_classid)
@@ -253,7 +254,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#amajor').on('change', function () {
+            $('.amajor').on('change', function () {
                 var selectVal = $(this).val();
                 console.log(selectVal);
                 $.ajax({
@@ -263,7 +264,7 @@
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
                     success : function ( data ) {
-                        $('#aclass').html(data);
+                        $('.aclass').html(data);
                     }
                 })
             });

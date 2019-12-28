@@ -109,6 +109,7 @@
                             <input type="text" name="subjectclassid" value="{{$data[0]->mmc_subjectclassid}}" hidden="true">
                             <span>Tỉ lệ điểm</span>
                             <select name="point_ratio" title="Tỉ lệ giữa điểm trên lớp và điểm thi">
+                              <option <?php if( $data[0]->point_ratio == 2) echo "selected"; ?> value="2">2 : 8</option>
                               <option <?php if( $data[0]->point_ratio == 3) echo "selected"; ?> value="3">3 : 7</option>
                               <option <?php if( $data[0]->point_ratio == 4) echo "selected"; ?> value="4">4 : 6</option>
                               <option <?php if( $data[0]->point_ratio == 5) echo "selected"; ?> value="5">5 : 5</option>
