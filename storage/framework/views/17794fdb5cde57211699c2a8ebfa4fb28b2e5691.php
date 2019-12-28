@@ -66,9 +66,12 @@
                                 <tbody>
                                 <?php $__currentLoopData = $class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
+
                                         <td data-toggle="modal" data-target="#infoclass" style="cursor:pointer"><?php echo e($item->mmc_classname); ?></td>
                                         <td><?php echo e(\App\Http\Controllers\Admin\ClassController::getmajor($item->mmc_major)); ?></td>
-                                        <td><a href="<?php echo e(route('get-thong-tin-giang-vien',\App\Http\Controllers\Admin\ClassController::getidemployee($item->mmc_headteacher))); ?>" style='color:gray;'><?php echo e(\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)); ?></a></td>
+                                        <td><?php if(!is_null(\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher))): ?>
+                                                <a href="<?php echo e(route('giangvien.show',\App\Http\Controllers\Admin\ClassController::getidemployee($item->mmc_headteacher))); ?>" style='color:gray;'><?php echo e(\App\Http\Controllers\Admin\ClassController::getemployee($item->mmc_headteacher)); ?></a>
+                                            <?php endif; ?></td>
                                         <td><?php echo e($item->mmc_numstudent); ?></td>
                                         <td><?php echo e($item->mmc_description); ?></td>
                                         <td>

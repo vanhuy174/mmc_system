@@ -80,7 +80,7 @@
                                     </tr>
                                     <tr>
                                         <th>Trung Bình :</th>
-                                        <td >{{$tb}}</td>
+                                        <td style="text-align: center">{{$tb}}</td>
                                     </tr>
                                     <tr>
                                         <th>Yếu :</th>

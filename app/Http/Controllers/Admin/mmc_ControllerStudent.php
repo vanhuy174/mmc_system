@@ -33,7 +33,6 @@ class mmc_ControllerStudent extends Controller
         $keyword= $request->search;
         $classid= $request->malop;
         $majorid= $request->manghanh;
-        $status= $request->status;
         if(!empty($keyword)){
             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
             return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major"]));
@@ -119,6 +118,17 @@ class mmc_ControllerStudent extends Controller
             $student = mmc_Student::where('mmc_classid', '=', $classid)->latest()->paginate($perPage);
             return back()->with("student", "class", "major", "majorid", "classid");
         }
+    }
+
+    /**
+     * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
+     * @param Request $request
+     */
+    public function ajaxmajor(Request $request){
+        $data= mmc_class::where('mmc_major', '=', $request->id)->get();
+            foreach ($data as $key){
+                echo "<option value='".$key->mmc_classid."'>".$key->mmc_classname."</option>";
+            }
     }
 
     /**
@@ -313,6 +323,7 @@ class mmc_ControllerStudent extends Controller
     /**
      * Hàm export dùng để xuất ra danh sách tất cả các sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
      */
+
     public function export(Request $request)
     {
         return Excel::download(new mmc_studentExport($request), 'Danh-sach-sinh-vien.xlsx');
@@ -419,7 +430,7 @@ class mmc_ControllerStudent extends Controller
      * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
      * @param Request $request
      */
-    public function ajaxmajor(Request $request){
+    public function aajaxmajor(Request $request){
         $data= mmc_class::where('mmc_major', '=', $request->id)->get();
         echo "<option value=''>...</option>";
         foreach ($data as $key){

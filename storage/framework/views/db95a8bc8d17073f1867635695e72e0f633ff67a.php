@@ -38,7 +38,7 @@
                             <span class="text-muted text-xs block"><?php echo e(Auth::user()->mmc_position); ?><b class="caret"></b></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="dropdown-item" href="<?php echo e(route('get-thong-tin-ca-nhan',Auth::user()->id)); ?>">Thông tin cá nhân</a></li>
+                            <li><a class="dropdown-item" href="<?php echo e(route('canhan.show',Auth::user()->id)); ?>">Thông tin cá nhân</a></li>
                             <li><a class="dropdown-item" href="mailbox.html">Thông báo</a></li>
                             <li class="dropdown-divider"></li>
                             <li>
@@ -66,11 +66,11 @@
                             <li><a href="<?php echo e(route('major.index')); ?>">Quản lý ngành</a></li>
                             <li><a href="<?php echo e(route('educationprogram.index')); ?>">Quản lý CTĐT</a></li>
                             <li><a href="<?php echo e(route('class.index')); ?>">Quản lý lớp học</a></li>
-                            <li><a href="<?php echo e(route('danh-sach-giang-vien')); ?>">Quản lý giảng viên</a></li>
+                            <li><a href="<?php echo e(route('giangvien.index')); ?>">Quản lý giảng viên</a></li>
                             <li><a href="<?php echo e(route('homeStudent')); ?>">Quản lý sinh viên</a></li>
-                            <li><a href="<?php echo e(route('subject.index')); ?>">Quản lý môn học</a></li>
                             <li><a href="<?php echo e(route('studentpoint')); ?>">Quản lý điểm sinh viên</a></li>
                             <li><a href="<?php echo e(route('homeCalendar')); ?>">Quản lý lịch giảng dạy</a></li>
+                            <li><a href="<?php echo e(route('science.index')); ?>">Quản lý hoạt động KHCN</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
@@ -82,6 +82,9 @@
                 </li>
                 <li>
                     <a href="<?php echo e(route('subjectclass.index')); ?>"><i class="fa fa-users"></i> <span class="nav-label">Lớp giảng dạy</span>  </a>
+                </li>
+                <li>
+                    <a href="<?php echo e(route('scienceemployee.index')); ?>"><i class="fa fa-book"></i> <span class="nav-label">Hoạt động khoa học công nghệ</span>  </a>
                 </li>
             </ul>
 
@@ -144,6 +147,9 @@
 <!-- Full Calendar -->
 <script src="js/plugins/fullcalendar/fullcalendar.min.js"></script>
 <script src="js/plugins/fullcalendar/lang/lang-all.js"></script>
+
+<!-- js for me -->
+
 <?php echo $__env->yieldContent('scripts'); ?>
 <script>
     $(document).ready(function(){
@@ -160,6 +166,7 @@ $(function($) {
         }
     });
 });
+
 </script>
 
 

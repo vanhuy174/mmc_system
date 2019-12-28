@@ -26,18 +26,19 @@ class homeController extends Controller
         $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
         if(count($student) > 0 && count($pointdetail) > 0){
             foreach ($student as $item){
-
-                $point= $item->pointdetail->mmc_4grade;
-                if($point < 2.0){
-                    $yeu++;
-                }elseif ($point >= 2.0 && $point < 2.5 ){
-                    $tb++;
-                }elseif ($point >= 2.5 && $point < 3.2 ){
-                    $kha++;
-                }elseif ($point >= 3.2 && $point < 3.6 ){
-                    $gioi++;
-                }else{
-                    $xs++;
+                if(isset($$item->pointdetail)){
+                    $point= $item->pointdetail->mmc_4grade;
+                    if($point < 2.0){
+                        $yeu++;
+                    }elseif ($point >= 2.0 && $point < 2.5 ){
+                        $tb++;
+                    }elseif ($point >= 2.5 && $point < 3.2 ){
+                        $kha++;
+                    }elseif ($point >= 3.2 && $point < 3.6 ){
+                        $gioi++;
+                    }else{
+                        $xs++;
+                    }
                 }
             }
             $yeu= (int)(($yeu*100)/$numberstudent);

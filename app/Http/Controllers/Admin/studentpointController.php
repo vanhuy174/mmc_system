@@ -33,6 +33,8 @@ class studentpointController extends Controller
         $keyword= $request->search;
         $classid= $request->malop;
         $majorid= $request->manghanh;
+
+        $numberstudent= 0; $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
         $hocky= $request->hocky;
         $status= $request->status;
         $numberstudent= 0; $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;

@@ -144,5 +144,4 @@ class MajorController extends Controller
     public static function  getmajor(){
         return mmc_major::select('mmc_majorname','r','g','b','mmc_majorid')->get();
     }
-
 }

@@ -22,7 +22,11 @@
                     @if(isset($class) && $class->mmc_ctdt==$item->mmc_course)
                         <option selected>{{$item->mmc_course}}</option>
                     @else
+<<<<<<< HEAD
+                        <option selected>{{$item->mmc_course}}</option>
+=======
                         <option >{{$item->mmc_course}}</option>
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
                     @endif
                 @endforeach
             </select>

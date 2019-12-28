@@ -11,7 +11,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('ajaxmajor') }}",
+                    url: "{{ route('aajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
@@ -25,7 +25,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('ajaxmajor') }}",
+                    url: "{{ route('aajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
@@ -286,4 +286,30 @@
 	</div>
 </div>
 @endsection
-
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#amajor').on('change', function () {
+                var selectVal = $(this).val();
+                console.log(selectVal);
+                $.ajax({
+                    method: "POST",
+                    url: "{{ route('aajaxmajor') }}",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": selectVal},
+                    success : function ( data ) {
+                        $('#aclass').html(data);
+                    }
+                })
+            });
+        });
+        $(document).ready(function() {
+            $("#checkall").click(function() {
+                $(":checkbox").attr('checked',
+                    $('#checkall').is(':checked'));
+                $(this).closest('tr').toggleClass('highlight');
+            });
+        });
+    </script>
+@endsection

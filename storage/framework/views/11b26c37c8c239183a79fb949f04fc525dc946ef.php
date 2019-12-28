@@ -22,6 +22,9 @@
                         <a href="<?php echo e(route('educationprogram.create')); ?>" class="btn btn-primary btn-sm" title="Thêm mới ngành">
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
                         </a>
+                        <a href="<?php echo e(route('subject.index')); ?>" class="btn btn-primary btn-sm" title="Quản lý môn học">
+                           Quản lý môn học
+                        </a>
                         <?php echo Form::open(['method' => 'GET', 'url' => '/admin/major', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search']); ?>
 
                         <div class="input-group">

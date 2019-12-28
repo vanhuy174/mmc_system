@@ -3,7 +3,7 @@
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Quản lý môn học</h2>
-            <span><a href="{{route('home')}}">Home</a> > Quản lý học phần </span>
+            <span><a href="{{route('home')}}">Home ><a href="{{route('educationprogram.index')}}">Quản lý chương trình đào tạo</a> ></a> > Quản lý học phần </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">

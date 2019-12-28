@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\item;
 use App\mmc_class;
 use App\mmc_department;
 use App\mmc_education;
 use App\mmc_employee;
 use App\mmc_major;
 use App\mmc_student;
+use App\scienceemployee;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -20,6 +22,20 @@ class AjaxController extends Controller
         {
             echo "<option>".$item->mmc_course."</option>";
         }
+    }
+    public function getMission(Request $request)
+    {
+        $items=item::where('listitems_id','=',$request->id)->get();
+        foreach ($items as $item)
+        {
+            echo "<option value='".$item->id."'>".$item->mmc_mission."</option>";
+        }
+    }
+    public function getUpdate(Request $request)
+    {
+        $scienceemployee = scienceemployee::findOrFail($request->id);
+        $scienceemployee['mmc_status']=1;
+        $scienceemployee->update();
     }
     public function getMajor(Request $request)
     {
@@ -105,7 +121,7 @@ class AjaxController extends Controller
                 echo "<tr>";
                 echo "<td  style='border-top: none;'>".$i."</td>";
                 echo "<td style='border-top: none;'><a href='{$urlsd}' style='color:gray;'>".$item->mmc_studentid."</a></td>";
-                echo "<td style='border-top: none;'>".$item->mmc_fullname."</td>";
+                echo "<td style='border-top: none;'><a href='{$urlsd}' style='color:gray;'>".$item->mmc_fullname."</a></td>";
                 echo "</tr>";
             }
             else
@@ -113,7 +129,7 @@ class AjaxController extends Controller
                 echo "<tr>";
                 echo "<td>".$i."</td>";
                 echo "<td><a href='{$urlsd}' style='color:gray;'>".$item->mmc_studentid."</a></td>";
-                echo "<td>".$item->mmc_fullname."</td>";
+                echo "<td><a href='{$urlsd}' style='color:gray;'>".$item->mmc_fullname."</a></td>";
                 echo "</tr>";
             }
             $i++;

@@ -6,6 +6,7 @@ use App\mmc_employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class CaNhanController extends Controller
 {
@@ -16,7 +17,7 @@ class CaNhanController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -26,7 +27,7 @@ class CaNhanController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -102,7 +103,6 @@ class CaNhanController extends Controller
                 $constraint->upsize();
             });
             $image_resize->save('IMG/'.$name);
-
             $sua->mmc_avatar = $name; //Ảnh đại điện
         }
 
@@ -166,7 +166,6 @@ class CaNhanController extends Controller
         return view('admin.canhan.matkhau');
     }
     public function postDoiPass(Request $request,$id){
-        
         $passMoi1 = $request->password_Moi1;
         $passMoi2 = $request->password_Moi2;
 

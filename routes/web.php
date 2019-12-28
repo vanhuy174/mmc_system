@@ -51,7 +51,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
-        Route::post('/ajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('ajaxmajor');
+        Route::post('/aajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('aajaxmajor');
         Route::post('setstatus', 'Admin\mmc_ControllerStudent@setstatus')->name('setstatus');
 
 //        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
@@ -81,10 +81,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     });
     Route::resource('schedule', 'Admin\ScheduleController');
+    Route::resource('science', 'Admin\ScienceController');
     Route::post('updatecalendar','Admin\ScheduleController@updatecalendar')->name('updatecalendar');
     Route::resource('oneclass', 'Admin\OneClassController');
     Route::resource('subjectclass', 'Admin\subjectclassController');
-
+    Route::resource('scienceemployee', 'Admin\ScienceEmployeeController');
     //Route điểm sinh viên.
 
     Route::get('/studentpoint', 'Admin\studentpointController@index')->name('studentpoint');
@@ -99,5 +100,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('ajax/getmajor', 'Admin\AjaxController@getMajor')->name('ajaxgetmajor');
     Route::post('ajax/geteducation', 'Admin\AjaxController@getCTDT')->name('ajaxgeteducation');
     Route::post('ajax/getclass', 'Admin\AjaxController@getClass')->name('ajaxgetclass');
+    Route::post('ajax/getmission', 'Admin\AjaxController@getMission')->name('ajaxmission');
+    Route::post('ajax/getupdate', 'Admin\AjaxController@getUpdate')->name('ajaxupdate');
 });
 

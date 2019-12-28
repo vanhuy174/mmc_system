@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
+class ComposerStaticInitd83e4f022fdbe3619132693927742689
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -559,6 +559,7 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\ClassExport' => __DIR__ . '/../..' . '/app/Exports/ClassExport.php',
         'App\\Exports\\mmc_studentExport' => __DIR__ . '/../..' . '/app/Exports/mmc_studentExport.php',
+        'App\\Exports\\studentpointExport' => __DIR__ . '/../..' . '/app/Exports/studentpointExport.php',
         'App\\Http\\Controllers\\Admin\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AjaxController.php',
         'App\\Http\\Controllers\\Admin\\CaNhanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/CaNhanController.php',
         'App\\Http\\Controllers\\Admin\\ClassController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ClassController.php',
@@ -568,6 +569,8 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'App\\Http\\Controllers\\Admin\\MajorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MajorController.php',
         'App\\Http\\Controllers\\Admin\\OneClassController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/OneClassController.php',
         'App\\Http\\Controllers\\Admin\\ScheduleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ScheduleController.php',
+        'App\\Http\\Controllers\\Admin\\ScienceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ScienceController.php',
+        'App\\Http\\Controllers\\Admin\\ScienceEmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ScienceEmployeeController.php',
         'App\\Http\\Controllers\\Admin\\SubjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SubjectController.php',
         'App\\Http\\Controllers\\Admin\\homeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/homeController.php',
         'App\\Http\\Controllers\\Admin\\mmc_ControllerStudent' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/mmc_ControllerStudent.php',
@@ -600,6 +603,8 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\item' => __DIR__ . '/../..' . '/app/item.php',
+        'App\\listitem' => __DIR__ . '/../..' . '/app/listitem.php',
         'App\\mmc_calendar' => __DIR__ . '/../..' . '/app/mmc_calendar.php',
         'App\\mmc_class' => __DIR__ . '/../..' . '/app/mmc_class.php',
         'App\\mmc_department' => __DIR__ . '/../..' . '/app/mmc_department.php',
@@ -616,6 +621,7 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'App\\mmc_subject' => __DIR__ . '/../..' . '/app/mmc_subject.php',
         'App\\mmc_subjectclass' => __DIR__ . '/../..' . '/app/mmc_subjectclass.php',
         'App\\mmc_time' => __DIR__ . '/../..' . '/app/mmc_time.php',
+        'App\\scienceemployee' => __DIR__ . '/../..' . '/app/scienceemployee.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
         'Barryvdh\\Debugbar\\Controllers\\BaseController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/BaseController.php',
@@ -2590,6 +2596,7 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'Maatwebsite\\Excel\\Concerns\\Exportable' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/Exportable.php',
         'Maatwebsite\\Excel\\Concerns\\FromArray' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromArray.php',
         'Maatwebsite\\Excel\\Concerns\\FromCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromCollection.php',
+        'Maatwebsite\\Excel\\Concerns\\FromGenerator' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromGenerator.php',
         'Maatwebsite\\Excel\\Concerns\\FromIterator' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromIterator.php',
         'Maatwebsite\\Excel\\Concerns\\FromQuery' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromQuery.php',
         'Maatwebsite\\Excel\\Concerns\\FromView' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromView.php',
@@ -2687,7 +2694,6 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
         'Maatwebsite\\Excel\\Jobs\\QueueExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueExport.php',
         'Maatwebsite\\Excel\\Jobs\\QueueImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueImport.php',
         'Maatwebsite\\Excel\\Jobs\\ReadChunk' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ReadChunk.php',
-        'Maatwebsite\\Excel\\Jobs\\SerializedQuery' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/SerializedQuery.php',
         'Maatwebsite\\Excel\\Jobs\\StoreQueuedExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/StoreQueuedExport.php',
         'Maatwebsite\\Excel\\MappedReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/MappedReader.php',
         'Maatwebsite\\Excel\\Mixins\\DownloadCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Mixins/DownloadCollection.php',
@@ -5138,10 +5144,10 @@ class ComposerStaticInite5c29b939a74344c496450d4a02e06d2
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite5c29b939a74344c496450d4a02e06d2::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite5c29b939a74344c496450d4a02e06d2::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInite5c29b939a74344c496450d4a02e06d2::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInite5c29b939a74344c496450d4a02e06d2::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd83e4f022fdbe3619132693927742689::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd83e4f022fdbe3619132693927742689::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitd83e4f022fdbe3619132693927742689::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitd83e4f022fdbe3619132693927742689::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -259,7 +259,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('ajaxmajor') }}",
+                    url: "{{ route('aajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},

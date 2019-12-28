@@ -91,6 +91,10 @@
 											@endforeach
 										</select>
 									</div>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 									<div class="input-group mb-3 input-group-sm">
 										<div class="input-group-prepend">
 											<span class="input-group-text width-input">Mã sinh viên: <b class="color-red">&nbsp;&nbsp;*</b></span>
@@ -135,6 +139,9 @@
 										<textarea  name="mmc_descipline" class="form-control" rows="2">{{$data['mmc_descipline']}}</textarea>
 									</div>
 								</div>
+<<<<<<< HEAD
+
+=======
                                     <div class="col-md-12">
                                         <h3 class="tieude">II. NỘI NGOẠI TRÚ <span>(Chỉ điền thông tin cho 1 trong 2)</span></h3>
                                     </div>
@@ -176,6 +183,7 @@
                                             <textarea  name="mmc_landlord_address" class="form-control" rows="2" placeholder="VD: Phòng 11, Xóm cô Lan, Tổ 3, Phường Tân Thịnh, Xã Quyết Thắng, TP Thái Nguyên">{{$data['mmc_landlord_address']}}</textarea>
                                         </div>
                                     </div>
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 								<div class="col-md-12">
 									<h3 class="tieude">III. THÀNH PHẦN GIA ĐÌNH</h3>
 								</div>

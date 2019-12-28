@@ -1,5 +1,5 @@
 <?php $__env->startSection('linkstyle'); ?>
-<link href="../../css/mmc_detailstudent.css" rel="stylesheet">
+<link href="css/mmc_detailstudent.css" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -13,11 +13,17 @@
 	<?php if(session('status')): ?>
 	<br> <div class="alert alert-info"><?php echo e(session('status')); ?></div>
 	<?php endif; ?>
+    <div class="row">
+        <div class="col-lg-12">
+        <a href="" class=" btn btn-primary btn-sm float-right " title="Xuất File">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i> Xuất file PDF
+        </a>
+        </div>
+    </div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">Thông tin sinh viên</div>
-				<a class="btn btn-primary width-100" href="">Xuất file pdf</a>
 				<div class="card-body">
 					<div class="container">
 						<div class="text-center">
@@ -86,13 +92,55 @@
 											<span>Kỷ luật: &nbsp;&nbsp;<?php echo e($data['mmc_descipline']); ?></span>
 										</div>
 									</div>
-								</div>	
+								</div>
 							</div>
-							
+<<<<<<< HEAD
+
+=======
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="margin-top-10">II. NỘI NGOẠI TRÚ</h3>
+                                    </div>
+                                    <?php if(!is_null($data['mmc_dormitory'])): ?>
+                                        <div class="col-md-12">
+                                            <h3 class="margin-top-10">Nội trú</h3>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Dãy nhà: &nbsp;&nbsp;<?php echo e($data['mmc_dormitory']); ?></span>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <span>Số phòng: &nbsp;&nbsp;<?php echo e($data['mmc_room_dormitory']); ?></span>
+                                            </div>
+                                        </div>
+                                    <?php elseif(!is_null($data['mmc_landlord_name'])): ?>
+                                        <div class="col-md-12">
+                                            <h3 class="margin-top-10">Ngoại trú</h3>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Họ tên chủ trọ: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_name']); ?></span>
+                                        </div>
+                                        <div class="input-group mb-3 input-group-sm">
+                                            <span>Số điện thoại: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_phone']); ?></span>
+                                        </div>
+                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-3 input-group-sm">
+                                                <span>Địa chỉ: &nbsp;&nbsp;<?php echo e($data['mmc_landlord_address']); ?></span>
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+>>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
 							<div class="col-md-12">
 								<div class="row">
 									<div class="col-md-12">
-										<h3 class="margin-top-10">II. THÀNH PHẦN GIA ĐÌNH</h3>
+										<h3 class="margin-top-10">III. THÀNH PHẦN GIA ĐÌNH</h3>
 									</div>
 									<div class="col-md-12">
 										<h3>1. Cha:</h3>
@@ -143,7 +191,7 @@
 										<div class="input-group mb-3 input-group-sm">
 											<span>Email: &nbsp;&nbsp;<?php echo e($data['mmc_motheremail']); ?></span>
 										</div>
-										
+
 									</div>
 									<div class="col-md-6">
 										<div class="input-group mb-3 input-group-sm">
@@ -170,4 +218,5 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.backend', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/mmc/MMC-system/resources/views/admin/Student/mmc_detailStudent.blade.php ENDPATH**/ ?>

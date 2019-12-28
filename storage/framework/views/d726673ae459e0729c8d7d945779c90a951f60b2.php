@@ -1,8 +1,8 @@
 <?php $__env->startSection('content'); ?>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Quản lý lớp giảng dạy</h2>
-            <span><a href="<?php echo e(route('home')); ?>">Home</a> > Quản lý lớp giảng dạy </span>
+            <h2>Quản lý lớp chủ nhiệm </h2>
+            <span><a href="<?php echo e(route('home')); ?>">Home</a> > Quản lý lớp chủ nhiệm </span>
         </div>
     </div>
     <div class="wrapper wrapper-content  animated fadeInRight blog">
@@ -28,11 +28,11 @@
                                     <table class="table">
                                         <tr>
                                             <th style="border-top: none;">Tên lớp:</th>
-                                            <td style="text-align: center;border-top: none;" ><?php echo e($lop->mmc_classname); ?></td>
+                                            <td style="text-align: center;border-top: none;"><?php echo e($lop->mmc_classname); ?></td>
                                         </tr>
                                         <tr>
                                             <th>Số sinh viên:</th>
-                                            <td style="text-align: center"><?php echo e($lop->mmc_numstudent); ?></td>
+                                            <td style="text-align: center"><?php echo e($member); ?></td>
                                         </tr>
                                         <tr>
                                             <th>Lớp trưởng:</th>
@@ -47,25 +47,44 @@
                             </div>
                             <div class="col-lg-4">
                                 <table class="table">
+                                    <?php
+                                    $yeu=0; $tb=0; $kha=0; $gioi=0; $xs=0;
+                                    foreach ($student as $item){
+                                        if(!is_null($item->pointdetail)){
+                                            $point= $item->pointdetail->mmc_4grade;
+                                            if($point < 2.0){
+                                                $yeu++;
+                                            }elseif ($point >= 2.0 && $point < 2.5 ){
+                                                $tb++;
+                                            }elseif ($point >= 2.5 && $point < 3.2 ){
+                                                $kha++;
+                                            }elseif ($point >= 3.2 && $point < 3.6 ){
+                                                $gioi++;
+                                            }else{
+                                                $xs++;
+                                            }
+                                        }
+                                    }
+                                    ?>
                                     <tr>
                                         <th style="border-top: none;">Xuất sắc :</th>
-                                        <td style="text-align: center; border-top: none;">10</td>
+                                        <td style="text-align: center; border-top: none;"><?php echo e($xs); ?></td>
                                     </tr>
                                     <tr>
                                         <th>Giỏi :</th>
-                                        <td style="text-align: center">5</td>
+                                        <td style="text-align: center"><?php echo e($gioi); ?></td>
                                     </tr>
                                     <tr>
                                         <th>Khá  :</th>
-                                        <td style="text-align: center">4</td>
+                                        <td style="text-align: center"><?php echo e($kha); ?></td>
                                     </tr>
                                     <tr>
                                         <th>Trung Bình :</th>
-                                        <td style="text-align: center">3</td>
+                                        <td style="text-align: center"><?php echo e($tb); ?></td>
                                     </tr>
                                     <tr>
-                                        <th>Kém :</th>
-                                        <td style="text-align: center">2</td>
+                                        <th>Yếu :</th>
+                                        <td style="text-align: center"><?php echo e($yeu); ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -81,6 +100,7 @@
                                     <th>SĐT</th>
                                     <th>Điểm hệ 4</th>
                                     <th>Điểm hệ 10</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -90,8 +110,9 @@
                                         <td><?php echo e($item->mmc_fullname); ?></td>
                                         <td><?php echo e($item->mmc_email); ?></td>
                                         <td><?php echo e($item->mmc_phone); ?></td>
-                                        <td>2.5</td>
-                                        <td>6.75</td>
+                                        <td><?php echo e($item->pointdetail->mmc_4grade); ?></td>
+                                        <td><?php echo e($item->pointdetail->mmc_10grade); ?></td>
+                                        <td><?php echo e($item->mmc_status); ?></td>
                                     </tr>
                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
