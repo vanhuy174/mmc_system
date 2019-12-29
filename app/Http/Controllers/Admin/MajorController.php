@@ -22,7 +22,7 @@ class MajorController extends Controller
 
         if (!empty($keyword)) {
             $department="mmc-".Str::slug($keyword);
-            $major = mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->orwhere('mmc_deptid', 'LIKE', "%$department%")->latest()->paginate($perPage);
+            $major = mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->orwhere('mmc_deptid', 'LIKE', "%$department%")->orwhere('mmc_majorid', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
         } else {
             $major = mmc_major::latest()->paginate($perPage);
         }
@@ -72,7 +72,7 @@ class MajorController extends Controller
         $major->g=$g;
         $major->b=$b;
         $major->save();
-        return redirect('admin/major');
+        return redirect('admin/major')->with('flash_message', 'Thêm mới thành công!');
     }
 
     /**

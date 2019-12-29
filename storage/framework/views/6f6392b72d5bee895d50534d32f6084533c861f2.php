@@ -26,7 +26,7 @@
                         <form class="form-inline" action="<?php echo e(route('studentpoint')); ?>">
                             <div class="form-group mb-2">
                                 <label for="amajor">Ngành:&emsp;</label>
-                                <select class="form-control" id="amajor" name="manghanh">
+                                <select class="form-control amajor" name="manghanh">
                                     <?php if(isset($majorid)): ?>
                                         <?php $__currentLoopData = $data_major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($majorid == $key->mmc_majorid): ?>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                <select class="form-control " id="aclass" name="malop" style="width: 200px;">
+                                <select class="form-control aclass" name="malop" style="width: 200px;">
                                     <?php if(isset($classid)): ?>
                                         <?php $__currentLoopData = $data_class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if($classid == $key->mmc_classid): ?>
@@ -96,7 +96,7 @@
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
-                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                <select class="form-control amajor" name="manghanh">
                                                     <?php if(isset($majorid)): ?>
                                                         <option value="">...</option>
                                                         <?php $__currentLoopData = $data_major; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                                <select class="form-control" id="modalclass" name="malop">
+                                                <select class="form-control aclass" name="malop">
                                                     <?php if(isset($classid)): ?>
                                                         <?php $__currentLoopData = $data_class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php if($classid == $key->mmc_classid): ?>
@@ -252,17 +252,17 @@
 <?php $__env->startSection('scripts'); ?>
     <script>
         $(document).ready(function() {
-            $('#amajor').on('change', function () {
+            $('.amajor').on('change', function () {
                 var selectVal = $(this).val();
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "<?php echo e(route('aajaxmajor')); ?>",
+                    url: "<?php echo e(route('ajaxmajor')); ?>",
                     data: {
                         "_token": "<?php echo e(csrf_token()); ?>",
                         "id": selectVal},
                     success : function ( data ) {
-                        $('#aclass').html(data);
+                        $('.aclass').html(data);
                     }
                 })
             });

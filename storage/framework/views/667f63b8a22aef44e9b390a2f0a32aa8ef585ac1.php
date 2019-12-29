@@ -22,18 +22,6 @@
                         <a href="<?php echo e(route('scienceemployee.create')); ?>" class="btn btn-primary btn-sm" title="Thêm mới ngành">
                             <i class="fa fa-plus" aria-hidden="true"></i> Thêm mới
                         </a>
-                        <?php echo Form::open(['method' => 'GET', 'url' => '/admin/major', 'class' => 'form-inline my-2 my-lg-0 float-right', 'role' => 'search']); ?>
-
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="submit" style="margin-bottom: 0px;">
-                                    <i class="fa fa-search" ></i>
-                                </button>
-                            </span>
-                        </div>
-                        <?php echo Form::close(); ?>
-
                         <br/>
                         <br/>
                         <div class="table-responsive">

@@ -51,7 +51,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
-        Route::post('/aajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('aajaxmajor');
+        Route::post('/ajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('ajaxmajor');
         Route::post('setstatus', 'Admin\mmc_ControllerStudent@setstatus')->name('setstatus');
 
 //        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');

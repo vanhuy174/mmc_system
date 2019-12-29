@@ -3,45 +3,7 @@
 @section('linkstyle')
 	<link href="css/mmc_homestudent.css" rel="stylesheet">
 @endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#amajor').on('change', function () {
-                var selectVal = $(this).val();
-                console.log(selectVal);
-                $.ajax({
-                    method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": selectVal},
-                    success : function ( data ) {
-                        $('#aclass').html(data);
-                    }
-                })
-            });
-            $('#modalmajor').on('change', function () {
-                var selectVal = $(this).val();
-                console.log(selectVal);
-                $.ajax({
-                    method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": selectVal},
-                    success : function ( data ) {
-                        $('#modalclass').html(data);
-                    }
-                })
-            });
-            $("#checkall").click(function() {
-                $(":checkbox").attr('checked',
-                    $('#checkall').is(':checked'));
-                $(this).closest('tr').toggleClass('highlight');
-            });
-        });
-    </script>
-@endsection
+
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
@@ -289,17 +251,17 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#amajor').on('change', function () {
+            $('.amajor').on('change', function () {
                 var selectVal = $(this).val();
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
+                    url: "{{ route('ajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
                     success : function ( data ) {
-                        $('#aclass').html(data);
+                        $('.aclass').html(data);
                     }
                 })
             });

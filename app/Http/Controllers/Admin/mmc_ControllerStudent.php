@@ -121,17 +121,6 @@ class mmc_ControllerStudent extends Controller
     }
 
     /**
-     * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
-     * @param Request $request
-     */
-    public function ajaxmajor(Request $request){
-        $data= mmc_class::where('mmc_major', '=', $request->id)->get();
-            foreach ($data as $key){
-                echo "<option value='".$key->mmc_classid."'>".$key->mmc_classname."</option>";
-            }
-    }
-
-    /**
         Hàm getclass dùng để lấy thông tin của các lớp trong csdl.
         Hàm này phục vụ cho chức năng thêm sinh viên.
     */
@@ -430,7 +419,7 @@ class mmc_ControllerStudent extends Controller
      * Hàm getclass dùng để lấy thông tin của các lớp theo nghành;
      * @param Request $request
      */
-    public function aajaxmajor(Request $request){
+    public function ajaxmajor(Request $request){
         $data= mmc_class::where('mmc_major', '=', $request->id)->get();
         echo "<option value=''>...</option>";
         foreach ($data as $key){
