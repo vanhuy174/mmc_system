@@ -15,6 +15,8 @@ use App\mmc_major;
 use DB;
 use libphonenumber\CountryCodeToRegionCodeMap;
 use PhpOffice\PhpSpreadsheet\Reader\Xls;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\studentpointExport;
 
 class studentpointController extends Controller
 {
@@ -754,4 +756,12 @@ class studentpointController extends Controller
         return back()->with('status', 'Sửa tỉ lệ điểm thành công!');
     }
 
+    /**
+     * Hàm export dùng để xuất ra danh sách diem sinh viên có trong CSDL ra file excel có tên: Danh-sach-sinh-vien.xlsx .
+     */
+    public function export(Request $request)
+    {
+        return Excel::download(new studentpointExport($request), 'Danh-sach-diem-sinh-vien.xlsx');
+        return back();
+    }
 }

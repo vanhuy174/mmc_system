@@ -93,7 +93,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form action="{{route('exportStudent')}}">
+{{--                                    <form action="{{route('exportPointstudent')}}">--}}
+                                    <form action="">
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
@@ -253,7 +254,11 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+<<<<<<< HEAD
             $('.vamajor').on('change', function () {
+=======
+            $('.amajor').on('change', function () {
+>>>>>>> e70f13dfaa28258899b504d9d67c433654e4f841
                 var selectVal = $(this).val();
                 console.log(selectVal);
                 $.ajax({
