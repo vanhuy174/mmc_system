@@ -32,7 +32,7 @@
                     <form class="form-inline" action="{{route('homeStudent')}}">
                             <div class="form-group mb-2">
                                 <label for="amajor">Ngành:&emsp;</label>
-                                <select class="form-control" id="amajor" name="manghanh">
+                                <select class="form-control amajor" name="manghanh">
                                     @if(isset($majorid))
                                         <option value="">...</option>
                                         @foreach($data_major as $key)
@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                <select class="form-control width-200" id="aclass" name="malop">
+                                <select class="form-control width-200 aclass" name="malop">
                                     @if(isset($classid))
                                         @foreach($data_class as $key)
                                             @if($classid == $key->mmc_classid)
@@ -120,7 +120,7 @@
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
-                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                <select class="form-control amajor" name="manghanh">
                                                     @if(isset($majorid))
                                                         <option value="">...</option>
                                                         @foreach($data_major as $key)
@@ -138,7 +138,7 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                                <select class="form-control" id="modalclass" name="malop">
+                                                <select class="form-control aclass" name="malop">
                                                     @if(isset($classid))
                                                         @foreach($data_class as $key)
                                                             @if($classid == $key->mmc_classid)

@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\mmc_class;
 use App\mmc_student;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class studentpointExport implements FromView
      */
     public function view(): View
     {
+        $dataclass= mmc_class::get();
         $classid= $this->requestall->malop;
         $majorid= $this->requestall->manghanh;
         $hocky= $this->requestall->hocky;
@@ -122,11 +124,9 @@ class studentpointExport implements FromView
         else{
             $data = mmc_student::get();
         }
-        dd($data);
-        return view('admin.Student.mmc_formExport', [
+        return view('admin.point.formExport', [
             'data' => $data,
-            'hocky' => $status,
-            'status' => $status,
+            'dataclass' => $dataclass,
         ]);
     }
 }

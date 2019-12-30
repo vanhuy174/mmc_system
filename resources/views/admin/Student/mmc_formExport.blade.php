@@ -83,10 +83,6 @@
             <td>{{ $data->mmc_motherphone }}</td>
             <td>{{ $data->mmc_motheremail }}</td>
             <td>{{ $data->mmc_motherjob }}</td>
-<<<<<<< HEAD
-
-=======
->>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
         </tr>
     @endforeach
     </tbody>
