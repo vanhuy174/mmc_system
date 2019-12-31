@@ -40,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="dropdown-item" href="{{route('canhan.show',Auth::user()->id)}}">Thông tin cá nhân</a></li>
-                            <li><a class="dropdown-item" href="mailbox.html">Thông báo</a></li>
+                            <li><a class="dropdown-item" href="{{route('nhanviec.index')}}">Thông báo <span class="float-right" style="color:red;">{{\App\Http\Controllers\Admin\NhanViecController::count()}}</span></a></li>
                             <li class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout')}}"
@@ -70,6 +70,7 @@
                             <li><a href="{{route('homeStudent')}}">Quản lý sinh viên</a></li>
                             <li><a href="{{route('studentpoint')}}">Quản lý điểm sinh viên</a></li>
                             <li><a href="{{route('homeCalendar')}}">Quản lý lịch giảng dạy</a></li>
+                            <li><a href="{{route('giaoviec.index')}}">Quản Lý công việc</a></li>
                             <li><a href="{{route('science.index')}}">Quản lý hoạt động KHCN</a></li>
                         </ul>
                     </li>
@@ -98,6 +99,30 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i>  <span class="label label-primary">{{\App\Http\Controllers\Admin\NhanViecController::count()}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="" class="dropdown-item">
+                                    <div>
+                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                        <span class="float-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <div class="text-center link-block">
+                                    <a href="{{route('nhanviec.index')}}" class="dropdown-item">
+                                        <strong>See All Alerts</strong>
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

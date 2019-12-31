@@ -72,14 +72,22 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         //route giảng viên
         Route::resource('giangvien', 'Admin\GiangVienController');
 
-        //route cá nhân
-        Route::resource('canhan', 'Admin\CaNhanController');
-        // đổi mật khẩu
-        Route::get('canhan/matkhau/{id}','Admin\CaNhanController@getDoiPass')->name('getDoiPass');
-        Route::post('canhan/matkhau/{id}','Admin\CaNhanController@postDoiPass')->name('postDoiPass');
-
+        // giao việc
+        Route::resource('giaoviec', 'Admin\GiaoViecController');
+        //đánh giá
+        Route::get('giaoviec/danhgia/{id}','Admin\GiaoViecController@getdanhgia')->name('getdanhgia');
+        Route::post('giaoviec/danhgia/{id}','Admin\GiaoViecController@postdanhgia')->name('postdanhgia');
 
     });
+    // nhận việc
+    Route::resource('nhanviec', 'Admin\NhanViecController');
+    
+    //route cá nhân
+    Route::resource('canhan', 'Admin\CaNhanController');
+    // đổi mật khẩu
+    Route::get('canhan/matkhau/{id}','Admin\CaNhanController@getDoiPass')->name('getDoiPass');
+    Route::post('canhan/matkhau/{id}','Admin\CaNhanController@postDoiPass')->name('postDoiPass');
+    
     Route::resource('schedule', 'Admin\ScheduleController');
     Route::resource('science', 'Admin\ScienceController');
     Route::post('updatecalendar','Admin\ScheduleController@updatecalendar')->name('updatecalendar');

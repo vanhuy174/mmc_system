@@ -84,7 +84,7 @@
                                                     <input type="text" name="mmc_name" id="mmc_name" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{ old('mmc_name') }}">
                                                     {{-- <input type="text" name="mmc_name" id="mmc_name" minlength="3" maxlength="50" class="form-control" required autocomplete="off" > --}}
                                                 </div>
-                                                <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group mb-3 input-group-sm" hidden >
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Mã giảng viên: <b style="color:red;" >*</b></span>
                                                     </div>
@@ -95,7 +95,7 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Tên bộ môn: <b style="color:red;" >*</b></span>
                                                     </div>
-                                                    <select class="form-control" id="mmc_deptid" name="mmc_deptid" required>
+                                                    <select class="browser-default custom-select" id="mmc_deptid" name="mmc_deptid" required>
                                                         @foreach ($bomon as $bm)
                                                             <option value="{{$bm->mmc_deptid}}">{{$bm->mmc_deptname}}</option>
                                                         @endforeach
@@ -105,12 +105,20 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Chức vụ hiện tại: <b style="color:red;" >*</b></span>
                                                     </div>
-                                                    <select class="form-control" name="mmc_position" id="mmc_position" required>
-                                                        <option value="Trưởng Khoa" >Trưởng Khoa</option>
-                                                        <option value="Phó Khoa" >Phó Khoa</option>
-                                                        <option value="Trưởng Bộ Môn" >Trưởng Bộ Môn</option>
-                                                        <option value="Phó Bộ Môn" >Phó Bộ Môn</option>
-                                                        <option value="Giảng Viên" >Giảng Viên</option>
+                                                    <select class="browser-default custom-select" name="mmc_position" id="mmc_position" required>
+                                                        @foreach (config('test.cv') as $cv)
+                                                            <option value="{{$cv}}">{{$cv}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="input-group mb-3 input-group-sm">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Phân Quyền: <b style="color:red;" >*</b></span>
+                                                    </div>
+                                                    <select class="browser-default custom-select" id="mmc_level" name="mmc_level" required>
+                                                        @foreach (config('test.qp') as $key => $qp)
+                                                            <option value="{{$key}}">{{$qp}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="input-group mb-3 input-group-sm">

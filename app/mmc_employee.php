@@ -56,7 +56,8 @@ class mmc_employee extends Authenticatable
         'mmc_heathlevel',
         'mmc_bloodgroup',
         'mmc_tall',
-        'mmc_weight'
+        'mmc_weight',
+        'mmc_level'
     ];
 
     /**
@@ -91,5 +92,15 @@ class mmc_employee extends Authenticatable
     public function department()
     {
         return $this->belongsTo('App\mmc_department', 'mmc_deptid', 'mmc_deptid');
+    }
+
+    public function nguoigui()
+    {
+        return $this->belongsTo('App\mmc_congviec', 'mmc_employeeid', 'mmc_nguoigui');
+    }
+
+    public function nguoinhan()
+    {
+        return $this->belongsTo('App\mmc_congviec', 'mmc_employeeid', 'mmc_nguoinhan');
     }
 }

@@ -46,6 +46,7 @@
                                     <th>Mã giảng viên</th>
                                     <th>Email</th>
                                     <th>Số điện thoại</th>
+                                    <th>Quyền</th>
                                     <th>Chức năng</th>
                                 </tr>
                                 </thead>
@@ -56,8 +57,17 @@
                                         <td>{{$gv->mmc_employeeid}}</td>
                                         <td>{{$gv->email}}</td>
                                         <td>{{$gv->mmc_phone}}</td>
+                                        <td >
+                                            
+                                            @if ( $gv->mmc_level ==1)
+                                                Admin
+                                            @else   
+                                                Member
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{ url('/admin/giangvien/'.$gv->id.'/edit') }}" title="Sửa thông tin giảng viên"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            {{-- <a href="" title="phân quyền"><button class="btn btn-primary btn-sm"><i class="fa fa-sitemap" aria-hidden="true"></i></button></a> --}}
                                             {!! Form::open([
                                                 'method' => 'DELETE',
                                                 'url' => ['/admin/giangvien',$gv->id],

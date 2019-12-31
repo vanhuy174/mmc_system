@@ -144,6 +144,8 @@ class GiangVienController extends Controller
             $them->mmc_tall= $request->mmc_tall; //Chiều cao
             $them->mmc_weight= $request->mmc_weight; //Cân nặng
 
+            $them->mmc_level = $request->mmc_level;
+
             $them->save();
 
             return redirect()->route('giangvien.index')->with('thongbao','thêm giảng viên thành công');
@@ -188,11 +190,15 @@ class GiangVienController extends Controller
     {
         $this->validate($request,
         [
+            'mmc_avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'mmc_employeeid'=>'unique:mmc_employees,mmc_employeeid,'.$id,
             'email'=>'ends_with:gmail.com,ictu.edu.vn|unique:mmc_employees,email,'.$id,
             'mmc_phone'=>'phone:VN|unique:mmc_employees,mmc_phone,'.$id,
         ],
         [
+            'mmc_avatar.image'=>'vui lòng chọn đúng ảnh',
+            'mmc_avatar.mimes'=>'file ảnh phải có định dạng jpeg,png,jpg,gif,svg',
+            'mmc_avatar.max'=>'kích thước ảnh phải nhỏ hơm 2 Mb',
             'mmc_employeeid.unique'=>'Mã giảng viên đã tồn tại',
             'email.unique'=>'Email đã tồn tại',
             'email.ends_with'=>'email phải có định dạnh gmail.com hoặc ictu.edu.vn',
@@ -258,6 +264,12 @@ class GiangVienController extends Controller
         $sua->mmc_bloodgroup= $request->mmc_bloodgroup; //Nhóm máu
         $sua->mmc_tall= $request->mmc_tall; //Chiều cao
         $sua->mmc_weight= $request->mmc_weight; //Cân nặng
+        $sua->mmc_level= $request->mmc_level;
+        // if(($request->mmc_level)=="User"){
+        //     $sua->mmc_level = 2;
+        // }else{
+        //     $sua->mmc_level = 1;
+        // }
 
         $sua->update();
 
@@ -285,7 +297,10 @@ class GiangVienController extends Controller
 
     public function xemthongtin($id){
         $hien = DB::table('mmc_employees')->where('id',$id)->get();
-        return view('admin.giangvien.thongtinxoa',compact('hien'));
+        $ma = $hien[0]->mmc_deptid;
+        $ma1 = mmc_department::where('mmc_deptid', '=', "$ma")->get();
+        $ten = $ma1[0]->mmc_deptname;
+        return view('admin.giangvien.thongtinxoa',compact('hien','ten'));
     }
 
     public function phuchoi($id){

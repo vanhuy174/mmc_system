@@ -49,7 +49,7 @@
                                 <h4 class="w3-opacity"><b>- Mã giảng viên: </b>{{$hien[0]->mmc_employeeid}}</h4>
                             </div>
                             <div class="w3-container my-4">
-                                <h4 class="w3-opacity"><b>- Mã bộ môn: </b>{{$hien[0]->mmc_deptid}}</h4>
+                                <h4 class="w3-opacity"><b>- Tên bộ môn: </b>{{$ten}}</h4>
                             </div>
                             <div class="w3-container my-4">
                                 <h4 class="w3-opacity"><b>- Chức vụ hiện tại: </b> {{$hien[0]->mmc_position}}</h4>

@@ -15,30 +15,6 @@ class CreateMmcStudentsTable extends Migration
     {
         Schema::create('mmc_students', function (Blueprint $table) {
             $table->bigIncrements('id');
-<<<<<<< HEAD
-            $table->string('mmc_studentid')->unique();
-            $table->string('mmc_classid');
-            $table->string('mmc_fullname')->nullable();
-            $table->date('mmc_dateofbirth')->nullable();
-            $table->tinyInteger('mmc_gender')->nullable();
-            $table->string('mmc_email')->nullable();
-            $table->string('mmc_phone')->nullable();
-            $table->string('mmc_address')->nullable();
-            $table->string('mmc_ethnic')->nullable();
-            $table->string('mmc_religion')->nullable();
-            $table->string('mmc_reward')->nullable();
-            $table->string('mmc_descipline')->nullable();
-            $table->string('mmc_personalid')->nullable();
-            $table->string('mmc_status')->nullable();
-            $table->string('mmc_father')->nullable();
-            $table->string('mmc_fathernationality')->nullable();
-            $table->string('mmc_fatherethnic')->nullable();
-            $table->string('mmc_fatherreligion')->nullable();
-            $table->string('mmc_fatheraddress')->nullable();
-            $table->string('mmc_fatherphone')->nullable();
-            $table->string('mmc_fatheremail')->nullable();
-            $table->string('mmc_fatherjob')->nullable();
-=======
             $table->string('mmc_studentid')->unique(); //mã sinh viên
             $table->string('mmc_classid');  //mã lớp
             $table->string('mmc_fullname')->nullable(); //họ tên
@@ -66,7 +42,6 @@ class CreateMmcStudentsTable extends Migration
             $table->string('mmc_fatherphone')->nullable();  //số điện thoại
             $table->string('mmc_fatheremail')->nullable();      //email
             $table->string('mmc_fatherjob')->nullable();    //Nghề ngiệp
->>>>>>> 9ebf5f8656a348f20c1c0344f8436ce209bb5cf6
             $table->string('mmc_mother')->nullable();
             $table->string('mmc_mothernationality')->nullable();
             $table->string('mmc_motherethnic')->nullable();

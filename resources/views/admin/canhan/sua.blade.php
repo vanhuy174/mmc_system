@@ -94,13 +94,13 @@
                                                     </div>
                                                     <input type="text" name="mmc_name" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{Auth::user()->mmc_name}}">
                                                 </div>
-                                                <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group mb-3 input-group-sm" hidden>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Mã giảng viên: <b style="color:red;" >*</b></span>
                                                     </div>
                                                     <input type="text" name="mmc_employeeid" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{Auth::user()->mmc_employeeid}}">
                                                 </div>
-                                                <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group mb-3 input-group-sm" hidden>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Tên bộ môn: <b style="color:red;" >*</b></span> 
                                                     </div>
@@ -110,9 +110,9 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group mb-3 input-group-sm" hidden>
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">Chức vụ hiện tại: <b style="color:red;" >*</b></span>
+                                                        <span class="input-group-text" >Chức vụ hiện tại: <b style="color:red;" >*</b></span>
                                                     </div>
                                                     <select class="form-control" name="mmc_position" id="mmc_position" required>
                                                         <option value="Trưởng Khoa" >Trưởng Khoa</option>

@@ -95,7 +95,7 @@
                                                     </div>
                                                     <input type="text" name="mmc_name" minlength="3" maxlength="50" class="form-control" required autocomplete="off" value="{{$sua->mmc_name}}">
                                                 </div>
-                                                <div class="input-group mb-3 input-group-sm">
+                                                <div class="input-group mb-3 input-group-sm" hidden>
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Mã giảng viên: <b style="color:red;" >*</b></span>
                                                     </div>
@@ -105,9 +105,9 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Tên bộ môn: <b style="color:red;" >*</b></span> 
                                                     </div>
-                                                    <select class="form-control" id="sel1" name="mmc_deptid">
+                                                    <select class="browser-default custom-select" id="sel1" name="mmc_deptid">
                                                         @foreach ($bomon as $bm)
-                                                            <option value="{{$bm->mmc_deptid}}">{{$bm->mmc_deptname}}</option>
+                                                            <option value="{{$bm->mmc_deptid}}" {{$bm->mmc_deptid == $sua->mmc_deptid ? 'selected' : ''}}>{{$bm->mmc_deptname}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -115,14 +115,25 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Chức vụ hiện tại: <b style="color:red;" >*</b></span>
                                                     </div>
-                                                    <select class="form-control" name="mmc_position" id="mmc_position" required>
-                                                        <option value="Trưởng Khoa" >Trưởng Khoa</option>
-                                                        <option value="Phó Khoa" >Phó Khoa</option>
-                                                        <option value="Trưởng Bộ Môn" >Trưởng Bộ Môn</option>
-                                                        <option value="Phó Bộ Môn" >Phó Bộ Môn</option>
-                                                        <option value="Giảng Viên" >Giảng Viên</option>
+                                                    <select class="browser-default custom-select" name="mmc_position" id="mmc_position" required>
+                                                        @foreach (config('test.cv') as $cv)
+                                                            <option value="{{$cv}}" {{$cv==$sua->mmc_position ? 'selected' : ''}}>{{$cv}}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
+                                                @if (Auth::user()->mmc_level==1)
+                                                    <div class="input-group mb-3 input-group-sm">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Phân Quyền: <b style="color:red;" >*</b></span>
+                                                        </div>
+                                                        {{-- {{dd($sua->mmc_level)}} --}}
+                                                        <select class="browser-default custom-select" id="mmc_level" name="mmc_level" required>
+                                                            @foreach (config('test.qp') as $key => $qp)
+                                                                <option value="{{$key}}" {{$key==$sua->mmc_level ? 'selected' : ''}}>{{$qp}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                                 <div class="input-group mb-3 input-group-sm">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Ngày tháng và năm sinh: </span>
@@ -135,12 +146,12 @@
                                                     </div>
                                                     <div class="form-check-inline" style="margin-left: 10px;">
                                                         <label class="form-check-label" for="radio1">
-                                                            <input type="radio" class="form-check-input" id="radio1" name="mmc_gender" value="0" checked >Nam
+                                                            <input type="radio" class="form-check-input" id="radio1" name="mmc_gender" value="0" {{0 == $sua->mmc_gender ? 'checked' : ''}}  >Nam
                                                         </label>
                                                     </div>
                                                     <div class="form-check-inline">
                                                         <label class="form-check-label" for="radio2">
-                                                            <input type="radio" class="form-check-input" id="radio2" name="mmc_gender" value="1" >Nữ
+                                                            <input type="radio" class="form-check-input" id="radio2" name="mmc_gender" value="1" {{1 == $sua->mmc_gender ? 'checked' : ''}}>Nữ
                                                         </label>
                                                     </div>
                                                 </div>
