@@ -23,13 +23,14 @@ class GiaoViecController extends Controller
         $keyword = $request->get('search');
         $perPage = 5;
         $id = Auth::user()->mmc_employeeid;
+        //dd(mmc_congviec::distinct()->get('mmc_cv'));
         if (!empty($keyword)) {
            
             $nguoinhan = mmc_employee::where('mmc_name', 'LIKE', "%$keyword%")->get();
             $ma = $nguoinhan[0]->mmc_employeeid;
-            $danhsach = mmc_congviec::where('mmc_nguoinhan', '=', "$ma")->where('mmc_nguoigui', '=', "$id")->latest()->paginate($perPage);
+            $danhsach = mmc_congviec::where('mmc_nguoinhan',$ma)->where('mmc_nguoigui', $id)->latest()->paginate($perPage);
         } else {
-            $danhsach = mmc_congviec::where('mmc_nguoigui', '=', "$id")->latest()->paginate($perPage);
+            $danhsach = mmc_congviec::where('mmc_nguoigui', $id)->latest()->paginate($perPage);
         }
         return view('admin.giaoviec.danhsach',compact('danhsach'));
     }
@@ -41,10 +42,13 @@ class GiaoViecController extends Controller
      */
     public function create()
     {
+        $ids  = DB::table('mmc_congviecs')->max('id');
+        $cvc = "CV_".$ids;
+
         $employee=mmc_employee::select('mmc_employeeid','mmc_name','mmc_deptid')->get();
         $department = mmc_department::select('mmc_deptid','mmc_deptname')->get();
         //$major = mmc_major::select('mmc_majorid','mmc_majorname')->pluck('mmc_majorname','mmc_majorid');
-        return view("admin.giaoviec.them",compact('employee','department'));
+        return view("admin.giaoviec.them",compact('employee','department','cvc'));
     }
 
     /**
@@ -55,7 +59,6 @@ class GiaoViecController extends Controller
      */
     public function store(Request $request)
     {
-        // dd([$request->mmc_nguoinhan]);
         $arr = $request->mmc_nguoinhan;
         foreach($arr as $item){
             $congviec = new mmc_congviec;
@@ -67,8 +70,8 @@ class GiaoViecController extends Controller
             $congviec ->mmc_noidung = $request->mmc_noidung;
             $congviec ->mmc_ghichu = $request->mmc_ghichu;
             $congviec ->mmc_trangthai = 1;
+            $congviec ->mmc_cv = $request->mmc_cv;
 
-    
             $congviec ->save();
             
         }
@@ -96,6 +99,7 @@ class GiaoViecController extends Controller
     public function edit($id)
     {
         $sua = mmc_congviec::find($id);
+        // dd($sua ->mmc_cv);
         return view('admin.giaoviec.sua',compact('sua'));
     }
 

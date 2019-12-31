@@ -76,7 +76,7 @@
                                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
                                                     'type' => 'submit',
                                                     'class' => 'btn btn-danger btn-sm',
-                                                    'title' => 'Xóa bộ môn',
+                                                    'title' => 'Xóa giảng viên',
                                                     'onclick'=>'return confirm("Xác nhận xóa?")'
                                             )) !!}
                                             {!! Form::close() !!}

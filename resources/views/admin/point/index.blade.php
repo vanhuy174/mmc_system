@@ -93,8 +93,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-{{--                                    <form action="{{route('exportPointstudent')}}">--}}
-                                    <form action="">
+                                    <form action="{{route('exportPointstudent')}}">
+{{--                                    <form action="">--}}
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
@@ -202,9 +202,9 @@
                                         <td>{{$i++}}</td>
                                         <td>{{$std->mmc_studentid}}</td>
                                         <td>{{$std->mmc_fullname}}</td>
-                                        <td>{{$std->class->mmc_classname}}</td>
-                                        <td>{{$std->pointdetail->mmc_4grade}}</td>
-                                        <td>{{$std->pointdetail->mmc_10grade}}</td>
+                                        <td>@if(!is_null($std->class)){{$std->class->mmc_classname}}@endif</td>
+                                        <td>@if(!is_null($std->pointdetail)){{$std->pointdetail->mmc_4grade}}@endif</td>
+                                        <td>@if(!is_null($std->pointdetail)){{$std->pointdetail->mmc_10grade}}@endif</td>
                                     </tr>
                                     @endforeach
                                 @elseif(!is_null($pointstudent) && isset($hocky))
@@ -213,7 +213,7 @@
                                             <td>{{$i++}}</td>
                                             <td>{{$std->mmc_studentid}}</td>
                                             <td>{{$std->mmc_fullname}}</td>
-                                            <td>{{$std->class->mmc_classname}}</td>
+                                            <td>@if(!is_null($std->class)){{$std->class->mmc_classname}}@endif</td>
                                             <td>{{diemhockyhs4($std->mmc_studentid, $hocky)}}</td>
                                             <td>{{diemhockyhs10($std->mmc_studentid, $hocky)}}</td>
                                         </tr>
@@ -259,7 +259,7 @@
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
+                    url: "{{ route('ajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},

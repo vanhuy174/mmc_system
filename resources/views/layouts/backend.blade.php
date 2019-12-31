@@ -40,7 +40,7 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="dropdown-item" href="{{route('canhan.show',Auth::user()->id)}}">Thông tin cá nhân</a></li>
-                            <li><a class="dropdown-item" href="{{route('nhanviec.index')}}">Thông báo <span class="float-right" style="color:red;">{{\App\Http\Controllers\Admin\NhanViecController::count()}}</span></a></li>
+                            {{-- <li><a class="dropdown-item" href="{{route('nhanviec.index')}}">Thông báo <span class="float-right" style="color:red;">{{\App\Http\Controllers\Admin\NhanViecController::count()}}</span></a></li> --}}
                             <li class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('logout')}}"
@@ -107,8 +107,7 @@
                             <li>
                                 <a href="" class="dropdown-item">
                                     <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="float-right text-muted small">4 minutes ago</span>
+                                        <i class="fa fa-envelope fa-fw"></i> Bạn có thông báo mới
                                     </div>
                                 </a>
                             </li>
@@ -116,7 +115,7 @@
                             <li>
                                 <div class="text-center link-block">
                                     <a href="{{route('nhanviec.index')}}" class="dropdown-item">
-                                        <strong>See All Alerts</strong>
+                                        <strong>Xem Tất Cả</strong>
                                         <i class="fa fa-angle-right"></i>
                                     </a>
                                 </div>

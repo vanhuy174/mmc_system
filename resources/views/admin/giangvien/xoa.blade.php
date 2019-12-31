@@ -55,7 +55,19 @@
                                         <td>{{$x->email}}</td>
                                         <td>{{$x->mmc_phone}}</td>
                                         <td>
-                                            <a href="{{route('getPhucHoi',$x->id)}}" title="phục hồi"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+                                            <a href="{{route('getPhucHoi',$x->id)}}" title="phục hồi"><button class="btn btn-primary btn-sm"><i class="fa fa-refresh" aria-hidden="true"></i></button></a>
+                                            {!! Form::open([
+                                                'method' => 'GET',
+                                                'url' => ['admin/giangvien/xoavinhvien',$x->id],
+                                                'style' => 'display:inline'
+                                            ]) !!}
+                                            {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', array(
+                                                    'type' => 'submit',
+                                                    'class' => 'btn btn-danger btn-sm',
+                                                    'title' => 'Xóa vĩnh viễn',
+                                                    'onclick'=>'return confirm("Xác nhận xóa?")'
+                                            )) !!}
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach

@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        DB::unprepared(File::get(base_path() . '/database/seeds/mmc_times.sql'));
+        DB::table('mmc_employees')->insert([
+            'mmc_name' => 'Admin',
+            'mmc_employeeid' => 'MMC_GVadmin',
+            'password' => Hash::make('123456'),
+            'email' => 'admin@gmail.com',
+            'mmc_level'=> '1',
+        ]);
     }
 }

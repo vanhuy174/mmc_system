@@ -57,7 +57,7 @@ class DepartmentController extends Controller
         $department->mmc_deptname=$request->mmc_deptname;
         $department->mmc_description=$request->mmc_description;
         $department->save();
-        return redirect('admin/department');
+        return redirect('admin/department')->with('flash_message', 'Thêm mới thành công!');
     }
 
     /**

@@ -3,45 +3,7 @@
 @section('linkstyle')
 	<link href="css/mmc_homestudent.css" rel="stylesheet">
 @endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#amajor').on('change', function () {
-                var selectVal = $(this).val();
-                console.log(selectVal);
-                $.ajax({
-                    method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": selectVal},
-                    success : function ( data ) {
-                        $('#aclass').html(data);
-                    }
-                })
-            });
-            $('#modalmajor').on('change', function () {
-                var selectVal = $(this).val();
-                console.log(selectVal);
-                $.ajax({
-                    method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": selectVal},
-                    success : function ( data ) {
-                        $('#modalclass').html(data);
-                    }
-                })
-            });
-            $("#checkall").click(function() {
-                $(":checkbox").attr('checked',
-                    $('#checkall').is(':checked'));
-                $(this).closest('tr').toggleClass('highlight');
-            });
-        });
-    </script>
-@endsection
+
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
@@ -70,7 +32,7 @@
                     <form class="form-inline" action="{{route('homeStudent')}}">
                             <div class="form-group mb-2">
                                 <label for="amajor">Ngành:&emsp;</label>
-                                <select class="form-control" id="amajor" name="manghanh">
+                                <select class="form-control amajor" name="manghanh">
                                     @if(isset($majorid))
                                         <option value="">...</option>
                                         @foreach($data_major as $key)
@@ -88,7 +50,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                <select class="form-control width-200" id="aclass" name="malop">
+                                <select class="form-control width-200 aclass" name="malop">
                                     @if(isset($classid))
                                         @foreach($data_class as $key)
                                             @if($classid == $key->mmc_classid)
@@ -158,7 +120,7 @@
                                         <div class="modal-body">
                                             <div class="form-group mb-2">
                                                 <label for="amajor">Ngành:&emsp;</label>
-                                                <select class="form-control" id="modalmajor" name="manghanh">
+                                                <select class="form-control amajor" name="manghanh">
                                                     @if(isset($majorid))
                                                         <option value="">...</option>
                                                         @foreach($data_major as $key)
@@ -176,7 +138,7 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <label for="aclass">&emsp;Lớp:&emsp;</label>
-                                                <select class="form-control" id="modalclass" name="malop">
+                                                <select class="form-control aclass" name="malop">
                                                     @if(isset($classid))
                                                         @foreach($data_class as $key)
                                                             @if($classid == $key->mmc_classid)
@@ -289,17 +251,17 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#amajor').on('change', function () {
+            $('.amajor').on('change', function () {
                 var selectVal = $(this).val();
                 console.log(selectVal);
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('aajaxmajor') }}",
+                    url: "{{ route('ajaxmajor') }}",
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "id": selectVal},
                     success : function ( data ) {
-                        $('#aclass').html(data);
+                        $('.aclass').html(data);
                     }
                 })
             });

@@ -41,7 +41,6 @@
                                                     @foreach($employee as $employeeitem)
                                                         @if($employeeitem->mmc_deptid == $item->mmc_deptid)
                                                             <option value="{{$employeeitem->mmc_employeeid}}">{{$employeeitem->mmc_name}}</option>
-                                                            
                                                         @endif
                                                     @endforeach
                                                 </optgroup>
@@ -74,6 +73,10 @@
                                     <div class="form-group">
                                         <label>Tiêu Đề:</label>
                                         <input type="text" class="form-control" name="mmc_tieude">
+                                    </div>
+                                    <div class="form-group" hidden>
+                                        <label>Công Việc Chung:</label>
+                                        <input type="text" class="form-control" value="{{$cvc}}" name="mmc_cv">
                                     </div>
                                     <div class="form-group">
                                         <label>Nội Dung Công Việc:</label>

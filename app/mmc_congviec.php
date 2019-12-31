@@ -17,10 +17,11 @@ class mmc_congviec extends Model
         'mmc_batdau',
         'mmc_ketthuc',
         'mmc_ketqua',
-        'mmc_danhgia'
+        'mmc_danhgia',
+        'mmc_cv'
     ];
     protected $table = "mmc_congviecs";
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function nguoigui()
     {

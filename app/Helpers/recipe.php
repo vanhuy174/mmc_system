@@ -47,6 +47,19 @@ if (! function_exists('test')) {
             return 'xs';
         }
     }
+    function hocluc($point){
+        if($point < 2.0){
+            return 'Yếu';
+        }elseif ($point >= 2.0 && $point < 2.5 ){
+            return 'Trung bình';
+        }elseif ($point >= 2.5 && $point < 3.2 ){
+            return 'Khá';
+        }elseif ($point >= 3.2 && $point < 3.6 ){
+            return 'Giỏi';
+        }else{
+            return 'Xuất sắc';
+        }
+    }
     function semester(){
         $date= date("Y");
         $i=0; $j=0; $semester= [];

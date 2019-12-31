@@ -51,7 +51,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('/downloadfileExcel', 'Admin\mmc_ControllerStudent@downloadfileExcel')->name('downloadfileExcel');
         Route::get('/exportStudent', 'Admin\mmc_ControllerStudent@export')->name('exportStudent');
 
-        Route::post('/aajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('aajaxmajor');
+        Route::post('/ajaxmajor', 'Admin\mmc_ControllerStudent@ajaxmajor')->name('ajaxmajor');
         Route::post('setstatus', 'Admin\mmc_ControllerStudent@setstatus')->name('setstatus');
 
 //        Route::post('/statusstudent', 'Admin\mmc_ControllerStudent@statusstudent')->name('statusstudent');
@@ -68,6 +68,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
         Route::get('giangvien/xoagiangvien', 'Admin\GiangVienController@xoagv')->name('getXoa');
         Route::get('giangvien/xemthongtin/{id}', 'Admin\GiangVienController@xemthongtin')->name('getThongTin');
         Route::get('giangvien/phuchoi/{id}', 'Admin\GiangVienController@phuchoi')->name('getPhucHoi');
+        // xóa giảng viên vĩnh viễn
+        Route::get('giangvien/xoavinhvien/{id}','Admin\XoaVinhVien@xoa')->name('getXoaVinhVien');
 
         //route giảng viên
         Route::resource('giangvien', 'Admin\GiangVienController');

@@ -23,7 +23,7 @@ class EducationProgramController extends Controller
         $perPage = 5;
         if (!empty($keyword)){
             $major= mmc_major::where('mmc_majorname', 'LIKE', "%$keyword%")->pluck('mmc_majorid');
-            $education = mmc_education::whereIn('mmc_major',$major)->latest()->paginate($perPage);
+            $education = mmc_education::whereIn('mmc_majorid',$major)->orwhere('mmc_course','LIKE',"%$keyword%")->latest()->paginate($perPage);
         } else {
             $education = mmc_education::latest()->paginate($perPage);
         }

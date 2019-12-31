@@ -74,7 +74,7 @@ class ScienceController extends Controller
             $item->mmc_sogiochuan=$request->mmc_sogiochuan;
             $item->save();
         }
-        return redirect('admin/science');
+        return redirect('admin/science')->with('flash_message', 'Thêm mới thành công!');
      }
 
     /**

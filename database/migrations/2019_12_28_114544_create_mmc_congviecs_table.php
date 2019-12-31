@@ -25,6 +25,7 @@ class CreateMmcCongviecsTable extends Migration
             $table->date('mmc_ketthuc')->nullable();  //kết thúc
             $table->string('mmc_ketqua')->nullable();  //kết thúc
             $table->text('mmc_nhanxet')->nullable();  //đánh giá
+            $table->string('mmc_cv')->nullable();  //công việc chung
 
             $table->foreign('mmc_nguoinhan')
                 ->references('mmc_employeeid')->on('mmc_employees')

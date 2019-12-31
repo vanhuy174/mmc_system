@@ -56,7 +56,7 @@ class ScienceEmployeeController extends Controller
         $scienceemployee->mmc_link=$request->mmc_link;
         $scienceemployee->mmc_status=0;
         $scienceemployee->save();
-        return back();
+        return redirect('admin/scienceemployee')->with('flash_message', 'Thêm mới thành công!');;
     }
 
     /**

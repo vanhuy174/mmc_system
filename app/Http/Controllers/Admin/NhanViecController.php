@@ -16,7 +16,8 @@ class NhanViecController extends Controller
     public function index()
     {
         $id = Auth::user()->mmc_employeeid;
-        $danhsach = mmc_congviec::where('mmc_nguoinhan', '=', "$id")->get();
+        $danhsach = mmc_congviec::where('mmc_nguoinhan', $id)->get();
+        
         return view('admin.nhanviec.danhsach',compact('danhsach'));
     }
 
