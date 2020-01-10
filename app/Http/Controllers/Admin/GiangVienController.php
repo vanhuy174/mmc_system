@@ -28,7 +28,7 @@ class GiangVienController extends Controller
         if (!empty($keyword)) {
             $giangvien = mmc_employee::where('mmc_name', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
         } else {
-            $giangvien = mmc_employee::latest()->paginate($perPage);
+            $giangvien = mmc_employee::where('mmc_deptid', '<>',NULL)->latest()->paginate($perPage);
         }
         return view('admin.giangvien.danhsach',compact('giangvien'));
     }

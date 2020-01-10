@@ -78,10 +78,13 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if(isset($data))
                                 @foreach($data as $item)
                                 	 <tr>
                                         <td>{{$item->mmc_name}}</td>
+                                        @if(isset($item->department))
                                         <td>{{$item->department->mmc_deptname}}</td>
+                                        @endif
                                         <td>
 		                                	@foreach($item->subjectclass as $sjc)
 		                                        {{$sjc->mmc_subjectclassname}}</br>
@@ -99,8 +102,10 @@
                                         </td>
 									</tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
+                        </div>
 					</div>
 				</div>
 			</div>

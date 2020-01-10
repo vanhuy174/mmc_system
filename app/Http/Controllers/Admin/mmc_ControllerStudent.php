@@ -33,6 +33,7 @@ class mmc_ControllerStudent extends Controller
         $keyword= $request->search;
         $classid= $request->malop;
         $majorid= $request->manghanh;
+        $status= $request->status;
         if(!empty($keyword)){
             $data= mmc_Student::where('mmc_studentid', 'LIKE', "%$keyword%")->orWhere('mmc_fullname', 'LIKE', "%$keyword%")->orWhere('mmc_email', 'LIKE', "%$keyword%")->latest()->paginate($perPage);
             return view('admin.Student.mmc_homeStudent',compact(['data' , "data_class", "data_major"]));
