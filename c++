@@ -66,6 +66,29 @@ Node* searchKey(Tree T, item x)     // tim nut co key x
      
 }
 
+int delKey(Tree &T, item x)     // xoa nut co key x
+{
+    if (T==NULL) return 0;
+    else if (T->key > x) return delKey(T->Left, x);
+    else if (T->key < x) return delKey(T->Right, x);
+    else // T->key == x
+    {
+        if (T->Left == NULL) T = T->Right;    // Node chi co cay con phai
+        else if (T->Right == NULL) T = T->Left;   // Node chi co cay con trai
+        else // Node co ca 2 con
+        {
+            Node *Q = T->Left;
+            while (Q->Right != NULL)
+            {
+                Q = Q->Right;
+            }
+            T->key = Q->key;
+            delKey(T->Left, Q->key);
+        }
+    }
+    return 1;
+}
+
 int main()
 {
     Tree T;
@@ -89,6 +112,17 @@ int main()
     P = searchKey(T, x);
     if (P != NULL) printf("Tim thay key %d\n", P->key);
     else printf("Key %d khong co trong cay\n", x);
+    
+    do{
+    	printf("Nhap vao key can xoa: ");
+	    scanf("%d", &x);
+	    if (delKey(T, x)) printf("Xoa thanh cong\n");
+	    else printf("Khong tim thay key %d can xoa \n", x);
+		    printf("Duyet cay theo LNR: \n");
+		    LNR(T);
+		    printf("\n");
+	}while(delKey(T, x) != 1);
+    
     
     return 0;
 }
